@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katana-King - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1c2526 100%);
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            cursor: auto;
+        }
+        video.background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: blur(10px);
+            opacity: 0.5;
+        }
+        .content-overlay {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        nav {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease-in-out;
+        }
+        nav.scrolled {
+            transform: translateY(-100%);
+        }
+        nav.visible {
+            transform: translateY(0);
+        }
+        .hero-img {
+            animation: scaleUp 1s ease-out forwards, float 6s ease-in-out infinite;
+            cursor: pointer;
+        }
+        .hero-img:hover {
+            transform: scale(1.05);
+        }
+        @keyframes scaleUp {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            position: relative;
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .project-card, .stats-card, .dev-stats-card, .about-content {
+            background: rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .project-card.visible, .stats-card.visible, .dev-stats-card.visible, .about-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .project-card:hover, .stats-card:hover, .dev-stats-card:hover, .about-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            animation: pulse 0.3s ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-10px) scale(1); }
+            50% { transform: translateY(-12px) scale(1.02); }
+        }
+        .nav-links a {
+            position: relative;
+            transition: color 0.3s ease-in-out;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            cursor: pointer;
+        }
+        .nav-links.visible a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-links a:nth-child(1) { transition-delay: 0.1s; }
+        .nav-links a:nth-child(2) { transition-delay: 0.2s; }
+        .nav-links a:nth-child(3) { transition-delay: 0.3s; }
+        .nav-links a:nth-child(4) { transition-delay: 0.4s; }
+        .nav-links a:nth-child(5) { transition-delay: 0.5s; }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #ff6b6b;
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .typing {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 2.5s steps(20, end) forwards;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        .mute-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .mute-toggle:hover {
+            background: rgba(255, 107, 107, 0.7);
+        }
+        .entry-prompt {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .entry-prompt-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+        }
+        .entry-prompt button {
+            margin-top: 1rem;
+            background: #ff6b6b;
+            color: #e0e0e0;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .entry-prompt button:hover {
+            background: #e55a5a;
+        }
+        .entry-prompt img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+            opacity: 0.7;
+        }
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        #projects, #stats, #dev-stats, #about {
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.8) 0%, rgba(28, 37, 38, 0.8) 100%);
+        }
+        #about {
+            position: relative;
+        }
+        #about .background-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        .project-title, .stats-title, .developer-stats-title, .about-title {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 1.5s steps(20, end) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .transition-gif {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 300;
+            display: none;
+            background: transparent;
+        }
+        .transition-gif img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1;
+        }
+        .transition-gif.fade-out {
+            animation: fadeOut 1s ease-in-out forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; display: none; }
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+                cursor: pointer;
+            }
+            .nav-links {
+                display: none;
+            }
+            .nav-links.show {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 4rem;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.9);
+                padding: 1rem;
+                animation: slideIn 0.3s ease-in-out;
+            }
+            .nav-links.show a {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0s;
+            }
+            @keyframes slideIn {
+                from { transform: translateY(-100%); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Entry Prompt Overlay -->
+    <div class="entry-prompt" id="entryPrompt">
+        <div id="particles-js"></div>
+        <img src="2.gif" alt="Welcome GIF">
+        <div class="entry-prompt-content">
+            <h2 class="text-2xl font-bold mb-4">Welcome to Katana-King's Site</h2>
+            <p>Would you like to enter and experience the full site with audio?</p>
+            <button onclick="enterSite()">Enter Site</button>
+        </div>
+    </div>
+
+    <!-- Transition GIF Overlay -->
+    <div class="transition-gif" id="transitionGif">
+        <img src="3.gif" alt="Transition GIF">
+    </div>
+
+    <!-- Background Video (Always Muted) -->
+    <video class="background-video" loop playsinline muted id="backgroundVideo">
+        <source src="videos/1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Background Audio (Initially Paused) -->
+    <audio id="backgroundAudio" loop>
+        <source src="1.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <!-- Mute/Unmute Toggle for Audio -->
+    <button class="mute-toggle" title="Toggle Mute Audio" onclick="toggleMute()">
+        <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+    </button>
+
+    <!-- Content Overlay -->
+    <div class="content-overlay">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full p-4 flex justify-between items-center z-50 visible">
+            <div class="text-2xl font-bold">Katana-King</div>
+            <div class="menu-toggle flex flex-col gap-1.5 cursor-pointer md:hidden">
+                <div class="w-6 h-0.5 bg-white transition-transform duration-300"></div>
+                <div class="w-6 h-0.5 bg-white transition-transform duration-300"></div>
+                <div class="w-6 h-0.5 bg-white transition-transform duration-300"></div>
+            </div>
+            <ul class="nav-links flex gap-6 items-center text-lg md:flex visible">
+                <li><a href="#home" class="hover:text-red-400">Home</a></li>
+                <li><a href="#projects" class="hover:text-red-400">Projects</a></li>
+                <li><a href="#stats" class="hover:text-red-400">Stats</a></li>
+                <li><a href="#dev-stats" class="hover:text-red-400">Dev Stats</a></li>
+                <li><a href="#about" class="hover:text-red-400">About Me</a></li>
+            </ul>
+        </nav>
+
+        <!-- Home Section -->
+        <section id="home" class="section flex flex-col md:flex-row items-center justify-center gap-10">
+            <div class="max-w-lg text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome</h1>
+                <p class="text-2xl md:text-4xl font-semibold mb-2">I am <span class="text-red-400 typing">Katana-King</span></p>
+                <p class="text-lg md:text-xl">Gamer, Developer, and Creative Mind</p>
+                <div class="mt-4 flex justify-center md:justify-start gap-4">
+                    <a href="https://steamcommunity.com/profiles/76561199055694029/" target="_blank" class="text-red-400 hover:underline">Steam Profile</a>
+                    <a href="https://discord.com/users/kingos2" target="_blank" class="text-red-400 hover:underline">Discord: kingos2</a>
+                    <a href="https://github.com/Katana-king" target="_blank" class="text-red-400 hover:underline">GitHub</a>
+                </div>
+            </div>
+            <a href="#about"><img src="1.gif" alt="Profile" class="hero-img w-48 h-48 md:w-64 md:h-64 rounded-full object-cover"></a>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="max-w-4xl w-full">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center typing">Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="project-card p-6 rounded-lg visible">
+                        <h3 class="text-xl font-semibold mb-2 project-title text-red-400">Wood-art</h3>
+                        <p class="mb-4">A creative HTML-based project showcasing wood-themed art designs.</p>
+                        <a href="https://github.com/Katana-king/Wood-art" target="_blank" class="text-red-400 hover:underline">View on GitHub</a>
+                    </div>
+                    <div class="project-card p-6 rounded-lg visible">
+                        <h3 class="text-xl font-semibold mb-2 project-title text-red-400">OnlyRams</h3>
+                        <p class="mb-4">An HTML project exploring unique web designs and layouts.</p>
+                        <a href="https://github.com/Katana-king/OnlyRams" target="_blank" class="text-red-400 hover:underline">View on GitHub</a>
+                    </div>
+                    <div class="project-card p-6 rounded-lg visible">
+                        <h3 class="text-xl font-semibold mb-2 project-title text-red-400">GameBuddyv2</h3>
+                        <p class="mb-4">A TypeScript-based application for connecting gamers and enhancing gameplay experiences.</p>
+                        <a href="https://github.com/Katana-king/GameBuddyv2" target="_blank" class="text-red-400 hover:underline">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="stats" class="section">
+            <div class="max-w-4xl w-full">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center typing">Stats</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="stats-card p-6 rounded-lg visible">
+                        <h3 class="text-xl font-semibold mb-2 stats-title text-red-400">Steam Stats</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><span class="font-semibold">Created:</span> May 8, 2020</li>
+                            <li><span class="font-semibold">Restrictions:</span> VAC Trade Limited</li>
+                        </ul>
+                        <a href="https://steamcommunity.com/profiles/76561199055694029/" target="_blank" class="text-red-400 hover:underline mt-4 inline-block">View Steam Profile</a>
+                    </div>
+                    <div class="stats-card p-6 rounded-lg visible">
+                        <h3 class="text-xl font-semibold mb-2 stats-title text-red-400">Discord Stats</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><span class="font-semibold">Username:</span> kingos2</li>
+                            <li><span class="font-semibold">Activity:</span> Active member in gaming communities, frequently engaging in CS2 and development discussions</li>
+                        </ul>
+                        <a href="https://discord.com/users/kingos2" target="_blank" class="text-red-400 hover:underline mt-4 inline-block">Connect on Discord</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Developer Stats Section -->
+        <section id="dev-stats" class="section">
+            <div class="max-w-4xl w-full">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center typing">Developer Stats</h2>
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="dev-stats-card p-6 rounded-lg visible">
+                        <h3 class="text-xl font-semibold mb-2 developer-stats-title text-red-400">Full Stack Developer</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><span class="font-semibold">HTML:</span> Proficient in creating semantic and accessible web structures</li>
+                            <li><span class="font-semibold">CSS:</span> Skilled in designing responsive and visually appealing layouts</li>
+                            <li><span class="font-semibold">PHP:</span> Experienced in building dynamic server-side applications</li>
+                            <li><span class="font-semibold">JavaScript:</span> Capable of developing responsive, event-driven, and modern web applications</li>
+                        </ul>
+                        <a href="https://github.com/Katana-king" target="_blank" class="text-red-400 hover:underline mt-4 inline-block">View Projects on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="section">
+            <img src="4.gif" alt="About Background" class="background-gif">
+            <div class="max-w-4xl w-full">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center typing">About Me</h2>
+                <div class="about-content p-6 rounded-lg text-center max-w-lg mx-auto">
+                    <h3 class="text-xl font-semibold mb-2 about-title text-red-400">Katana-King</h3>
+                    <p class="text-lg md:text-xl mb-4">
+                        Hey there! I'm Katana-King, a passionate gamer and full-stack developer. I spend my time exploring different video games, building creative projects, and creating projects that have no purpose other than having fun with code. Whether I'm developing new ideas or immersed in a gaming session, I bring creativity and energy to everything I do.
+                    </p>
+                    <div class="flex justify-center gap-4">
+                        <a href="https://steamcommunity.com/profiles/76561199055694029/" target="_blank" class="text-red-400 hover:underline">Steam Profile</a>
+                        <a href="https://discord.com/users/kingos2" target="_blank" class="text-red-400 hover:underline">Discord: kingos2</a>
+                        <a href="https://github.com/Katana-king" target="_blank" class="text-red-400 hover:underline">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Initialize particles.js
+        window.addEventListener('load', () => {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: '#ff6b6b' },
+                    shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+                    opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1 } },
+                    size: { value: 3, random: true, anim: { enable: false } },
+                    line_linked: { enable: true, distance: 150, color: '#ff6b6b', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 6, direction: 'none', random: true, straight: false, out_mode: 'out' }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: { enable: true, mode: 'grab' },
+                        onclick: { enable: true, mode: 'push' },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 200, line_linked: { opacity: 0.7 } },
+                        push: { particles_nb: 4 }
+                    }
+                },
+                retina_detect: true
+            });
+
+            // Trigger project, stats, dev stats, and about content animations
+            const cards = document.querySelectorAll('.project-card, .stats-card, .dev-stats-card, .about-content');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, index * 200); // Staggered animation
+            });
+        });
+
+        // Elements
+        const video = document.getElementById('backgroundVideo');
+        const audio = document.getElementById('backgroundAudio');
+        const muteButton = document.querySelector('.mute-toggle');
+        const muteIcon = document.getElementById('muteIcon');
+        const entryPrompt = document.getElementById('entryPrompt');
+        const transitionGif = document.getElementById('transitionGif');
+
+        // Initially hide content and mute media
+        video.pause();
+        audio.pause();
+        video.muted = true; // Video is always muted
+        audio.muted = true;
+        document.querySelector('.content-overlay').style.display = 'none';
+        muteButton.style.display = 'none';
+        transitionGif.style.display = 'none';
+
+        // Function to enter the site
+        function enterSite() {
+            // Hide entry prompt
+            entryPrompt.style.display = 'none';
+            // Show transition GIF
+            transitionGif.style.display = 'block';
+            // Show content and mute button
+            document.querySelector('.content-overlay').style.display = 'block';
+            muteButton.style.display = 'block';
+            // Play video and audio simultaneously
+            Promise.all([
+                video.play().then(() => {
+                    console.log("Video playback started successfully (muted)");
+                }).catch((error) => {
+                    console.error("Video playback failed:", error.message);
+                }),
+                audio.play().then(() => {
+                    console.log("Audio playback started successfully");
+                    audio.muted = false;
+                }).catch((error) => {
+                    console.error("Audio playback failed:", error.message);
+                })
+            ]).then(() => {
+                console.log("Media playback synchronized");
+            });
+            // Smooth scroll to home section
+            document.querySelector('#home').scrollIntoView({
+                behavior: 'smooth'
+            });
+            // Fade out transition GIF after 1 second
+            setTimeout(() => {
+                transitionGif.classList.add('fade-out');
+                setTimeout(() => {
+                    transitionGif.style.display = 'none';
+                }, 1000); // Match fade-out animation duration
+            }, 1000); // Show GIF for 1 second
+        }
+
+        // Toggle mute/unmute for audio only
+        function toggleMute() {
+            audio.muted = !audio.muted;
+            console.log("Audio muted:", audio.muted);
+            muteIcon.innerHTML = audio.muted
+                ? `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46l-6 6"></path><path d="M18.54 5.46l-6 6"></path>`
+                : `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>`;
+        }
+
+        // Menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+            menuToggle.children[0].classList.toggle('rotate-45', navLinks.classList.contains('show'));
+            menuToggle.children[0].classList.toggle('translate-y-2', navLinks.classList.contains('show'));
+            menuToggle.children[1].classList.toggle('opacity-0', navLinks.classList.contains('show'));
+            menuToggle.children[2].classList.toggle('-rotate-45', navLinks.classList.contains('show'));
+            menuToggle.children[2].classList.toggle('-translate-y-2', navLinks.classList.contains('show'));
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                navLinks.classList.remove('show');
+                menuToggle.children[0].classList.remove('rotate-45', 'translate-y-2');
+                menuToggle.children[1].classList.remove('opacity-0');
+                menuToggle.children[2].classList.remove('-rotate-45', '-translate-y-2');
+            });
+        });
+
+        // Scroll-triggered animations
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Navbar hide/show on scroll
+        let lastScrollTop = 0;
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                nav.classList.remove('visible');
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+                nav.classList.add('visible');
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Initial nav links animation
+        window.addEventListener('load', () => {
+            navLinks.classList.add('visible');
+        });
+    </script>
+</body>
+</html>
