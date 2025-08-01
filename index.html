@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEO Improvements -->
     <title>Katana-King - Gamer & Full-Stack Developer Portfolio</title>
-    <meta name="description" content="Portfolio of Katana-King, a passionate gamer and full-stack developer showcasing creative projects and gaming stats.">
-    <meta name="keywords" content="Katana-King, portfolio, gamer, developer, full-stack, HTML, CSS, JavaScript, TypeScript, gaming">
+    <meta name="description" content="Portfolio of Katana-King, a passionate gamer and full-stack developer offering custom website development for online shops, restaurant menus, e-commerce, and more.">
+    <meta name="keywords" content="Katana-King, portfolio, gamer, developer, full-stack, HTML, CSS, JavaScript, TypeScript, gaming, web development, e-commerce">
     <meta name="author" content="Katana-King">
     <!-- Favicon for branding -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -29,19 +29,17 @@
         body.light-theme .content-overlay,
         body.light-theme nav,
         body.light-theme .project-card,
-        body.light-theme .stats-card,
         body.light-theme .dev-stats-card,
-        body.light-theme .about-content,
-        body.light-theme .project-table {
+        body.light-theme .services-card,
+        body.light-theme .about-content {
             background: rgba(255, 255, 255, 0.8);
             color: #333;
         }
         body.light-theme .nav-links a:hover,
         body.light-theme .nav-links a:active,
         body.light-theme .project-card a,
-        body.light-theme .stats-card a,
-        body.light-theme .about-content a,
-        body.light-theme .project-table a {
+        body.light-theme .services-card a,
+        body.light-theme .about-content a {
             color: #e55a5a;
         }
         body.light-theme .social-icons svg {
@@ -50,10 +48,6 @@
         body.light-theme .social-icons a:hover svg,
         body.light-theme .social-icons a:active svg {
             stroke: #e55a5a;
-        }
-        body.light-theme .project-table th,
-        body.light-theme .project-table td {
-            border-color: #ccc;
         }
         video.background-video {
             position: fixed;
@@ -100,7 +94,7 @@
             100% { transform: translateY(0px); }
         }
         .section {
-            min-height: 80vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -114,18 +108,18 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .project-card, .stats-card, .dev-stats-card, .about-content {
+        .project-card, .dev-stats-card, .services-card, .about-content {
             background: rgba(255, 255, 255, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease-out;
             opacity: 0;
             transform: translateY(10px);
         }
-        .project-card.visible, .stats-card.visible, .dev-stats-card.visible, .about-content.visible {
+        .project-card.visible, .dev-stats-card.visible, .services-card.visible, .about-content.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        .project-card:hover, .stats-card:hover, .dev-stats-card:hover, .about-content:hover,
-        .project-card:active, .stats-card:active, .dev-stats-card:active, .about-content:active {
+        .project-card:hover, .dev-stats-card:hover, .services-card:hover, .about-content:hover,
+        .project-card:active, .dev-stats-card:active, .services-card:active, .about-content:active {
             transform: translateY(-6px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
             animation: pulse 0.3s ease-in-out;
@@ -255,21 +249,21 @@
             height: 100%;
             z-index: 1;
         }
-        #projects, #stats, #dev-stats, #about {
+        #projects, #dev-stats, #services, #about {
             background: linear-gradient(135deg, rgba(15, 15, 15, 0.8) 0%, rgba(28, 37, 38, 0.8) 100%);
         }
-        #about .background-gif {
-            position: absolute;
+        #about .background-gif, #services .background-gif {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             object-fit: cover;
             z-index: -1;
             opacity: 0.7;
             loading: lazy;
         }
-        .project-title, .stats-title, .developer-stats-title, .about-title {
+        .project-title, .developer-stats-title, .services-title, .about-title {
             display: inline-block;
             overflow: hidden;
             white-space: nowrap;
@@ -304,48 +298,7 @@
             from { opacity: 1; }
             to { opacity: 0; }
         }
-        .project-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            z-index: 100;
-            display: none;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-        .project-dropdown.show {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .project-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .project-table th,
-        .project-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .project-table th {
-            font-weight: bold;
-            color: #ff6b6b;
-        }
-        .project-table tr:hover, .project-table tr:active {
-            background: rgba(255, 107, 107, 0.2);
-            cursor: pointer;
-        }
-        .project-card a {
+        .project-card a, .services-card a {
             display: inline-block;
             padding: 0.75rem 1.5rem;
             background: rgba(255, 107, 107, 0.2);
@@ -354,7 +307,7 @@
             min-width: 120px;
             text-align: center;
         }
-        .project-card a:hover, .project-card a:active {
+        .project-card a:hover, .project-card a:active, .services-card a:hover, .services-card a:active {
             background: rgba(255, 107, 107, 0.4);
         }
         .social-icons a {
@@ -429,24 +382,11 @@
                 padding: 1rem;
                 font-size: 1.1rem;
             }
-            .project-dropdown {
-                position: static;
-                max-width: 100%;
-                margin: 0.5rem 0;
-            }
-            .project-table th,
-            .project-table td {
-                font-size: 1rem;
-                padding: 1rem;
-            }
-            .project-table tr {
-                cursor: pointer;
-            }
             .section {
                 padding: 1rem;
-                min-height: 80vh;
+                min-height: 100vh;
             }
-            .project-card, .stats-card, .dev-stats-card, .about-content {
+            .project-card, .dev-stats-card, .services-card, .about-content {
                 max-width: 100%;
                 padding: 1rem;
             }
@@ -495,7 +435,7 @@
             .section {
                 padding: 0.75rem;
             }
-            .project-card, .stats-card, .dev-stats-card, .about-content {
+            .project-card, .dev-stats-card, .services-card, .about-content {
                 padding: 0.75rem;
             }
             h1 {
@@ -531,11 +471,6 @@
                 padding: 0.5rem 1rem;
                 font-size: 0.9rem;
                 min-width: 100px;
-            }
-            .project-table th,
-            .project-table td {
-                font-size: 0.9rem;
-                padding: 0.75rem;
             }
         }
         @keyframes slideIn {
@@ -605,31 +540,9 @@
             </div>
             <ul class="nav-links flex gap-4 md:gap-6 items-center text-base md:text-lg md:flex visible">
                 <li><a href="#home" class="hover:text-red-400 active:text-red-400" aria-label="Go to Home section">Home</a></li>
-                <li class="relative">
-                    <a href="#projects" class="hover:text-red-400 active:text-red-400" aria-label="Go to Projects section" id="projectsLink">Projects</a>
-                    <div class="project-dropdown" id="projectDropdown">
-                        <table class="project-table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr onclick="scrollToProject('Wood-art')">
-                                    <td>Wood-art</td>
-                                </tr>
-                                <tr onclick="scrollToProject('OnlyRams')">
-                                    <td>OnlyRams</td>
-                                </tr>
-                                <tr onclick="scrollToProject('GameBuddyv2')">
-                                    <td>GameBuddyv2</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </li>
-                <li><a href="#stats" class="hover:text-red-400 active:text-red-400" aria-label="Go to Stats section">Stats</a></li>
+                <li><a href="#projects" class="hover:text-red-400 active:text-red-400" aria-label="Go to Projects section">Projects</a></li>
                 <li><a href="#dev-stats" class="hover:text-red-400 active:text-red-400" aria-label="Go to Developer Stats section">Dev Stats</a></li>
+                <li><a href="#services" class="hover:text-red-400 active:text-red-400" aria-label="Go to Services section">Services</a></li>
                 <li><a href="#about" class="hover:text-red-400 active:text-red-400" aria-label="Go to About Me section">About Me</a></li>
             </ul>
         </nav>
@@ -704,30 +617,12 @@
                             <a href="https://katana-king.github.io/GameBuddyv2" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="View live demo of GameBuddyv2">Live Demo</a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section id="stats" class="section">
-            <div class="max-w-4xl w-full">
-                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing">Stats</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                    <div class="stats-card p-4 md:p-6 rounded-lg visible">
-                        <h3 class="text-lg md:text-xl font-semibold mb-2 stats-title text-red-400">Steam Stats</h3>
-                        <ul class="list-disc list-inside space-y-2 text-sm md:text-base">
-                            <li><span class="font-semibold">Created:</span> May 8, 2020</li>
-                            <li><span class="font-semibold">Restrictions:</span> VAC Trade Limited</li>
-                        </ul>
-                        <a href="https://steamcommunity.com/profiles/76561199055694029/" target="_blank" class="text-red-400 hover:underline active:underline mt-4 inline-block" aria-label="View Steam Profile">View Steam Profile</a>
-                    </div>
-                    <div class="stats-card p-4 md:p-6 rounded-lg visible">
-                        <h3 class="text-lg md:text-xl font-semibold mb-2 stats-title text-red-400">Discord Stats</h3>
-                        <ul class="list-disc list-inside space-y-2 text-sm md:text-base">
-                            <li><span class="font-semibold">Username:</span> kingos2</li>
-                            <li><span class="font-semibold">Activity:</span> Active member in gaming communities, frequently engaging in CS2 and development discussions</li>
-                        </ul>
-                        <a href="https://discord.com/users/kingos2" target="_blank" class="text-red-400 hover:underline active:underline mt-4 inline-block" aria-label="Connect on Discord">Connect on Discord</a>
+                    <div class="project-card p-4 md:p-6 rounded-lg visible" id="project-Fast-Food-Menu">
+                        <h3 class="text-lg md:text-xl font-semibold mb-2 project-title text-red-400">Fast Food Menu</h3>
+                        <p class="mb-4 text-sm md:text-base">A sleek and responsive menu site for fast food items like burgers, drinks, and sides.</p>
+                        <div class="flex justify-start">
+                            <a href="https://katana-king.github.io/menu/" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="View live demo of Fast Food Menu">Live Demo</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -748,6 +643,21 @@
                         </ul>
                         <a href="https://github.com/Katana-king" target="_blank" class="text-red-400 hover:underline active:underline mt-4 inline-block" aria-label="View Projects on GitHub">View Projects on GitHub</a>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <img src="5.gif" alt="Background animation for Services section" class="background-gif" loading="lazy">
+            <div class="max-w-4xl w-full">
+                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing">Services</h2>
+                <div class="services-card p-4 md:p-6 rounded-lg text-center max-w-lg mx-auto visible">
+                    <h3 class="text-lg md:text-xl font-semibold mb-2 services-title text-red-400">Custom Web Development</h3>
+                    <p class="text-base md:text-xl mb-4">
+                        Need a website that pops like a critical hit? I can craft you a shiny new site from scratch! Whether it's an online shop to sell your epic loot, a restaurant menu that makes mouths water, an e-commerce empire to rival the dark web, or anything in the digital realm, I've got you covered. And for payment? I accept cash, crypto, rare CS2 skins, human organs, or even a bag of premium cocaine... jk, let's stick to legit methods!
+                    </p>
+                    <a href="https://discord.com/users/kingos2" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="Contact for services">Contact Me</a>
                 </div>
             </div>
         </section>
@@ -859,7 +769,7 @@
             });
 
             // Trigger animations
-            const cards = document.querySelectorAll('.project-card, .stats-card, .dev-stats-card, .about-content');
+            const cards = document.querySelectorAll('.project-card, .dev-stats-card, .services-card, .about-content');
             cards.forEach((card, index) => {
                 setTimeout(() => {
                     card.classList.add('visible');
@@ -877,8 +787,6 @@
         const entryPrompt = document.getElementById('entryPrompt');
         const transitionGif = document.getElementById('transitionGif');
         const transitionImg = transitionGif.querySelector('img');
-        const projectsLink = document.getElementById('projectsLink');
-        const projectDropdown = document.getElementById('projectDropdown');
         const navLinks = document.querySelector('.nav-links');
         const menuToggle = document.querySelector('.menu-toggle');
 
@@ -952,7 +860,6 @@
             menuToggle.children[1].classList.toggle('opacity-0', navLinks.classList.contains('show'));
             menuToggle.children[2].classList.toggle('-rotate-45', navLinks.classList.contains('show'));
             menuToggle.children[2].classList.toggle('-translate-y-2', navLinks.classList.contains('show'));
-            projectDropdown.classList.remove('show');
         });
 
         // Smooth scrolling
@@ -966,22 +873,8 @@
                 menuToggle.children[0].classList.remove('rotate-45', 'translate-y-2');
                 menuToggle.children[1].classList.remove('opacity-0');
                 menuToggle.children[2].classList.remove('-rotate-45', '-translate-y-2');
-                projectDropdown.classList.remove('show');
             });
         });
-
-        // Scroll to project card
-        function scrollToProject(projectName) {
-            const projectCard = document.getElementById(`project-${projectName}`);
-            if (projectCard) {
-                projectCard.scrollIntoView({ behavior: 'smooth' });
-                projectDropdown.classList.remove('show');
-                navLinks.classList.remove('show');
-                menuToggle.children[0].classList.remove('rotate-45', 'translate-y-2');
-                menuToggle.children[1].classList.remove('opacity-0');
-                menuToggle.children[2].classList.remove('-rotate-45', '-translate-y-2');
-            }
-        }
 
         // Scroll-triggered animations
         const sections = document.querySelectorAll('.section');
@@ -1003,7 +896,6 @@
             if (scrollTop > lastScrollTop && scrollTop > 100) {
                 nav.classList.remove('visible');
                 nav.classList.add('scrolled');
-                projectDropdown.classList.remove('show');
             } else {
                 nav.classList.remove('scrolled');
                 nav.classList.add('visible');
@@ -1014,42 +906,6 @@
         // Initial nav links animation
         window.addEventListener('load', () => {
             navLinks.classList.add('visible');
-        });
-
-        // Project dropdown behavior
-        projectsLink.addEventListener('click', (e) => {
-            if (window.innerWidth < 768) {
-                e.preventDefault();
-                projectDropdown.classList.toggle('show');
-            }
-        });
-
-        projectsLink.addEventListener('mouseenter', () => {
-            if (window.innerWidth >= 768 && !navLinks.classList.contains('show')) {
-                projectDropdown.classList.add('show');
-            }
-        });
-
-        projectDropdown.addEventListener('mouseenter', () => {
-            if (window.innerWidth >= 768) {
-                projectDropdown.classList.add('show');
-            }
-        });
-
-        projectsLink.addEventListener('mouseleave', () => {
-            if (window.innerWidth >= 768) {
-                setTimeout(() => {
-                    if (!projectDropdown.matches(':hover')) {
-                        projectDropdown.classList.remove('show');
-                    }
-                }, 100);
-            }
-        });
-
-        projectDropdown.addEventListener('mouseleave', () => {
-            if (window.innerWidth >= 768) {
-                projectDropdown.classList.remove('show');
-            }
         });
     </script>
 </body>
