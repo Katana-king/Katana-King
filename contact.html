@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katana-King - Contact Me</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1c2526 100%);
+        }
+        .background-gif {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.7;
+            loading: lazy;
+        }
+        .content-overlay {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 90%;
+            display: none; /* Hidden by default */
+        }
+        .contact-form h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+        .contact-form button {
+            background: #ff6b6b;
+            color: #e0e0e0;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+            min-width: 120px;
+        }
+        .contact-form button:hover,
+        .contact-form button:active {
+            background: #e55a5a;
+        }
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .entry-prompt {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .entry-prompt-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            max-width: 90%;
+        }
+        .entry-prompt button {
+            margin-top: 1rem;
+            background: #ff6b6b;
+            color: #e0e0e0;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+            min-width: 120px;
+        }
+        .entry-prompt button:hover,
+        .entry-prompt button:active {
+            background: #e55a5a;
+        }
+        .entry-prompt img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+            opacity: 0.7;
+            loading: lazy;
+        }
+        .controls {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 100;
+            display: flex;
+            gap: 1rem;
+        }
+        .mute-toggle {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.75rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mute-toggle:hover,
+        .mute-toggle:active {
+            background: rgba(255, 107, 107, 0.7);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .contact-form {
+                padding: 1rem;
+            }
+            .contact-form h2 {
+                font-size: 1.5rem;
+            }
+            .contact-form input,
+            .contact-form textarea {
+                font-size: 0.9rem;
+            }
+            .contact-form button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .entry-prompt-content {
+                padding: 1rem;
+            }
+            .entry-prompt button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .mute-toggle {
+                width: 40px;
+                height: 40px;
+                padding: 0.5rem;
+            }
+            .mute-toggle svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="8.gif" alt="Contact background animation" class="background-gif" loading="lazy">
+    <div id="particles-js"></div>
+
+    <!-- Entry Prompt -->
+    <div class="entry-prompt" id="entryPrompt" role="dialog" aria-labelledby="entryPromptTitle">
+        <div id="particles-js"></div>
+        <img src="8.gif" alt="Welcome animation for contact page" loading="lazy">
+        <div class="entry-prompt-content">
+            <h2 id="entryPromptTitle" class="text-xl md:text-2xl font-bold mb-4">Contact Katana-King</h2>
+            <p>Would you like to enter the contact form or go back?</p>
+            <div class="flex gap-4 mt-4">
+                <button onclick="enterSite()" aria-label="Enter the contact form">Enter</button>
+                <button onclick="goBack()" aria-label="Go back to previous page">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="content-overlay">
+        <div class="contact-form" id="contactForm">
+            <h2>Contact Me</h2>
+            <form action="https://formsubmit.co/brahimiahmed995@gmail.com" method="POST">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required placeholder="Your name">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Your email">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required placeholder="Your message" rows="4"></textarea>
+                <button type="submit">Send Email</button>
+            </form>
+        </div>
+    </div>
+
+    <audio id="backgroundAudio" loop aria-hidden="true">
+        <source src="menu.mp3" type="audio/mp3">
+        Your browser does not support the audio tag. <a href="menu.mp3" download>Download audio</a> to play manually.
+    </audio>
+
+    <div class="controls">
+        <button class="mute-toggle" title="Toggle Mute Audio" onclick="toggleMute()" aria-label="Toggle background audio mute">
+            <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Initialize particles.js
+        window.addEventListener('load', () => {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: window.innerWidth < 768 ? 30 : 50, density: { enable: true, value_area: 800 } },
+                    color: { value: '#ff6b6b' },
+                    shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+                    opacity: { value: 0.5, random: true, anim: { enable: true, speed: 0.7, opacity_min: 0.1 } },
+                    size: { value: 3, random: true, anim: { enable: false } },
+                    line_linked: { enable: true, distance: 100, color: '#ff6b6b', opacity: 0.3, width: 1 },
+                    move: { enable: true, speed: 3, direction: 'none', random: true, straight: false, out_mode: 'out' }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: { enable: window.innerWidth >= 768, mode: 'grab' },
+                        onclick: { enable: true, mode: 'push' },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 150, line_linked: { opacity: 0.5 } },
+                        push: { particles_nb: 2 }
+                    }
+                },
+                retina_detect: true
+            });
+        });
+
+        // Enter site and play audio
+        function enterSite() {
+            const audio = document.getElementById('backgroundAudio');
+            const entryPrompt = document.getElementById('entryPrompt');
+            const contactForm = document.getElementById('contactForm');
+            entryPrompt.style.display = 'none';
+            contactForm.style.display = 'block';
+            audio.play().catch(error => console.error("Audio play failed:", error));
+            document.querySelector('.content-overlay').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Go back
+        function goBack() {
+            window.history.back();
+        }
+
+        // Toggle mute
+        function toggleMute() {
+            const audio = document.getElementById('backgroundAudio');
+            const muteIcon = document.getElementById('muteIcon');
+            audio.muted = !audio.muted;
+            muteIcon.innerHTML = audio.muted
+                ? `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46l-6 6"></path><path d="M18.54 5.46l-6 6"></path>`
+                : `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>`;
+        }
+    </script>
+</body>
+</html>
