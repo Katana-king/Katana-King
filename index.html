@@ -10,6 +10,10 @@
     <meta name="author" content="Katana-King">
     <!-- Favicon for branding -->
     <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="videos/1.mp4" as="video" type="video/mp4">
+    <link rel="preload" href="2.gif" as="image">
+    <link rel="preload" href="1.mp3" as="audio" type="audio/mp3">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
@@ -696,7 +700,8 @@
                         Need a website that pops like a critical hit? I can craft you a shiny new site from scratch! Whether it's an online shop to sell your epic loot, a restaurant menu that makes mouths water, an e-commerce empire to rival the dark web, or anything in the digital realm, I've got you covered. And for payment? I accept cash, crypto, rare CS2 skins, human organs, or even a bag of premium cocaine... jk, let's stick to legit methods!
                     </p>
                     <div class="flex flex-col sm:flex-row justify-center gap-4">
-<a href="contact.html" class="text-red-400 hover:underline active:underline" aria-label="Go to contact page">Contact Me</a>                        <button class="custom-button" onclick="playServicesAudio()" aria-label="Play Services audio">Play Audio</button>
+                        <a href="contact.html" class="text-red-400 hover:underline active:underline" aria-label="Go to contact page">Contact Me</a>
+                        <button class="custom-button" onclick="playServicesAudio()" aria-label="Play Services audio">Play Audio</button>
                         <button class="custom-button" onclick="playShutupServicesAudio()" aria-label="Play Shut Up audio and mute Services audio">Shut Up</button>
                     </div>
                 </div>
@@ -715,12 +720,6 @@
                     </p>
                     <button class="custom-button" onclick="playAboutmeAudio()" aria-label="Play About Me audio">Play Audio</button>
                     <button class="custom-button" onclick="playShutupAboutAudio()" aria-label="Play Shut Up audio">Shut Up</button>
-                    <div 
-                    
-                    
-                    
-                        </a>
-                    </div>
                 </div>
             </div>
         </section>
