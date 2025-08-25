@@ -47,7 +47,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             max-width: 500px;
             width: 90%;
-            display: none; /* Hidden by default */
+            display: none;
         }
         .contact-form h2 {
             text-align: center;
@@ -83,6 +83,45 @@
         .contact-form button:hover,
         .contact-form button:active {
             background: #e55a5a;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .message {
+            display: flex;
+            align-items: center;
+            margin: 0.5rem 0;
+            max-width: 80%;
+        }
+        .bot-message {
+            background: #4a5568;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+        .user-message {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin-left: auto;
+        }
+        .message img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 0.5rem;
+        }
+        .bot-message img {
+            order: -1;
+        }
+        .typing-indicator {
+            display: none;
+            font-style: italic;
+            color: #a0aec0;
         }
         #particles-js {
             position: absolute;
@@ -201,6 +240,10 @@
                 width: 20px;
                 height: 20px;
             }
+            .message img {
+                width: 32px;
+                height: 32px;
+            }
         }
     </style>
 </head>
@@ -226,24 +269,40 @@
     <div class="content-overlay">
         <div class="contact-form" id="contactForm">
             <h2>Contact Me</h2>
-            <form action="https://formsubmit.co/brahimiahmed995@gmail.com" method="POST">
+            <div id="initialForm">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required placeholder="Your name">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required placeholder="Your email">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required placeholder="Your message" rows="4"></textarea>
                 <div class="flex gap-4 justify-center">
-                    <button type="submit">Send Email</button>
-                    <button type="button" onclick="window.location.href='index.html'" aria-label="Go back to home page">Back to Home</button>
+                    <button onclick="startChat()">Start Chat</button>
+                    <button onclick="window.location.href='index.html'" aria-label="Go back to home page">Back to Home</button>
                 </div>
-            </form>
+            </div>
+            <div id="chatInterface" style="display: none;">
+                <div id="chatBox" class="chat-box">
+                    <div id="typingIndicator" class="typing-indicator">Katana-King is typing...</div>
+                </div>
+                <form id="messageForm" action="https://formsubmit.co/brahimiahmed995@gmail.com" method="POST">
+                    <input type="hidden" id="formName" name="name">
+                    <input type="hidden" id="formEmail" name="email">
+                    <textarea id="message" name="message" required placeholder="Type your message..." rows="4"></textarea>
+                    <div class="flex gap-4 justify-center">
+                        <button type="submit">Send Message</button>
+                        <button type="button" onclick="window.location.href='index.html'" aria-label="Go back to home page">Back to Home</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <audio id="backgroundAudio" loop aria-hidden="true">
         <source src="menu.mp3" type="audio/mp3">
         Your browser does not support the audio tag. <a href="menu.mp3" download>Download audio</a> to play manually.
+    </audio>
+    <audio id="notificationSound" aria-hidden="true">
+        <source src="notification.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
     </audio>
 
     <div class="controls">
@@ -304,12 +363,79 @@
         // Toggle mute
         function toggleMute() {
             const audio = document.getElementById('backgroundAudio');
+            const notificationSound = document.getElementById('notificationSound');
             const muteIcon = document.getElementById('muteIcon');
             audio.muted = !audio.muted;
+            notificationSound.muted = audio.muted;
             muteIcon.innerHTML = audio.muted
                 ? `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46l-6 6"></path><path d="M18.54 5.46l-6 6"></path>`
                 : `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>`;
         }
+
+        // Start chat
+        function startChat() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            if (!name || !email) {
+                alert('Please enter both name and email.');
+                return;
+            }
+            document.getElementById('initialForm').style.display = 'none';
+            document.getElementById('chatInterface').style.display = 'block';
+            document.getElementById('formName').value = name;
+            document.getElementById('formEmail').value = email;
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.style.display = 'block';
+            setTimeout(() => {
+                typingIndicator.style.display = 'none';
+                addMessage('bot', 'Hello, how can I help you?', 'katana-king-avatar.png');
+                playNotificationSound();
+            }, 1500);
+        }
+
+        // Play notification sound
+        function playNotificationSound() {
+            const notificationSound = document.getElementById('notificationSound');
+            if (!notificationSound.muted) {
+                notificationSound.currentTime = 0;
+                notificationSound.play().catch(error => console.error("Notification sound play failed:", error));
+            }
+        }
+
+        // Add message to chat
+        function addMessage(sender, text, avatar = 'user-avatar.png') {
+            const chatBox = document.getElementById('chatBox');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender === 'bot' ? 'bot-message' : 'user-message'}`;
+            messageDiv.innerHTML = `<img src="${sender === 'bot' ? 'katana-king-avatar.png' : 'user-avatar.png'}" alt="${sender === 'bot' ? 'Katana-King' : 'User'} avatar"> ${text}`;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            if (sender === 'user') {
+                saveMessage(text);
+                playNotificationSound();
+            }
+        }
+
+        // Save message to localStorage
+        function saveMessage(message) {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+            messages.push({ name, email, message, timestamp: new Date().toISOString() });
+            localStorage.setItem('contactMessages', JSON.stringify(messages));
+        }
+
+        // Handle form submission
+        document.getElementById('messageForm').addEventListener('submit', function(event) {
+            const message = document.getElementById('message').value.trim();
+            if (!message) {
+                event.preventDefault();
+                alert('Please enter a message.');
+                return;
+            }
+            addMessage('user', message, 'user-avatar.png');
+        });
     </script>
 </body>
 </html>
