@@ -14,6 +14,8 @@
     <link rel="preload" href="videos/1.mp4" as="video" type="video/mp4">
     <link rel="preload" href="2.gif" as="image">
     <link rel="preload" href="1.mp3" as="audio" type="audio/mp3">
+    <link rel="preload" href="achievement-icon.png" as="image"> <!-- Preload achievement icon -->
+    <link rel="preload" href="achievement-sound.mp3" as="audio" type="audio/mp3"> <!-- Preload achievement sound -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
@@ -52,6 +54,16 @@
         body.light-theme .social-icons a:hover svg,
         body.light-theme .social-icons a:active svg {
             stroke: #e55a5a;
+        }
+        body.light-theme .achievement-notification {
+            background: #e0e0e0; /* Lighter background for light theme */
+            color: #333;
+        }
+        body.light-theme .achievement-info h3 {
+            color: #333;
+        }
+        body.light-theme .achievement-info p {
+            color: #666;
         }
         video.background-video {
             position: fixed;
@@ -366,6 +378,67 @@
             padding: 1.5rem;
             font-size: 1rem;
         }
+        /* Achievement Notification Styles */
+        .achievement-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: #252525; /* Steam's dark gray background */
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right, #2f7e38, #1a6b99) 1; /* Steam's green-to-blue gradient border */
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(100%); /* Start off-screen to the right */
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            z-index: 150;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            font-family: 'Arial', sans-serif; /* Steam uses a clean sans-serif font */
+        }
+        .achievement-notification.visible {
+            opacity: 1;
+            transform: translateX(0); /* Slide in from the right */
+        }
+        .achievement-icon {
+            width: 48px;
+            height: 48px;
+            background: url('achievement-icon.png') no-repeat center; /* Replace with your trophy icon */
+            background-size: cover;
+            margin-right: 10px;
+        }
+        .achievement-info h3 {
+            margin: 0;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #ffffff; /* White title like Steam */
+            text-transform: uppercase; /* Steam's title style */
+        }
+        .achievement-info p {
+            margin: 3px 0 0;
+            font-size: 0.85em;
+            color: #b1b1b1; /* Light gray description like Steam */
+        }
+        @media (max-width: 768px) {
+            .achievement-notification {
+                width: 250px;
+                bottom: 10px;
+                right: 10px;
+                padding: 8px;
+            }
+            .achievement-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .achievement-info h3 {
+                font-size: 1em;
+            }
+            .achievement-info p {
+                font-size: 0.8em;
+            }
+        }
         /* Phone-Responsive Styles */
         @media (max-width: 768px) {
             .menu-toggle {
@@ -518,6 +591,15 @@
         <img src="3.gif" alt="Transition animation for smooth entry" loading="lazy">
     </div>
 
+    <!-- Achievement Notification -->
+    <div class="achievement-notification" id="achievementNotification">
+        <div class="achievement-icon"></div>
+        <div class="achievement-info">
+            <h3>Achievement Unlocked!</h3>
+            <p>Welcome to Katana-King's Web site</p>
+        </div>
+    </div>
+
     <!-- Background Video -->
     <video class="background-video" loop playsinline muted id="backgroundVideo" aria-hidden="true">
         <source src="videos/1.mp4" type="video/mp4">
@@ -551,6 +633,12 @@
     <!-- Shut Up Audio for About -->
     <audio id="shutupAboutAudio" aria-hidden="true">
         <source src="shutup.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <!-- Achievement Audio -->
+    <audio id="achievementAudio" aria-hidden="true">
+        <source src="achievement-sound.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
 
@@ -798,6 +886,8 @@
         const shutupServicesAudio = document.getElementById('shutupServicesAudio');
         const aboutmeAudio = document.getElementById('aboutmeAudio');
         const shutupAboutAudio = document.getElementById('shutupAboutAudio');
+        const achievementAudio = document.getElementById('achievementAudio');
+        const achievementNotification = document.getElementById('achievementNotification');
         const muteButton = document.querySelector('.control-button');
         const muteIcon = document.getElementById('muteIcon');
         const themeButton = document.querySelector('.theme-toggle');
@@ -815,16 +905,19 @@
         shutupServicesAudio.pause();
         aboutmeAudio.pause();
         shutupAboutAudio.pause();
+        achievementAudio.pause();
         video.muted = true;
         audio.muted = true;
         servicesAudio.muted = false;
         shutupServicesAudio.muted = false;
         aboutmeAudio.muted = false;
         shutupAboutAudio.muted = false;
+        achievementAudio.muted = false;
         document.querySelector('.content-overlay').style.display = 'none';
         muteButton.style.display = 'none';
         themeButton.style.display = 'none';
         transitionGif.style.display = 'none';
+        achievementNotification.style.display = 'none';
         audio.volume = 1.0; // Default volume for background audio
 
         // Enter site
@@ -850,6 +943,26 @@
                     transitionImg.src = '';
                 }, 700);
             }, 700);
+
+            // Trigger achievement after 5 seconds
+            setTimeout(showAchievement, 5000);
+        }
+
+        // Show achievement notification
+        function showAchievement() {
+            achievementNotification.style.display = 'flex';
+            setTimeout(() => {
+                achievementNotification.classList.add('visible');
+                achievementAudio.play().catch((error) => console.error("Achievement audio playback failed:", error.message));
+            }, 100); // Small delay for display to take effect
+
+            // Hide after 5 seconds
+            setTimeout(() => {
+                achievementNotification.classList.remove('visible');
+                setTimeout(() => {
+                    achievementNotification.style.display = 'none';
+                }, 300); // Match transition duration
+            }, 5000);
         }
 
         // Toggle mute for background audio
