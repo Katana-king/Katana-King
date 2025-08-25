@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +15,8 @@
     <link rel="preload" href="videos/1.mp4" as="video" type="video/mp4">
     <link rel="preload" href="2.gif" as="image">
     <link rel="preload" href="1.mp3" as="audio" type="audio/mp3">
-    <link rel="preload" href="achievement-icon.png" as="image"> <!-- Preload achievement icon -->
-    <link rel="preload" href="achievement-sound.mp3" as="audio" type="audio/mp3"> <!-- Preload achievement sound -->
+    <link rel="preload" href="achievement-icon.png" as="image">
+    <link rel="preload" href="achievement-sound.mp3" as="audio" type="audio/mp3">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
@@ -56,7 +57,7 @@
             stroke: #e55a5a;
         }
         body.light-theme .achievement-notification {
-            background: #e0e0e0; /* Lighter background for light theme */
+            background: #e0e0e0;
             color: #333;
         }
         body.light-theme .achievement-info h3 {
@@ -384,28 +385,28 @@
             bottom: 20px;
             right: 20px;
             width: 300px;
-            background: #252525; /* Steam's dark gray background */
+            background: #252525;
             border: 2px solid transparent;
-            border-image: linear-gradient(to right, #2f7e38, #1a6b99) 1; /* Steam's green-to-blue gradient border */
+            border-image: linear-gradient(to right, #2f7e38, #1a6b99) 1;
             border-radius: 5px;
             padding: 10px;
             display: flex;
             align-items: center;
             opacity: 0;
-            transform: translateX(100%); /* Start off-screen to the right */
+            transform: translateX(100%);
             transition: opacity 0.3s ease-out, transform 0.3s ease-out;
             z-index: 150;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-            font-family: 'Arial', sans-serif; /* Steam uses a clean sans-serif font */
+            font-family: 'Arial', sans-serif;
         }
         .achievement-notification.visible {
             opacity: 1;
-            transform: translateX(0); /* Slide in from the right */
+            transform: translateX(0);
         }
         .achievement-icon {
             width: 48px;
             height: 48px;
-            background: url('achievement-icon.png') no-repeat center; /* Replace with your trophy icon */
+            background: url('achievement-icon.png') no-repeat center;
             background-size: cover;
             margin-right: 10px;
         }
@@ -413,13 +414,13 @@
             margin: 0;
             font-size: 1.1em;
             font-weight: bold;
-            color: #ffffff; /* White title like Steam */
-            text-transform: uppercase; /* Steam's title style */
+            color: #ffffff;
+            text-transform: uppercase;
         }
         .achievement-info p {
             margin: 3px 0 0;
             font-size: 0.85em;
-            color: #b1b1b1; /* Light gray description like Steam */
+            color: #b1b1b1;
         }
         @media (max-width: 768px) {
             .achievement-notification {
@@ -439,7 +440,6 @@
                 font-size: 0.8em;
             }
         }
-        /* Phone-Responsive Styles */
         @media (max-width: 768px) {
             .menu-toggle {
                 display: flex;
@@ -755,11 +755,11 @@
                         </div>
                     </div>
                     <div class="project-card p-4 md:p-6 rounded-lg visible" id="project-Why">
-                        <h3 class="text-lg md:text-xl font-semibold mb-2 project-title text-red-400">Why!</h3>
+                        <h3 class="text-lg md:text-xl font-semibold mb-2 project-title text-red-400">Why</h3>
                         <p class="mb-4 text-sm md:text-base">A troll game to prank your friends by shutting down their PCs when they hit Enter.</p>
                         <div class="flex justify-start gap-4">
-                            <a href="https://katana-king.github.io/Why" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="View live demo of Why!">Live Demo</a>
-                            <a href="downloads/why-game.zip" download class="text-red-400 hover:underline active:underline" aria-label="Download Why! game">Download</a>
+                            <a href="https://katana-king.github.io/troll" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="View live demo of Why game">Live Demo</a>
+                            <a href="downloads/troll-game.zip" download class="text-red-400 hover:underline active:underline" aria-label="Download Why game">Download</a>
                         </div>
                     </div>
                 </div>
@@ -926,7 +926,7 @@
         themeButton.style.display = 'none';
         transitionGif.style.display = 'none';
         achievementNotification.style.display = 'none';
-        audio.volume = 1.0; // Default volume for background audio
+        audio.volume = 1.0;
 
         // Enter site
         function enterSite() {
@@ -962,14 +962,14 @@
             setTimeout(() => {
                 achievementNotification.classList.add('visible');
                 achievementAudio.play().catch((error) => console.error("Achievement audio playback failed:", error.message));
-            }, 100); // Small delay for display to take effect
+            }, 100);
 
             // Hide after 5 seconds
             setTimeout(() => {
                 achievementNotification.classList.remove('visible');
                 setTimeout(() => {
                     achievementNotification.style.display = 'none';
-                }, 300); // Match transition duration
+                }, 300);
             }, 5000);
         }
 
@@ -983,12 +983,12 @@
 
         // Function to manage background audio volume
         function adjustBackgroundVolume(isPlaying) {
-            audio.volume = isPlaying ? 0.3 : 1.0; // Reduce to 30% when services or aboutme audio plays, restore to full otherwise
+            audio.volume = isPlaying ? 0.3 : 1.0;
         }
 
         // Play Services audio
         function playServicesAudio() {
-            aboutmeAudio.pause(); // Pause aboutme audio if playing
+            aboutmeAudio.pause();
             servicesAudio.play().then(() => {
                 adjustBackgroundVolume(true);
             }).catch((error) => console.error("Services audio playback failed:", error.message));
@@ -1003,7 +1003,7 @@
 
         // Play About Me audio
         function playAboutmeAudio() {
-            servicesAudio.pause(); // Pause services audio if playing
+            servicesAudio.pause();
             aboutmeAudio.play().then(() => {
                 adjustBackgroundVolume(true);
             }).catch((error) => console.error("About Me audio playback failed:", error.message));
@@ -1093,3 +1093,4 @@
     </script>
 </body>
 </html>
+```
