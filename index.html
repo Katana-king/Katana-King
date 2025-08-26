@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,42 +28,44 @@
             cursor: auto;
             transition: background 0.5s ease, color 0.5s ease;
         }
-        body.light-theme {
-            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
-            color: #333;
+        body.crt-effect {
+            background: #000;
+            color: #00ff00;
+            font-family: "Courier New", monospace;
+            position: relative;
         }
-        body.light-theme .content-overlay,
-        body.light-theme nav,
-        body.light-theme .project-card,
-        body.light-theme .dev-stats-card,
-        body.light-theme .services-card,
-        body.light-theme .about-content {
-            background: rgba(255, 255, 255, 0.8);
-            color: #333;
+        body.crt-effect .content-overlay,
+        body.crt-effect nav,
+        body.crt-effect .project-card,
+        body.crt-effect .dev-stats-card,
+        body.crt-effect .services-card,
+        body.crt-effect .about-content {
+            background: transparent;
+            color: #00ff00;
         }
-        body.light-theme .nav-links a:hover,
-        body.light-theme .nav-links a:active,
-        body.light-theme .project-card a,
-        body.light-theme .services-card a,
-        body.light-theme .about-content a {
-            color: #e55a5a;
+        body.crt-effect .nav-links a:hover,
+        body.crt-effect .nav-links a:active,
+        body.crt-effect .project-card a,
+        body.crt-effect .services-card a,
+        body.crt-effect .about-content a {
+            color: #00ff80;
         }
-        body.light-theme .social-icons svg {
-            stroke: #333;
+        body.crt-effect .social-icons svg {
+            stroke: #00ff00;
         }
-        body.light-theme .social-icons a:hover svg,
-        body.light-theme .social-icons a:active svg {
-            stroke: #e55a5a;
+        body.crt-effect .social-icons a:hover svg,
+        body.crt-effect .social-icons a:active svg {
+            stroke: #00ff80;
         }
-        body.light-theme .achievement-notification {
-            background: #e0e0e0;
-            color: #333;
+        body.crt-effect .achievement-notification {
+            background: transparent;
+            color: #00ff00;
         }
-        body.light-theme .achievement-info h3 {
-            color: #333;
+        body.crt-effect .achievement-info h3 {
+            color: #00ff00;
         }
-        body.light-theme .achievement-info p {
-            color: #666;
+        body.crt-effect .achievement-info p {
+            color: #00cc00;
         }
         video.background-video {
             position: fixed;
@@ -196,15 +197,30 @@
             padding: 0.75rem;
             border-radius: 9999px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
             width: 48px;
             height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         .theme-toggle {
             bottom: 4rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #ff6b6b;
+        }
+        .theme-toggle:hover, .theme-toggle:active {
+            background: #e55a5a;
+            transform: scale(1.1);
+        }
+        body.crt-effect .theme-toggle {
+            background: rgba(0, 51, 0, 0.7);
+            border: 1px solid #00ff00;
+        }
+        body.crt-effect .theme-toggle:hover, body.crt-effect .theme-toggle:active {
+            background: #004400;
+            transform: scale(1.1);
         }
         .custom-button {
             background: #ff6b6b;
@@ -567,6 +583,95 @@
             from { transform: translateY(-100%); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+        /* CRT effect styles */
+        body.crt-effect::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%,
+                rgba(0, 0, 0, 0.25) 50%
+            );
+            background-size: 100% 4px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        body.crt-effect::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            z-index: 999;
+            pointer-events: none;
+        }
+        body.crt-effect h1,
+        body.crt-effect h2,
+        body.crt-effect h3,
+        body.crt-effect p,
+        body.crt-effect a,
+        body.crt-effect li,
+        body.crt-effect button {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+        }
+        body.crt-effect button {
+            background: #003300;
+            border: 1px solid #00ff00;
+        }
+        body.crt-effect .custom-button {
+            background: #003300;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+        body.crt-effect .custom-button:hover,
+        body.crt-effect .custom-button:active {
+            background: #004400;
+        }
+        body.crt-effect .nav-links a::after {
+            background-color: #00ff00;
+        }
+        body.crt-effect .project-card a,
+        body.crt-effect .services-card a,
+        body.crt-effect .about-content a {
+            background: rgba(0, 255, 0, 0.1);
+        }
+        body.crt-effect .project-card a:hover,
+        body.crt-effect .project-card a:active,
+        body.crt-effect .services-card a:hover,
+        body.crt-effect .services-card a:active,
+        body.crt-effect .about-content a:hover,
+        body.crt-effect .about-content a:active {
+            background: rgba(0, 255, 0, 0.2);
+        }
+        body.crt-effect .social-icons a:hover,
+        body.crt-effect .social-icons a:active {
+            color: #00ff80;
+        }
+        body.crt-effect .control-button {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        body.crt-effect .control-button:hover,
+        body.crt-effect .control-button:active {
+            background: #004400;
+        }
+        body.crt-effect .control-button svg {
+            stroke: #00ff00;
+        }
+        body.crt-effect .achievement-notification {
+            border-image: linear-gradient(to right, #00ff00, #00cc00) 1;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        body.crt-effect video.background-video {
+            filter: brightness(0.5) contrast(1.2) sepia(1) hue-rotate(90deg) saturate(2);
+            opacity: 0.3;
+        }
     </style>
 </head>
 <body>
@@ -652,9 +757,11 @@
     </button>
 
     <!-- Theme Toggle -->
-    <button class="control-button theme-toggle" title="Toggle Theme" onclick="toggleTheme()" aria-label="Toggle between dark and light theme">
+    <button class="control-button theme-toggle" title="Toggle Theme" onclick="toggleTheme()" aria-label="Toggle between dark and retro CRT theme">
         <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
         </svg>
     </button>
 
@@ -1018,20 +1125,20 @@
 
         // Toggle theme
         function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            const isLight = document.body.classList.contains('light-theme');
-            themeIcon.innerHTML = isLight
-                ? `<path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364-7.364l-1.414 1.414M6.636 17.364l-1.414 1.414M17.364 17.364l-1.414-1.414M6.636 6.636l-1.414-1.414"></path>`
-                : `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            document.body.classList.toggle('crt-effect');
+            const isCrt = document.body.classList.contains('crt-effect');
+            themeIcon.innerHTML = isCrt
+                ? `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M6 16h12"></path><rect x="10" y="17" width="4" height="3"></rect>`
+                : `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>`;
+            localStorage.setItem('theme', isCrt ? 'crt' : 'dark');
         }
 
         // Load saved theme
         window.addEventListener('load', () => {
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-theme');
-                themeIcon.innerHTML = `<path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.364-7.364l-1.414 1.414M6.636 17.364l-1.414 1.414M17.364 17.364l-1.414-1.414M6.636 6.636l-1.414-1.414"></path>`;
+            if (savedTheme === 'crt') {
+                document.body.classList.add('crt-effect');
+                themeIcon.innerHTML = `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M6 16h12"></path><rect x="10" y="17" width="4" height="3"></rect>`;
             }
         });
 
@@ -1093,5 +1200,3 @@
     </script>
 </body>
 </html>
-
-
