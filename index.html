@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Improvements -->
     <title>Katana-King - Gamer & Full-Stack Developer Portfolio</title>
     <meta name="description" content="Portfolio of Katana-King, a passionate gamer and full-stack developer offering custom website development for online shops, restaurant menus, e-commerce, and more.">
     <meta name="keywords" content="Katana-King, portfolio, gamer, developer, full-stack, HTML, CSS, JavaScript, TypeScript, gaming, web development, e-commerce">
     <meta name="author" content="Katana-King">
-    <!-- Favicon for branding -->
     <link rel="icon" type="image/png" href="favicon.png">
-    <!-- Preload critical resources -->
     <link rel="preload" href="videos/1.mp4" as="video" type="video/mp4">
     <link rel="preload" href="2.gif" as="image">
     <link rel="preload" href="1.mp3" as="audio" type="audio/mp3">
     <link rel="preload" href="achievement-icon.png" as="image">
+    <link rel="preload" href="cake-icon.png" as="image">
+    <link rel="preload" href="birthday.mp3" as="audio" type="audio/mp3">
     <link rel="preload" href="achievement-sound.mp3" as="audio" type="audio/mp3">
+    <link rel="preload" href="services.mp3" as="audio" type="audio/mp3">
+    <link rel="preload" href="shutup.mp3" as="audio" type="audio/mp3">
+    <link rel="preload" href="aboutme.mp3" as="audio" type="audio/mp3">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
@@ -57,15 +59,62 @@
         body.crt-effect .social-icons a:active svg {
             stroke: #00ff80;
         }
-        body.crt-effect .achievement-notification {
+        body.crt-effect .achievement-notification,
+        body.crt-effect .birthday-overlay {
             background: transparent;
             color: #00ff00;
         }
-        body.crt-effect .achievement-info h3 {
+        body.crt-effect .achievement-info h3,
+        body.crt-effect .birthday-overlay h2 {
             color: #00ff00;
         }
-        body.crt-effect .achievement-info p {
+        body.crt-effect .achievement-info p,
+        body.crt-effect .birthday-overlay p {
             color: #00cc00;
+        }
+        body.birthday-mode {
+            background: linear-gradient(135deg, #2a0a3b 0%, #1a1a2a 100%);
+        }
+        body.birthday-mode .content-overlay,
+        body.birthday-mode nav,
+        body.birthday-mode .project-card,
+        body.birthday-mode .dev-stats-card,
+        body.birthday-mode .services-card,
+        body.birthday-mode .about-content {
+            background: rgba(255, 215, 0, 0.1);
+        }
+        body.birthday-mode .nav-links a:hover,
+        body.birthday-mode .nav-links a:active,
+        body.birthday-mode .project-card a:hover,
+        body.birthday-mode .services-card a:hover,
+        body.birthday-mode .about-content a:hover {
+            color: #ffd700;
+        }
+        body.birthday-mode .social-icons svg {
+            stroke: #ffd700;
+        }
+        body.birthday-mode .social-icons a:hover svg,
+        body.birthday-mode .social-icons a:active svg {
+            stroke: #ff6b6b;
+        }
+        body.birthday-mode .custom-button {
+            background: #ffd700;
+            color: #1a1a2a;
+        }
+        body.birthday-mode .custom-button:hover,
+        body.birthday-mode .custom-button:active {
+            background: #ff6b6b;
+        }
+        body.birthday-mode .theme-toggle {
+            border: 1px solid #ffd700;
+        }
+        body.birthday-mode .theme-toggle:hover,
+        body.birthday-mode .theme-toggle:active {
+            background: #ffd700;
+            color: #1a1a2a;
+        }
+        body.birthday-mode .achievement-notification {
+            border-image: linear-gradient(to right, #ffd700, #ff6b6b) 1;
         }
         video.background-video {
             position: fixed;
@@ -238,7 +287,7 @@
         .control-button:hover, .control-button:active {
             background: #e55a5a;
         }
-        .entry-prompt {
+        .entry-prompt, .birthday-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -252,7 +301,7 @@
             z-index: 200;
             animation: fadeIn 0.5s ease-in-out;
         }
-        .entry-prompt-content {
+        .entry-prompt-content, .birthday-overlay-content {
             position: relative;
             z-index: 3;
             text-align: center;
@@ -261,7 +310,7 @@
             border-radius: 8px;
             max-width: 90%;
         }
-        .entry-prompt button {
+        .entry-prompt button, .birthday-overlay button {
             margin-top: 1rem;
             background: #ff6b6b;
             color: #e0e0e0;
@@ -273,8 +322,20 @@
             font-size: 1rem;
             min-width: 120px;
         }
-        .entry-prompt button:hover, .entry-prompt button:active {
+        .entry-prompt button:hover, .entry-prompt button:active,
+        .birthday-overlay button:hover, .birthday-overlay button:active {
             background: #e55a5a;
+        }
+        .birthday-overlay-content {
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right, #ffd700, #ff6b6b) 1;
+        }
+        .birthday-overlay button {
+            background: #ffd700;
+            color: #1a1a2a;
+        }
+        .birthday-overlay button:hover, .birthday-overlay button:active {
+            background: #ff6b6b;
         }
         .entry-prompt img {
             position: absolute;
@@ -287,7 +348,7 @@
             opacity: 0.7;
             loading: lazy;
         }
-        #particles-js {
+        #particles-js, #birthday-particles-js {
             position: absolute;
             top: 0;
             left: 0;
@@ -353,7 +414,9 @@
             min-width: 120px;
             text-align: center;
         }
-        .project-card a:hover, .project-card a:active, .services-card a:hover, .services-card a:active, .about-content a:hover, .about-content a:active {
+        .project-card a:hover, .project-card a:active,
+        .services-card a:hover, .services-card a:active,
+        .about-content a:hover, .about-content a:active {
             background: rgba(255, 107, 107, 0.4);
         }
         .social-icons a {
@@ -375,6 +438,17 @@
         .social-icons a:hover svg, .social-icons a:active svg {
             stroke: #ff6b6b;
         }
+        .countdown {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            color: #ffd700;
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #ff6b6b;
+            border-radius: 8px;
+        }
         noscript {
             display: block;
             position: fixed;
@@ -395,7 +469,6 @@
             padding: 1.5rem;
             font-size: 1rem;
         }
-        /* Achievement Notification Styles */
         .achievement-notification {
             position: fixed;
             bottom: 20px;
@@ -426,6 +499,10 @@
             background-size: cover;
             margin-right: 10px;
         }
+        .birthday-achievement .achievement-icon {
+            background: url('cake-icon.png') no-repeat center;
+            background-size: cover;
+        }
         .achievement-info h3 {
             margin: 0;
             font-size: 1.1em;
@@ -455,8 +532,6 @@
             .achievement-info p {
                 font-size: 0.8em;
             }
-        }
-        @media (max-width: 768px) {
             .menu-toggle {
                 display: flex;
                 cursor: pointer;
@@ -520,10 +595,10 @@
                 font-size: 0.9rem;
                 line-height: 1.5;
             }
-            .entry-prompt-content {
+            .entry-prompt-content, .birthday-overlay-content {
                 padding: 1rem;
             }
-            .entry-prompt button, .custom-button {
+            .entry-prompt button, .birthday-overlay button, .custom-button {
                 padding: 0.75rem 1.5rem;
                 font-size: 1rem;
             }
@@ -535,6 +610,10 @@
             .control-button svg {
                 width: 24px;
                 height: 24px;
+            }
+            .countdown {
+                font-size: 1rem;
+                padding: 0.75rem;
             }
         }
         @media (max-width: 480px) {
@@ -570,20 +649,23 @@
                 width: 20px;
                 height: 20px;
             }
-            .entry-prompt-content {
+            .entry-prompt-content, .birthday-overlay-content {
                 padding: 0.75rem;
             }
-            .entry-prompt button, .custom-button {
+            .entry-prompt button, .birthday-overlay button, .custom-button {
                 padding: 0.5rem 1rem;
                 font-size: 0.9rem;
                 min-width: 100px;
+            }
+            .countdown {
+                font-size: 0.9rem;
+                padding: 0.5rem;
             }
         }
         @keyframes slideIn {
             from { transform: translateY(-100%); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
-        /* CRT effect styles */
         body.crt-effect::before {
             content: "";
             position: absolute;
@@ -591,10 +673,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(
-                rgba(18, 16, 16, 0) 50%,
-                rgba(0, 0, 0, 0.25) 50%
-            );
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
             background-size: 100% 4px;
             z-index: 1000;
             pointer-events: none;
@@ -675,12 +754,19 @@
     </style>
 </head>
 <body>
-    <!-- Noscript Fallback -->
     <noscript>
         <p>JavaScript is disabled in your browser. Please enable JavaScript or switch to a supported browser to view this portfolio. Visit <a href="https://www.enable-javascript.com/" target="_blank" style="color: #ff6b6b;">enable-javascript.com</a> for instructions.</p>
     </noscript>
 
-    <!-- Entry Prompt -->
+    <div class="birthday-overlay" id="birthdayOverlay" role="dialog" aria-labelledby="birthdayOverlayTitle">
+        <div id="birthday-particles-js"></div>
+        <div class="birthday-overlay-content">
+            <h2 id="birthdayOverlayTitle" class="text-xl md:text-2xl font-bold mb-4 typing">Happy Birthday, Katana-King!</h2>
+            <p>Leveling up to another epic year! Join my birthday gaming session on <a href="https://www.twitch.tv/katanaking" target="_blank" class="text-red-400 hover:underline">Twitch</a> or <a href="https://discord.com/users/kingos2" target="_blank" class="text-red-400 hover:underline">Discord</a>!</p>
+            <button onclick="enterSite()" aria-label="Enter Katana-King's birthday site" class="custom-button">Celebrate!</button>
+        </div>
+    </div>
+
     <div class="entry-prompt" id="entryPrompt" role="dialog" aria-labelledby="entryPromptTitle">
         <div id="particles-js"></div>
         <img src="2.gif" alt="Welcome animation showcasing Katana-King's gaming theme" loading="lazy">
@@ -691,63 +777,58 @@
         </div>
     </div>
 
-    <!-- Transition GIF -->
     <div class="transition-gif" id="transitionGif">
         <img src="3.gif" alt="Transition animation for smooth entry" loading="lazy">
     </div>
 
-    <!-- Achievement Notification -->
     <div class="achievement-notification" id="achievementNotification">
         <div class="achievement-icon"></div>
         <div class="achievement-info">
-            <h3>Achievement Unlocked!</h3>
-            <p>Welcome to Katana-King's Web site</p>
+            <h3 id="achievementTitle">Achievement Unlocked!</h3>
+            <p id="achievementDescription">Welcome to Katana-King's Web site</p>
         </div>
     </div>
 
-    <!-- Background Video -->
     <video class="background-video" loop playsinline muted id="backgroundVideo" aria-hidden="true">
         <source src="videos/1.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Background Audio -->
     <audio id="backgroundAudio" loop aria-hidden="true">
         <source src="1.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
 
-    <!-- Services Audio -->
+    <audio id="birthdayAudio" aria-hidden="true">
+        <source src="birthday.mp3" type="audio/mp3">
+        Your browser does not support the audio tag.
+    </audio>
+
     <audio id="servicesAudio" aria-hidden="true">
         <source src="services.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
 
-    <!-- Shut Up Audio for Services -->
     <audio id="shutupServicesAudio" aria-hidden="true">
         <source src="shutup.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
 
-    <!-- About Me Audio -->
     <audio id="aboutmeAudio" aria-hidden="true">
         <source src="aboutme.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
 
-    <!-- Shut Up Audio for About -->
     <audio id="shutupAboutAudio" aria-hidden="true">
         <source src="shutup.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
 
-    <!-- Achievement Audio -->
     <audio id="achievementAudio" aria-hidden="true">
         <source src="achievement-sound.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
 
-    <!-- Mute Toggle -->
     <button class="control-button" title="Toggle Mute Audio" onclick="toggleMute()" aria-label="Toggle background audio mute">
         <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
@@ -756,8 +837,7 @@
         </svg>
     </button>
 
-    <!-- Theme Toggle -->
-    <button class="control-button theme-toggle" title="Toggle Theme" onclick="toggleTheme()" aria-label="Toggle between dark and retro CRT theme">
+    <button class="control-button theme-toggle" title="Toggle Theme" onclick="toggleTheme()" aria-label="Toggle between dark, retro CRT, and birthday themes">
         <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
             <line x1="12" y1="8" x2="12" y2="16"></line>
@@ -766,7 +846,6 @@
     </button>
 
     <div class="content-overlay">
-        <!-- Navigation -->
         <nav class="fixed top-0 w-full p-3 md:p-4 flex justify-between items-center z-50 visible" role="navigation" aria-label="Main navigation">
             <div class="text-xl md:text-2xl font-bold">Katana-King</div>
             <div class="menu-toggle flex flex-col gap-1.5 cursor-pointer md:hidden" aria-label="Toggle mobile menu">
@@ -784,12 +863,12 @@
             </ul>
         </nav>
 
-        <!-- Home Section -->
         <section id="home" class="section flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
             <div class="max-w-lg text-center md:text-left">
                 <h1 class="text-3xl md:text-6xl font-bold mb-4">Welcome</h1>
                 <p class="text-xl md:text-4xl font-semibold mb-2">I am <span class="text-red-400 typing">Katana-King</span></p>
                 <p class="text-base md:text-xl">Gamer, Developer, and Creative Mind</p>
+                <div id="countdown" class="countdown" role="timer"></div>
                 <div class="mt-4 flex justify-center md:justify-start gap-4 social-icons">
                     <a href="https://steamcommunity.com/profiles/76561199055694029/" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="Visit Steam Profile">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -828,7 +907,6 @@
             <a href="#about" aria-label="Learn more about Katana-King"><img src="1.gif" alt="Katana-King's profile animation" class="hero-img w-36 h-36 md:w-64 md:h-64 rounded-full object-cover" loading="lazy"></a>
         </section>
 
-        <!-- Projects Section -->
         <section id="projects" class="section">
             <div class="max-w-4xl w-full">
                 <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing">Projects</h2>
@@ -873,7 +951,6 @@
             </div>
         </section>
 
-        <!-- Developer Stats Section -->
         <section id="dev-stats" class="section">
             <div class="max-w-4xl w-full">
                 <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing">Developer Stats</h2>
@@ -892,7 +969,6 @@
             </div>
         </section>
 
-        <!-- Services Section -->
         <section id="services" class="section">
             <img src="5.gif" alt="Background animation for Services section" class="background-gif" loading="lazy">
             <div class="max-w-4xl w-full">
@@ -911,7 +987,6 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="section">
             <img src="4.gif" alt="Background animation for About section" class="background-gif" loading="lazy">
             <div class="max-w-4xl w-full">
@@ -927,7 +1002,6 @@
             </div>
         </section>
 
-        <!-- Footer -->
         <footer class="py-4 md:py-6 text-center bg-black bg-opacity-50">
             <p class="text-sm">&copy; 2025 Katana-King. All rights reserved.</p>
             <div class="flex justify-center gap-4 mt-2 social-icons">
@@ -958,9 +1032,59 @@
     </div>
 
     <script>
-        // Initialize particles.js
+        function isBirthday() {
+            const now = new Date();
+            return now.getFullYear() === 2025 && now.getMonth() === 9 && now.getDate() === 5;
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            let birthday = new Date(now.getFullYear(), 9, 5);
+            if (now > birthday) {
+                birthday = new Date(now.getFullYear() + 1, 9, 5);
+            }
+            const timeDiff = birthday - now;
+            const countdownElement = document.getElementById('countdown');
+            if (isBirthday()) {
+                countdownElement.innerHTML = "It's my birthday today!";
+                return;
+            }
+            if (timeDiff <= 0) {
+                countdownElement.style.display = 'none';
+                return;
+            }
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            countdownElement.innerHTML = `Time to Katana-King's Birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
         window.addEventListener('load', () => {
-            particlesJS('particles-js', {
+            const particlesConfig = isBirthday() ? {
+                particles: {
+                    number: { value: window.innerWidth < 768 ? 50 : 100, density: { enable: true, value_area: 800 } },
+                    color: { value: ['#ffd700', '#ff6b6b', '#800080'] },
+                    shape: { type: 'star', stroke: { width: 0, color: '#000000' } },
+                    opacity: { value: 0.7, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2 } },
+                    size: { value: 4, random: true, anim: { enable: true, speed: 2, size_min: 1 } },
+                    line_linked: { enable: true, distance: 100, color: '#ffd700', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 4, direction: 'none', random: true, straight: false, out_mode: 'out' }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: { enable: window.innerWidth >= 768, mode: 'grab' },
+                        onclick: { enable: true, mode: 'push' },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 150, line_linked: { opacity: 0.5 } },
+                        push: { particles_nb: 3 }
+                    }
+                },
+                retina_detect: true
+            } : {
                 particles: {
                     number: { value: window.innerWidth < 768 ? 30 : 50, density: { enable: true, value_area: 800 } },
                     color: { value: '#ff6b6b' },
@@ -983,20 +1107,38 @@
                     }
                 },
                 retina_detect: true
-            });
+            };
 
-            // Trigger animations
+            particlesJS(isBirthday() ? 'birthday-particles-js' : 'particles-js', particlesConfig);
+
             const cards = document.querySelectorAll('.project-card, .dev-stats-card, .services-card, .about-content');
             cards.forEach((card, index) => {
                 setTimeout(() => {
                     card.classList.add('visible');
                 }, index * 100);
             });
+
+            if (isBirthday()) {
+                document.getElementById('entryPrompt').style.display = 'none';
+                document.getElementById('birthdayOverlay').style.display = 'flex';
+                document.body.classList.add('birthday-mode');
+                document.getElementById('backgroundAudio').pause();
+                document.getElementById('birthdayAudio').play().catch((error) => console.error("Birthday audio playback failed:", error.message));
+                document.getElementById('achievementNotification').classList.add('birthday-achievement');
+                document.getElementById('achievementTitle').textContent = 'Birthday Bash Unlocked!';
+                document.getElementById('achievementDescription').textContent = "Celebrating Katana-King's epic level-up!";
+            } else {
+                document.getElementById('birthdayOverlay').style.display = 'none';
+                document.getElementById('entryPrompt').style.display = 'flex';
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
         });
 
-        // Elements
         const video = document.getElementById('backgroundVideo');
         const audio = document.getElementById('backgroundAudio');
+        const birthdayAudio = document.getElementById('birthdayAudio');
         const servicesAudio = document.getElementById('servicesAudio');
         const shutupServicesAudio = document.getElementById('shutupServicesAudio');
         const aboutmeAudio = document.getElementById('aboutmeAudio');
@@ -1008,14 +1150,15 @@
         const themeButton = document.querySelector('.theme-toggle');
         const themeIcon = document.getElementById('themeIcon');
         const entryPrompt = document.getElementById('entryPrompt');
+        const birthdayOverlay = document.getElementById('birthdayOverlay');
         const transitionGif = document.getElementById('transitionGif');
         const transitionImg = transitionGif.querySelector('img');
         const navLinks = document.querySelector('.nav-links');
         const menuToggle = document.querySelector('.menu-toggle');
 
-        // Initial state
         video.pause();
         audio.pause();
+        birthdayAudio.pause();
         servicesAudio.pause();
         shutupServicesAudio.pause();
         aboutmeAudio.pause();
@@ -1023,6 +1166,7 @@
         achievementAudio.pause();
         video.muted = true;
         audio.muted = true;
+        birthdayAudio.muted = false;
         servicesAudio.muted = false;
         shutupServicesAudio.muted = false;
         aboutmeAudio.muted = false;
@@ -1034,10 +1178,11 @@
         transitionGif.style.display = 'none';
         achievementNotification.style.display = 'none';
         audio.volume = 1.0;
+        birthdayAudio.volume = 1.0;
 
-        // Enter site
         function enterSite() {
             entryPrompt.style.display = 'none';
+            birthdayOverlay.style.display = 'none';
             transitionGif.style.display = 'block';
             transitionImg.src = '3.gif';
             document.querySelector('.content-overlay').style.display = 'block';
@@ -1045,9 +1190,13 @@
             themeButton.style.display = 'flex';
             Promise.all([
                 video.play().catch((error) => console.error("Video playback failed:", error.message)),
-                audio.play().then(() => {
-                    audio.muted = false;
-                }).catch((error) => console.error("Audio playback failed:", error.message))
+                isBirthday()
+                    ? birthdayAudio.play().then(() => {
+                        birthdayAudio.muted = false;
+                    }).catch((error) => console.error("Birthday audio playback failed:", error.message))
+                    : audio.play().then(() => {
+                        audio.muted = false;
+                    }).catch((error) => console.error("Audio playback failed:", error.message))
             ]);
             document.querySelector('#home').scrollIntoView({ behavior: 'smooth' });
             setTimeout(() => {
@@ -1058,20 +1207,15 @@
                     transitionImg.src = '';
                 }, 700);
             }, 700);
-
-            // Trigger achievement after 5 seconds
             setTimeout(showAchievement, 5000);
         }
 
-        // Show achievement notification
         function showAchievement() {
             achievementNotification.style.display = 'flex';
             setTimeout(() => {
                 achievementNotification.classList.add('visible');
                 achievementAudio.play().catch((error) => console.error("Achievement audio playback failed:", error.message));
             }, 100);
-
-            // Hide after 5 seconds
             setTimeout(() => {
                 achievementNotification.classList.remove('visible');
                 setTimeout(() => {
@@ -1080,20 +1224,22 @@
             }, 5000);
         }
 
-        // Toggle mute for background audio
         function toggleMute() {
             audio.muted = !audio.muted;
+            birthdayAudio.muted = !birthdayAudio.muted;
             muteIcon.innerHTML = audio.muted
                 ? `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46l-6 6"></path><path d="M18.54 5.46l-6 6"></path>`
                 : `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>`;
         }
 
-        // Function to manage background audio volume
         function adjustBackgroundVolume(isPlaying) {
-            audio.volume = isPlaying ? 0.3 : 1.0;
+            if (isBirthday()) {
+                birthdayAudio.volume = isPlaying ? 0.2 : 1.0;
+            } else {
+                audio.volume = isPlaying ? 0.2 : 1.0;
+            }
         }
 
-        // Play Services audio
         function playServicesAudio() {
             aboutmeAudio.pause();
             servicesAudio.play().then(() => {
@@ -1101,14 +1247,12 @@
             }).catch((error) => console.error("Services audio playback failed:", error.message));
         }
 
-        // Play Shut Up audio and mute Services audio
         function playShutupServicesAudio() {
             servicesAudio.pause();
             adjustBackgroundVolume(false);
             shutupServicesAudio.play().catch((error) => console.error("Shut Up audio playback failed:", error.message));
         }
 
-        // Play About Me audio
         function playAboutmeAudio() {
             servicesAudio.pause();
             aboutmeAudio.play().then(() => {
@@ -1116,86 +1260,68 @@
             }).catch((error) => console.error("About Me audio playback failed:", error.message));
         }
 
-        // Play Shut Up audio
         function playShutupAboutAudio() {
             aboutmeAudio.pause();
             adjustBackgroundVolume(false);
             shutupAboutAudio.play().catch((error) => console.error("Shut Up audio playback failed:", error.message));
         }
 
-        // Toggle theme
         function toggleTheme() {
-            document.body.classList.toggle('crt-effect');
+            const isBirthdayMode = document.body.classList.contains('birthday-mode');
             const isCrt = document.body.classList.contains('crt-effect');
-            themeIcon.innerHTML = isCrt
-                ? `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M6 16h12"></path><rect x="10" y="17" width="4" height="3"></rect>`
-                : `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>`;
-            localStorage.setItem('theme', isCrt ? 'crt' : 'dark');
-        }
-
-        // Load saved theme
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'crt') {
+            if (isBirthdayMode) {
+                document.body.classList.remove('birthday-mode');
                 document.body.classList.add('crt-effect');
                 themeIcon.innerHTML = `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M6 16h12"></path><rect x="10" y="17" width="4" height="3"></rect>`;
+                localStorage.setItem('theme', 'crt');
+            } else if (isCrt) {
+                document.body.classList.remove('crt-effect');
+                themeIcon.innerHTML = `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>`;
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.add('birthday-mode');
+                themeIcon.innerHTML = `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M12 8v8m-4-4h8"></path>`;
+                localStorage.setItem('theme', 'birthday');
             }
-        });
+        }
 
-        // Menu toggle
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('show');
-            menuToggle.children[0].classList.toggle('rotate-45', navLinks.classList.contains('show'));
-            menuToggle.children[0].classList.toggle('translate-y-2', navLinks.classList.contains('show'));
-            menuToggle.children[1].classList.toggle('opacity-0', navLinks.classList.contains('show'));
-            menuToggle.children[2].classList.toggle('-rotate-45', navLinks.classList.contains('show'));
-            menuToggle.children[2].classList.toggle('-translate-y-2', navLinks.classList.contains('show'));
+            const bars = menuToggle.querySelectorAll('div');
+            bars[0].style.transform = navLinks.classList.contains('show') ? 'rotate(45deg) translate(5px, 5px)' : 'rotate(0) translate(0, 0)';
+            bars[1].style.opacity = navLinks.classList.contains('show') ? '0' : '1';
+            bars[2].style.transform = navLinks.classList.contains('show') ? 'rotate(-45deg) translate(5px, -5px)' : 'rotate(0) translate(0, 0)';
         });
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                navLinks.classList.remove('show');
-                menuToggle.children[0].classList.remove('rotate-45', 'translate-y-2');
-                menuToggle.children[1].classList.remove('opacity-0');
-                menuToggle.children[2].classList.remove('-rotate-45', '-translate-y-2');
-            });
-        });
-
-        // Scroll-triggered animations
         const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.25 });
+        }, observerOptions);
 
         sections.forEach(section => observer.observe(section));
 
-        // Navbar hide/show on scroll
         let lastScrollTop = 0;
-        const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            const nav = document.querySelector('nav');
+            if (currentScroll > lastScrollTop && currentScroll > 100) {
                 nav.classList.remove('visible');
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
                 nav.classList.add('visible');
             }
-            lastScrollTop = scrollTop;
-        });
-
-        // Initial nav links animation
-        window.addEventListener('load', () => {
-            navLinks.classList.add('visible');
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
         });
     </script>
 </body>
