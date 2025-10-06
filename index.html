@@ -12,8 +12,6 @@
     <link rel="preload" href="2.gif" as="image">
     <link rel="preload" href="1.mp3" as="audio" type="audio/mp3">
     <link rel="preload" href="achievement-icon.png" as="image">
-    <link rel="preload" href="cake-icon.png" as="image">
-    <link rel="preload" href="birthday.mp3" as="audio" type="audio/mp3">
     <link rel="preload" href="achievement-sound.mp3" as="audio" type="audio/mp3">
     <link rel="preload" href="services.mp3" as="audio" type="audio/mp3">
     <link rel="preload" href="shutup.mp3" as="audio" type="audio/mp3">
@@ -59,62 +57,15 @@
         body.crt-effect .social-icons a:active svg {
             stroke: #00ff80;
         }
-        body.crt-effect .achievement-notification,
-        body.crt-effect .birthday-overlay {
+        body.crt-effect .achievement-notification {
             background: transparent;
             color: #00ff00;
         }
-        body.crt-effect .achievement-info h3,
-        body.crt-effect .birthday-overlay h2 {
+        body.crt-effect .achievement-info h3 {
             color: #00ff00;
         }
-        body.crt-effect .achievement-info p,
-        body.crt-effect .birthday-overlay p {
+        body.crt-effect .achievement-info p {
             color: #00cc00;
-        }
-        body.birthday-mode {
-            background: linear-gradient(135deg, #2a0a3b 0%, #1a1a2a 100%);
-        }
-        body.birthday-mode .content-overlay,
-        body.birthday-mode nav,
-        body.birthday-mode .project-card,
-        body.birthday-mode .dev-stats-card,
-        body.birthday-mode .services-card,
-        body.birthday-mode .about-content {
-            background: rgba(255, 215, 0, 0.1);
-        }
-        body.birthday-mode .nav-links a:hover,
-        body.birthday-mode .nav-links a:active,
-        body.birthday-mode .project-card a:hover,
-        body.birthday-mode .services-card a:hover,
-        body.birthday-mode .about-content a:hover {
-            color: #ffd700;
-        }
-        body.birthday-mode .social-icons svg {
-            stroke: #ffd700;
-        }
-        body.birthday-mode .social-icons a:hover svg,
-        body.birthday-mode .social-icons a:active svg {
-            stroke: #ff6b6b;
-        }
-        body.birthday-mode .custom-button {
-            background: #ffd700;
-            color: #1a1a2a;
-        }
-        body.birthday-mode .custom-button:hover,
-        body.birthday-mode .custom-button:active {
-            background: #ff6b6b;
-        }
-        body.birthday-mode .theme-toggle {
-            border: 1px solid #ffd700;
-        }
-        body.birthday-mode .theme-toggle:hover,
-        body.birthday-mode .theme-toggle:active {
-            background: #ffd700;
-            color: #1a1a2a;
-        }
-        body.birthday-mode .achievement-notification {
-            border-image: linear-gradient(to right, #ffd700, #ff6b6b) 1;
         }
         video.background-video {
             position: fixed;
@@ -287,7 +238,7 @@
         .control-button:hover, .control-button:active {
             background: #e55a5a;
         }
-        .entry-prompt, .birthday-overlay {
+        .entry-prompt {
             position: fixed;
             top: 0;
             left: 0;
@@ -301,7 +252,7 @@
             z-index: 200;
             animation: fadeIn 0.5s ease-in-out;
         }
-        .entry-prompt-content, .birthday-overlay-content {
+        .entry-prompt-content {
             position: relative;
             z-index: 3;
             text-align: center;
@@ -310,7 +261,7 @@
             border-radius: 8px;
             max-width: 90%;
         }
-        .entry-prompt button, .birthday-overlay button {
+        .entry-prompt button {
             margin-top: 1rem;
             background: #ff6b6b;
             color: #e0e0e0;
@@ -322,20 +273,8 @@
             font-size: 1rem;
             min-width: 120px;
         }
-        .entry-prompt button:hover, .entry-prompt button:active,
-        .birthday-overlay button:hover, .birthday-overlay button:active {
+        .entry-prompt button:hover, .entry-prompt button:active {
             background: #e55a5a;
-        }
-        .birthday-overlay-content {
-            border: 2px solid transparent;
-            border-image: linear-gradient(to right, #ffd700, #ff6b6b) 1;
-        }
-        .birthday-overlay button {
-            background: #ffd700;
-            color: #1a1a2a;
-        }
-        .birthday-overlay button:hover, .birthday-overlay button:active {
-            background: #ff6b6b;
         }
         .entry-prompt img {
             position: absolute;
@@ -348,7 +287,7 @@
             opacity: 0.7;
             loading: lazy;
         }
-        #particles-js, #birthday-particles-js {
+        #particles-js {
             position: absolute;
             top: 0;
             left: 0;
@@ -438,17 +377,6 @@
         .social-icons a:hover svg, .social-icons a:active svg {
             stroke: #ff6b6b;
         }
-        .countdown {
-            font-family: 'Courier New', monospace;
-            font-size: 1.2rem;
-            color: #ffd700;
-            text-align: center;
-            margin-top: 1rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid #ff6b6b;
-            border-radius: 8px;
-        }
         noscript {
             display: block;
             position: fixed;
@@ -498,10 +426,6 @@
             background: url('achievement-icon.png') no-repeat center;
             background-size: cover;
             margin-right: 10px;
-        }
-        .birthday-achievement .achievement-icon {
-            background: url('cake-icon.png') no-repeat center;
-            background-size: cover;
         }
         .achievement-info h3 {
             margin: 0;
@@ -595,10 +519,10 @@
                 font-size: 0.9rem;
                 line-height: 1.5;
             }
-            .entry-prompt-content, .birthday-overlay-content {
+            .entry-prompt-content {
                 padding: 1rem;
             }
-            .entry-prompt button, .birthday-overlay button, .custom-button {
+            .entry-prompt button, .custom-button {
                 padding: 0.75rem 1.5rem;
                 font-size: 1rem;
             }
@@ -610,10 +534,6 @@
             .control-button svg {
                 width: 24px;
                 height: 24px;
-            }
-            .countdown {
-                font-size: 1rem;
-                padding: 0.75rem;
             }
         }
         @media (max-width: 480px) {
@@ -649,17 +569,13 @@
                 width: 20px;
                 height: 20px;
             }
-            .entry-prompt-content, .birthday-overlay-content {
+            .entry-prompt-content {
                 padding: 0.75rem;
             }
-            .entry-prompt button, .birthday-overlay button, .custom-button {
+            .entry-prompt button, .custom-button {
                 padding: 0.5rem 1rem;
                 font-size: 0.9rem;
                 min-width: 100px;
-            }
-            .countdown {
-                font-size: 0.9rem;
-                padding: 0.5rem;
             }
         }
         @keyframes slideIn {
@@ -758,15 +674,6 @@
         <p>JavaScript is disabled in your browser. Please enable JavaScript or switch to a supported browser to view this portfolio. Visit <a href="https://www.enable-javascript.com/" target="_blank" style="color: #ff6b6b;">enable-javascript.com</a> for instructions.</p>
     </noscript>
 
-    <div class="birthday-overlay" id="birthdayOverlay" role="dialog" aria-labelledby="birthdayOverlayTitle">
-        <div id="birthday-particles-js"></div>
-        <div class="birthday-overlay-content">
-            <h2 id="birthdayOverlayTitle" class="text-xl md:text-2xl font-bold mb-4 typing">Happy Birthday, Katana-King!</h2>
-            <p>Leveling up to another epic year! Join my birthday gaming session on <a href="https://www.twitch.tv/katanaking" target="_blank" class="text-red-400 hover:underline">Twitch</a> or <a href="https://discord.com/users/kingos2" target="_blank" class="text-red-400 hover:underline">Discord</a>!</p>
-            <button onclick="enterSite()" aria-label="Enter Katana-King's birthday site" class="custom-button">Celebrate!</button>
-        </div>
-    </div>
-
     <div class="entry-prompt" id="entryPrompt" role="dialog" aria-labelledby="entryPromptTitle">
         <div id="particles-js"></div>
         <img src="2.gif" alt="Welcome animation showcasing Katana-King's gaming theme" loading="lazy">
@@ -796,11 +703,6 @@
 
     <audio id="backgroundAudio" loop aria-hidden="true">
         <source src="1.mp3" type="audio/mp3">
-        Your browser does not support the audio tag.
-    </audio>
-
-    <audio id="birthdayAudio" aria-hidden="true">
-        <source src="birthday.mp3" type="audio/mp3">
         Your browser does not support the audio tag.
     </audio>
 
@@ -837,7 +739,7 @@
         </svg>
     </button>
 
-    <button class="control-button theme-toggle" title="Toggle Theme" onclick="toggleTheme()" aria-label="Toggle between dark, retro CRT, and birthday themes">
+    <button class="control-button theme-toggle" title="Toggle Theme" onclick="toggleTheme()" aria-label="Toggle between dark and retro CRT themes">
         <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
             <line x1="12" y1="8" x2="12" y2="16"></line>
@@ -1031,36 +933,8 @@
     </div>
 
     <script>
-        function isBirthday() {
-            const now = new Date();
-            return now.getFullYear() === 2025 && now.getMonth() === 9 && now.getDate() === 5;
-        }
-
         window.addEventListener('load', () => {
-            const particlesConfig = isBirthday() ? {
-                particles: {
-                    number: { value: window.innerWidth < 768 ? 50 : 100, density: { enable: true, value_area: 800 } },
-                    color: { value: ['#ffd700', '#ff6b6b', '#800080'] },
-                    shape: { type: 'star', stroke: { width: 0, color: '#000000' } },
-                    opacity: { value: 0.7, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2 } },
-                    size: { value: 4, random: true, anim: { enable: true, speed: 2, size_min: 1 } },
-                    line_linked: { enable: true, distance: 100, color: '#ffd700', opacity: 0.4, width: 1 },
-                    move: { enable: true, speed: 4, direction: 'none', random: true, straight: false, out_mode: 'out' }
-                },
-                interactivity: {
-                    detect_on: 'canvas',
-                    events: {
-                        onhover: { enable: window.innerWidth >= 768, mode: 'grab' },
-                        onclick: { enable: true, mode: 'push' },
-                        resize: true
-                    },
-                    modes: {
-                        grab: { distance: 150, line_linked: { opacity: 0.5 } },
-                        push: { particles_nb: 3 }
-                    }
-                },
-                retina_detect: true
-            } : {
+            const particlesConfig = {
                 particles: {
                     number: { value: window.innerWidth < 768 ? 30 : 50, density: { enable: true, value_area: 800 } },
                     color: { value: '#ff6b6b' },
@@ -1085,7 +959,7 @@
                 retina_detect: true
             };
 
-            particlesJS(isBirthday() ? 'birthday-particles-js' : 'particles-js', particlesConfig);
+            particlesJS('particles-js', particlesConfig);
 
             const cards = document.querySelectorAll('.project-card, .dev-stats-card, .services-card, .about-content');
             cards.forEach((card, index) => {
@@ -1094,25 +968,11 @@
                 }, index * 100);
             });
 
-            if (isBirthday()) {
-                document.getElementById('entryPrompt').style.display = 'none';
-                document.getElementById('birthdayOverlay').style.display = 'flex';
-                document.body.classList.add('birthday-mode');
-                document.getElementById('backgroundAudio').pause();
-                document.getElementById('birthdayAudio').play().catch((error) => console.error("Birthday audio playback failed:", error.message));
-                document.getElementById('achievementNotification').classList.add('birthday-achievement');
-                document.getElementById('achievementTitle').textContent = 'Birthday Bash Unlocked!';
-                document.getElementById('achievementDescription').textContent = "Celebrating Katana-King's epic level-up!";
-            } else {
-                document.getElementById('birthdayOverlay').style.display = 'none';
-                document.getElementById('entryPrompt').style.display = 'flex';
-            }
-
+            document.getElementById('entryPrompt').style.display = 'flex';
         });
 
         const video = document.getElementById('backgroundVideo');
         const audio = document.getElementById('backgroundAudio');
-        const birthdayAudio = document.getElementById('birthdayAudio');
         const servicesAudio = document.getElementById('servicesAudio');
         const shutupServicesAudio = document.getElementById('shutupServicesAudio');
         const aboutmeAudio = document.getElementById('aboutmeAudio');
@@ -1124,7 +984,6 @@
         const themeButton = document.querySelector('.theme-toggle');
         const themeIcon = document.getElementById('themeIcon');
         const entryPrompt = document.getElementById('entryPrompt');
-        const birthdayOverlay = document.getElementById('birthdayOverlay');
         const transitionGif = document.getElementById('transitionGif');
         const transitionImg = transitionGif.querySelector('img');
         const navLinks = document.querySelector('.nav-links');
@@ -1132,7 +991,6 @@
 
         video.pause();
         audio.pause();
-        birthdayAudio.pause();
         servicesAudio.pause();
         shutupServicesAudio.pause();
         aboutmeAudio.pause();
@@ -1140,7 +998,6 @@
         achievementAudio.pause();
         video.muted = true;
         audio.muted = true;
-        birthdayAudio.muted = false;
         servicesAudio.muted = false;
         shutupServicesAudio.muted = false;
         aboutmeAudio.muted = false;
@@ -1152,11 +1009,9 @@
         transitionGif.style.display = 'none';
         achievementNotification.style.display = 'none';
         audio.volume = 1.0;
-        birthdayAudio.volume = 1.0;
 
         function enterSite() {
             entryPrompt.style.display = 'none';
-            birthdayOverlay.style.display = 'none';
             transitionGif.style.display = 'block';
             transitionImg.src = '3.gif';
             document.querySelector('.content-overlay').style.display = 'block';
@@ -1164,13 +1019,9 @@
             themeButton.style.display = 'flex';
             Promise.all([
                 video.play().catch((error) => console.error("Video playback failed:", error.message)),
-                isBirthday()
-                    ? birthdayAudio.play().then(() => {
-                        birthdayAudio.muted = false;
-                    }).catch((error) => console.error("Birthday audio playback failed:", error.message))
-                    : audio.play().then(() => {
-                        audio.muted = false;
-                    }).catch((error) => console.error("Audio playback failed:", error.message))
+                audio.play().then(() => {
+                    audio.muted = false;
+                }).catch((error) => console.error("Audio playback failed:", error.message))
             ]);
             document.querySelector('#home').scrollIntoView({ behavior: 'smooth' });
             setTimeout(() => {
@@ -1200,18 +1051,13 @@
 
         function toggleMute() {
             audio.muted = !audio.muted;
-            birthdayAudio.muted = !birthdayAudio.muted;
             muteIcon.innerHTML = audio.muted
                 ? `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46l-6 6"></path><path d="M18.54 5.46l-6 6"></path>`
                 : `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>`;
         }
 
         function adjustBackgroundVolume(isPlaying) {
-            if (isBirthday()) {
-                birthdayAudio.volume = isPlaying ? 0.2 : 1.0;
-            } else {
-                audio.volume = isPlaying ? 0.2 : 1.0;
-            }
+            audio.volume = isPlaying ? 0.2 : 1.0;
         }
 
         function playServicesAudio() {
@@ -1241,21 +1087,15 @@
         }
 
         function toggleTheme() {
-            const isBirthdayMode = document.body.classList.contains('birthday-mode');
             const isCrt = document.body.classList.contains('crt-effect');
-            if (isBirthdayMode) {
-                document.body.classList.remove('birthday-mode');
-                document.body.classList.add('crt-effect');
-                themeIcon.innerHTML = `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M6 16h12"></path><rect x="10" y="17" width="4" height="3"></rect>`;
-                localStorage.setItem('theme', 'crt');
-            } else if (isCrt) {
+            if (isCrt) {
                 document.body.classList.remove('crt-effect');
                 themeIcon.innerHTML = `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>`;
                 localStorage.setItem('theme', 'dark');
             } else {
-                document.body.classList.add('birthday-mode');
-                themeIcon.innerHTML = `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M12 8v8m-4-4h8"></path>`;
-                localStorage.setItem('theme', 'birthday');
+                document.body.classList.add('crt-effect');
+                themeIcon.innerHTML = `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M6 16h12"></path><rect x="10" y="17" width="4" height="3"></rect>`;
+                localStorage.setItem('theme', 'crt');
             }
         }
 
