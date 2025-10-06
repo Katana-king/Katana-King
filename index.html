@@ -868,7 +868,6 @@
                 <h1 class="text-3xl md:text-6xl font-bold mb-4">Welcome</h1>
                 <p class="text-xl md:text-4xl font-semibold mb-2">I am <span class="text-red-400 typing">Katana-King</span></p>
                 <p class="text-base md:text-xl">Gamer, Developer, and Creative Mind</p>
-                <div id="countdown" class="countdown" role="timer"></div>
                 <div class="mt-4 flex justify-center md:justify-start gap-4 social-icons">
                     <a href="https://steamcommunity.com/profiles/76561199055694029/" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="Visit Steam Profile">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1037,29 +1036,6 @@
             return now.getFullYear() === 2025 && now.getMonth() === 9 && now.getDate() === 5;
         }
 
-        function updateCountdown() {
-            const now = new Date();
-            let birthday = new Date(now.getFullYear(), 9, 5);
-            if (now > birthday) {
-                birthday = new Date(now.getFullYear() + 1, 9, 5);
-            }
-            const timeDiff = birthday - now;
-            const countdownElement = document.getElementById('countdown');
-            if (isBirthday()) {
-                countdownElement.innerHTML = "It's my birthday today!";
-                return;
-            }
-            if (timeDiff <= 0) {
-                countdownElement.style.display = 'none';
-                return;
-            }
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-            countdownElement.innerHTML = `Time to Katana-King's Birthday: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-        }
-
         window.addEventListener('load', () => {
             const particlesConfig = isBirthday() ? {
                 particles: {
@@ -1132,8 +1108,6 @@
                 document.getElementById('entryPrompt').style.display = 'flex';
             }
 
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
         });
 
         const video = document.getElementById('backgroundVideo');
