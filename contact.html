@@ -527,22 +527,7 @@
         Your browser does not support the audio tag.
     </audio>
 
-    <div class="controls">
-        <button class="control-button mute-toggle" title="Toggle Mute Audio" onclick="toggleMute()" aria-label="Toggle background audio mute">
-            <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-            </svg>
-        </button>
-        <button class="control-button theme-toggle" title="Toggle Theme" onclick="toggleTheme()" aria-label="Toggle between dark and retro CRT theme">
-            <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="12" y1="8" x2="12" y2="16"></line>
-                <line x1="8" y1="12" x2="16" y2="12"></line>
-            </svg>
-        </button>
-    </div>
+    <!-- Controls removed: mute and retro/theme buttons removed per request -->
 
     <script>
         // Initialize particles.js
@@ -579,8 +564,6 @@
         const incomingCallSound = document.getElementById('incomingCallSound');
         const respondSound = document.getElementById('respondSound');
         const talkSound = document.getElementById('talkSound');
-        const muteIcon = document.getElementById('muteIcon');
-        const themeIcon = document.getElementById('themeIcon');
         const entryPrompt = document.getElementById('entryPrompt');
         const contactForm = document.getElementById('contactForm');
         const callOverlay = document.getElementById('callOverlay');
@@ -628,29 +611,9 @@
             window.history.back();
         }
 
-        // Toggle mute
-        function toggleMute() {
-            console.log('toggleMute called, muted:', audio.muted);
-            audio.muted = !audio.muted;
-            notificationSound.muted = audio.muted;
-            incomingCallSound.muted = audio.muted;
-            respondSound.muted = audio.muted;
-            talkSound.muted = audio.muted;
-            muteIcon.innerHTML = audio.muted
-                ? `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46l-6 6"></path><path d="M18.54 5.46l-6 6"></path>`
-                : `<path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>`;
-        }
+        // Mute control removed
 
-        // Toggle theme
-        function toggleTheme() {
-            console.log('toggleTheme called');
-            document.body.classList.toggle('crt-effect');
-            const isCrt = document.body.classList.contains('crt-effect');
-            themeIcon.innerHTML = isCrt
-                ? `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M6 16h12"></path><rect x="10" y="17" width="4" height="3"></rect>`
-                : `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line>`;
-            localStorage.setItem('theme', isCrt ? 'crt' : 'dark');
-        }
+        // Theme toggle removed
 
         // Load saved theme
         window.addEventListener('load', () => {
@@ -658,7 +621,6 @@
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'crt') {
                 document.body.classList.add('crt-effect');
-                themeIcon.innerHTML = `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M6 16h12"></path><rect x="10" y="17" width="4" height="3"></rect>`;
             }
         });
 
