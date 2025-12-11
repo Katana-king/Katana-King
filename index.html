@@ -1,56 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Katana-King - Gamer & Full-Stack Developer Portfolio</title>
-    <meta name="description" content="Portfolio of Katana-King, a passionate gamer and full-stack developer offering custom website development for online shops, restaurant menus, e-commerce, and more.">
-    <meta name="keywords" content="Katana-King, portfolio, gamer, developer, full-stack, HTML, CSS, JavaScript, TypeScript, gaming, web development, e-commerce">
+    <title data-key="site.title">Katana-King - Gamer & Full-Stack Developer Portfolio</title>
+    <meta name="description" content="Portfolio of Katana-King, a passionate gamer and full-stack developer offering custom website development.">
+    <meta name="keywords" content="Katana-King, portfolio, gamer, developer, full-stack, HTML, CSS, JavaScript">
     <meta name="author" content="Katana-King">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preload" href="videos/1.mp4" as="video" type="video/mp4">
     <link rel="preload" href="2.gif" as="image">
     <link rel="preload" href="achievement-icon.png" as="image">
-    <link rel="preload" href="achievement-sound.mp3" as="audio" type="audio/mp3">
-    <link rel="preload" href="services.mp3" as="audio" type="audio/mp3">
-    <link rel="preload" href="shutup.mp3" as="audio" type="audio/mp3">
-    <link rel="preload" href="aboutme.mp3" as="audio" type="audio/mp3">
+    <link rel="preload" href="achievement-sound.mp3" as="audio">
+    <link rel="preload" href="services.mp3" as="audio">
+    <link rel="preload" href="shutup.mp3" as="audio">
+    <link rel="preload" href="aboutme.mp3" as="audio">
+    <link rel="preload" href="1.mp3" as="audio">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <noscript>
-        <p>JavaScript is disabled in your browser. Please enable JavaScript or switch to a supported browser to view this portfolio. Visit <a href="https://www.enable-javascript.com/" target="_blank" style="color: #ff6b6b;">enable-javascript.com</a> for instructions.</p>
-    </noscript>
 
+    <!-- Entry Prompt -->
     <div class="entry-prompt" id="entryPrompt" role="dialog" aria-labelledby="entryPromptTitle">
         <div id="particles-js"></div>
-        <img src="2.gif" alt="Welcome animation showcasing Katana-King's gaming theme" loading="lazy">
+        <img src="2.gif" alt="Welcome animation" loading="lazy">
         <div class="entry-prompt-content">
-            <h2 id="entryPromptTitle" class="text-xl md:text-2xl font-bold mb-4">Welcome to Katana-King's Site</h2>
-            <p>Would you like to enter?</p>
-            <button onclick="enterSite()" aria-label="Enter the portfolio site" class="custom-button">Enter Site</button>
+            <h2 id="entryPromptTitle" class="text-xl md:text-2xl font-bold mb-4" data-key="entry.title">Welcome to Katana-King's Site</h2>
+            <p data-key="entry.text">Would you like to enter?</p>
+            <button onclick="enterSite()" class="custom-button" data-key="entry.button">Enter Site</button>
         </div>
     </div>
 
     <div class="transition-gif" id="transitionGif">
-        <img src="3.gif" alt="Transition animation for smooth entry" loading="lazy">
+        <img src="" alt="Transition animation" loading="lazy">
     </div>
 
     <div class="achievement-notification" id="achievementNotification">
         <div class="achievement-icon"></div>
         <div class="achievement-info">
-            <h3 id="achievementTitle">Achievement Unlocked!</h3>
-            <p id="achievementDescription">Welcome to Katana-King's Web site</p>
+            <h3 id="achievementTitle" data-key="achievement.title">Achievement Unlocked!</h3>
+            <p id="achievementDescription" data-key="achievement.desc">Welcome to Katana-King's Web site</p>
         </div>
     </div>
 
+    <!-- Background Video -->
     <video class="background-video" loop playsinline muted id="backgroundVideo" aria-hidden="true">
         <source src="videos/1.mp4" type="video/mp4">
-        Your browser does not support the video tag.
     </video>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop aria-hidden="true">
+        <source src="1.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Mute Button -->
+<button id="muteButton" class="fixed bottom-5 right-5 z-50 flex items-center gap-2.5 px-4 py-2.5 bg-black/85 hover:bg-red-900/60 backdrop-blur-md text-white font-bold text-sm tracking-wider rounded-full shadow-xl border border-red-600/50 transition-all duration-300 hover:scale-105 hidden">
+    <svg id="muteIcon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+    </svg>
+    <svg id="unmuteIcon" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <line x1="23" y1="1" x2="1" y2="23"/>
+    </svg>
+    <span id="muteText">MUTE</span>
+</button>
 
     <audio id="servicesAudio" aria-hidden="true"><source src="services.mp3" type="audio/mp3"></audio>
     <audio id="shutupServicesAudio" aria-hidden="true"><source src="shutup.mp3" type="audio/mp3"></audio>
@@ -59,30 +76,52 @@
     <audio id="achievementAudio" aria-hidden="true"><source src="achievement-sound.mp3" type="audio/mp3"></audio>
 
     <div class="content-overlay">
-        <nav class="fixed top-0 w-full p-3 md:p-4 flex justify-between items-center z-50 visible" role="navigation" aria-label="Main navigation">
+
+        <!-- NAVIGATION + LANGUAGE SELECTOR -->
+        <nav class="fixed top-0 w-full p-3 md:p-4 flex justify-between items-center z-50 visible">
             <div class="text-xl md:text-2xl font-bold">Katana-King</div>
-            <div class="menu-toggle flex flex-col gap-1.5 cursor-pointer md:hidden" aria-label="Toggle mobile menu">
-                <div class="w-8 h-1 bg-white transition-transform duration-300"></div>
-                <div class="w-8 h-1 bg-white transition-transform duration-300"></div>
-                <div class="w-8 h-1 bg-white transition-transform duration-300"></div>
+
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <button id="langButton" class="flex items-center gap-2 px-4 py-2 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 backdrop-blur-md transition">
+                        <span id="currentLangFlag">EN</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="langDropdown" class="absolute right-0 mt-2 w-44 bg-black bg-opacity-95 backdrop-blur-xl rounded-xl shadow-2xl hidden border border-red-600 border-opacity-40">
+                        <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="en">English</button>
+                        <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="fr">Français</button>
+                        <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="ar">العربية</button>
+                        <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="ru">Русский</button>
+                    </div>
+                </div>
+
+                <div class="menu-toggle flex flex-col gap-1.5 cursor-pointer md:hidden">
+                    <div class="w-8 h-1 bg-white"></div>
+                    <div class="w-8 h-1 bg-white"></div>
+                    <div class="w-8 h-1 bg-white"></div>
+                </div>
             </div>
-            <ul class="nav-links flex gap-4 md:gap-6 items-center text-base md:text-lg md:flex visible">
-                <li><a href="#home" class="smooth-scroll hover:text-red-400 active:text-red-400" aria-label="Go to Home section">Home</a></li>
-                <li><a href="#projects" class="smooth-scroll hover:text-red-400 active:text-red-400" aria-label="Go to Projects section">Projects</a></li>
-                <li><a href="#dev-stats" class="smooth-scroll hover:text-red-400 active:text-red-400" aria-label="Go to Developer Stats section">Dev Stats</a></li>
-                <li><a href="#services" class="smooth-scroll hover:text-red-400 active:text-red-400" aria-label="Go to Services section">Services</a></li>
-                <li><a href="#about" class="smooth-scroll hover:text-red-400 active:text-red-400" aria-label="Go to About Me section">About Me</a></li>
-                <li><a href="contact.html" class="hover:text-red-400 active:text-red-400" aria-label="Go to Contact Me section">Contact Me</a></li>
+
+            <ul class="nav-links flex gap-4 md:gap-6 items-center text-base md:text-lg visible">
+                <li><a href="#home" class="smooth-scroll" data-key="nav.home">Home</a></li>
+                <li><a href="#projects" class="smooth-scroll" data-key="nav.projects">Projects</a></li>
+                <li><a href="#dev-stats" class="smooth-scroll" data-key="nav.devstats">Dev Stats</a></li>
+                <li><a href="#services" class="smooth-scroll" data-key="nav.services">Services</a></li>
+                <li><a href="#about" class="smooth-scroll" data-key="nav.about">About Me</a></li>
+                <li><a href="contact.html" data-key="nav.contact">Contact Me</a></li>
             </ul>
         </nav>
 
+        <!-- HERO -->
         <section id="home" class="section flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
             <div class="max-w-lg text-center md:text-left">
-                <h1 class="text-3xl md:text-6xl font-bold mb-4">Welcome</h1>
-                <p class="text-xl md:text-4xl font-semibold mb-2">I am <span class="text-red-400 typing">Katana-King</span></p>
-                <p class="text-base md:text-xl">Gamer, Developer, and Creative Mind</p>
+                <h1 class="text-3xl md:text-6xl font-bold mb-4" data-key="hero.welcome">Welcome</h1>
+                <p class="text-xl md:text-4xl font-semibold mb-2" data-key="hero.name">I am <span class="text-red-400 typing">Katana-King</span></p>
+                <p class="text-base md:text-xl" data-key="hero.subtitle">Gamer, Developer, and Creative Mind</p>
                 <div class="mt-4 flex justify-center md:justify-start gap-4 social-icons">
-                    <a href="https://steamcommunity.com/profiles/76561199055694029/" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="Visit Steam Profile">
+                    <a href="https://steamcommunity.com/profiles/76561199055694029/" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="Steam">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M16.5 3a8.5 8.5 0 0 0-8.3 6.7l-3.3 1.4a3.7 3.7 0 0 0-1.9 3.2 3.8 3.8 0 0 0 2.2 3.5l2.8-2.2a4.2 4.2 0 0 1 4.3-4.2 4.2 4.2 0 0 1 4.2 4.2 4.2 4.2 0 0 1-4.2 4.2c-.5 0-1-.1-1.5-.3l-2.8 2.2a3.8 3.8 0 0 0 3.5.2 3.7 3.7 0 0 0 2.6-2.7l1.4-3.3A8.5 8.5 0 0 0 16.5 3zm-3.3 12.8a2.5 2.5 0 1 0 2.5-2.5 2.5 2.5 0 0 0-2.5 2.5z"/>
                         </svg>
@@ -92,109 +131,102 @@
                             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
                         </svg>
                     </a>
-                    <a href="https://discord.gg/WV8rvTvH" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="Visit Discord Profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 4.5c-1.5-1-3-1.5-4.5-1.5C13 3 11.5 4 10.5 5.5c-3 0-5.5 2.5-5.5 5.5 0 3 2.5 5.5 5.5 5.5l1-1.5c-2-.5-3-2-3-4s1-3.5 3-4c1 1.5 2.5 2.5 4.5 2.5s3.5-1 4.5-2.5c2 .5 3 2 3 4s-1 3.5-3 4l1 1.5c3 0 5.5-2.5 5.5-5.5s-2.5-5.5-5.5-5.5zM8.5 14c-.8 0-1.5-.7-1.5-1.5S7.7 11 8.5 11s1.5.7 1.5 1.5S9.3 14 8.5 14zm7 0c-.8 0-1.5-.7-1.5-1.5S14.7 11 15.5 11s1.5.7 1.5 1.5S16.3 14 15.5 14z"/>
-                        </svg>
-                    </a>
+                  
                 </div>
             </div>
-            <a href="#about" class="smooth-scroll" aria-label="Learn more about Katana-King">
-                <img src="1.gif" alt="Katana-King's profile animation" class="hero-img w-36 h-36 md:w-64 md:h-64 rounded-full object-cover" loading="lazy">
+            <a href="#about" class="smooth-scroll">
+                <img src="1.gif" alt="Profile animation" class="hero-img w-36 h-36 md:w-64 md:h-64 rounded-full object-cover" loading="lazy">
             </a>
         </section>
 
+        <!-- PROJECTS -->
         <section id="projects" class="section">
             <div class="max-w-4xl w-full">
-                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing">Projects</h2>
+                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing" data-key="section.projects">Projects</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                    <div class="project-card p-4 md:p-6 rounded-lg visible" id="project-OnlyRams">
-                        <h3 class="text-lg md:text-xl font-semibold mb-2 project-title text-red-400">OnlyRams</h3>
-                        <p class="mb-4 text-sm md:text-base">A troll site designed to humorously increase your RAM usage.</p>
-                        <div class="flex justify-start">
-                            <a href="https://katana-king.github.io/OnlyRams" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="View live demo of OnlyRams">Live Demo</a>
-                        </div>
+                    <div class="project-card p-4 md:p-6 rounded-lg visible">
+                        <h3 class="text-lg md:text-xl font-semibold mb-2 text-red-400" data-key="project.onlyrams">OnlyRams</h3>
+                        <p class="mb-4 text-sm md:text-base" data-key="project.onlyrams.desc">A troll site designed to humorously increase your RAM usage.</p>
+                        <a href="https://katana-king.github.io/OnlyRams" target="_blank" class="text-red-400 hover:underline" data-key="project.demo">Live Demo</a>
                     </div>
-                    <div class="project-card p-4 md:p-6 rounded-lg visible" id="project-GameBuddyv2">
-                        <h3 class="text-lg md:text-xl font-semibold mb-2 project-title text-red-400">GameBuddyv2</h3>
-                        <p class="mb-4 text-sm md:text-base">A website that helps you find the perfect match to play games with.</p>
-                        <div class="flex justify-start">
-                            <a href="https://katana-king.github.io/GameBuddyv2" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="View live demo of GameBuddyv2">Live Demo</a>
-                        </div>
+                    <div class="project-card p-4 md:p-6 rounded-lg visible">
+                        <h3 class="text-lg md:text-xl font-semibold mb-2 text-red-400" data-key="project.gamebuddy">GameBuddyv2</h3>
+                        <p class="mb-4 text-sm md:text-base" data-key="project.gamebuddy.desc">A website that helps you find the perfect match to play games with.</p>
+                        <a href="https://katana-king.github.io/GameBuddyv2" target="_blank" class="text-red-400 hover:underline" data-key="project.demo">Live Demo</a>
                     </div>
-                    <div class="project-card p-4 md:p-6 rounded-lg visible" id="project-Fast-Food-Menu">
-                        <h3 class="text-lg md:text-xl font-semibold mb-2 project-title text-red-400">Fast Food Menu</h3>
-                        <p class="mb-4 text-sm md:text-base">A sleek and responsive menu site for fast food items like burgers, drinks, and sides.</p>
-                        <div class="flex justify-start">
-                            <a href="https://katana-king.github.io/menu/" target="_blank" class="text-red-400 hover:underline active:underline" aria-label="View live demo of Fast Food Menu">Live Demo</a>
-                        </div>
+                    <div class="project-card p-4 md:p-6 rounded-lg visible">
+                        <h3 class="text-lg md:text-xl font-semibold mb-2 text-red-400" data-key="project.menu">Fast Food Menu</h3>
+                        <p class="mb-4 text-sm md:text-base" data-key="project.menu.desc">A sleek and responsive menu site for fast food items.</p>
+                        <a href="https://katana-king.github.io/menu/" target="_blank" class="text-red-400 hover:underline" data-key="project.demo">Live Demo</a>
                     </div>
-                    <div class="project-card p-4 md:p-6 rounded-lg visible" id="project-Why">
-                        <h3 class="text-lg md:text-xl font-semibold mb-2 project-title text-red-400">Why</h3>
-                        <p class="mb-4 text-sm md:text-base">A troll game to prank your friends by shutting down their PCs when they hit Enter.</p>
-                        <div class="flex justify-start gap-4">
-                            <a href="https://github.com/Katana-king/troll/archive/refs/heads/main.zip" download class="text-red-400 hover:underline active:underline" aria-label="Download Why game">Download</a>
-                        </div>
+                    <div class="project-card p-4 md:p-6 rounded-lg visible">
+                        <h3 class="text-lg md:text-xl font-semibold mb-2 text-red-400" data-key="project.why">Why</h3>
+                        <p class="mb-4 text-sm md:text-base" data-key="project.why.desc">A troll game to prank your friends by shutting down their PCs.</p>
+                        <a href="https://github.com/Katana-king/troll/archive/refs/heads/main.zip" download class="text-red-400 hover:underline" data-key="project.download">Download</a>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- DEV STATS -->
         <section id="dev-stats" class="section">
             <div class="max-w-4xl w-full">
-                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing">Developer Stats</h2>
+                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing" data-key="section.devstats">Developer Stats</h2>
                 <div class="grid grid-cols-1 gap-4 md:gap-6">
                     <div class="dev-stats-card p-4 md:p-6 rounded-lg visible">
-                        <h3 class="text-lg md:text-xl font-semibold mb-2 developer-stats-title text-red-400">Full Stack Developer</h3>
+                        <h3 class="text-lg md:text-xl font-semibold mb-2 text-red-400" data-key="devstats.title">Full Stack Developer</h3>
                         <ul class="list-disc list-inside space-y-2 text-sm md:text-base">
-                            <li><span class="font-semibold">HTML:</span> Proficient in creating semantic and accessible web structures</li>
-                            <li><span class="font-semibold">CSS:</span> Skilled in designing responsive and visually appealing layouts</li>
-                            <li><span class="font-semibold">PHP:</span> Experienced in building dynamic server-side applications</li>
-                            <li><span class="font-semibold">JavaScript:</span> Capable of developing responsive, event-driven, and modern web applications</li>
+                            <li data-key="devstats.html"><span class="font-semibold">HTML:</span> Proficient in creating semantic and accessible web structures</li>
+                            <li data-key="devstats.css"><span class="font-semibold">CSS:</span> Skilled in designing responsive and visually appealing layouts</li>
+                            <li data-key="devstats.php"><span class="font-semibold">PHP:</span> Experienced in building dynamic server-side applications</li>
+                            <li data-key="devstats.js"><span class="font-semibold">JavaScript:</span> Capable of developing responsive, event-driven, and modern web applications</li>
                         </ul>
-                        <a href="https://github.com/Katana-king" target="_blank" class="text-red-400 hover:underline active:underline mt-4 inline-block" aria-label="View Projects on GitHub">View Projects on GitHub</a>
+                        <a href="https://github.com/Katana-king" target="_blank" class="text-red-400 hover:underline mt-4 inline-block" data-key="devstats.github">View Projects on GitHub</a>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- SERVICES -->
         <section id="services" class="section">
-            <img src="5.gif" alt="Background animation for Services section" class="background-gif" loading="lazy">
+            <img src="5.gif" alt="Services background" class="background-gif" loading="lazy">
             <div class="max-w-4xl w-full">
-                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing">Services</h2>
+                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing" data-key="section.services">Services</h2>
                 <div class="services-card p-4 md:p-6 rounded-lg text-center max-w-lg mx-auto visible">
-                    <h3 class="text-lg md:text-xl font-semibold mb-2 services-title text-red-400">Custom Web Development</h3>
-                    <p class="text-base md:text-xl mb-4">
-                        Need a website that pops like a critical hit? I can craft you a shiny new site from scratch! Whether it's an online shop to sell your epic loot, a restaurant menu that makes mouths water, an e-commerce empire to rival the dark web, or anything in the digital realm, I've got you covered. And for payment? I accept cash, crypto, rare CS2 skins, human organs, or even a bag of premium cocaine... jk, let's stick to legit methods!
+                    <h3 class="text-lg md:text-xl font-semibold mb-2 text-red-400" data-key="services.title">Custom Web Development</h3>
+                    <p class="text-base md:text-xl mb-4" data-key="services.desc">
+                        Need a website that pops like a critical hit? I can craft you a shiny new site from scratch! Whether it's an online shop, restaurant menu, e-commerce empire, or anything digital — I've got you covered. Payment? Cash, crypto, CS2 skins... jk, only legit methods!
                     </p>
                     <div class="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="contact.html" class="text-red-400 hover:underline active:underline" aria-label="Go to contact page">Contact Me</a>
-                        <button class="custom-button" onclick="playServicesAudio()" aria-label="Play Services audio">Play Audio</button>
-                        <button class="custom-button" onclick="playShutupServicesAudio()" aria-label="Play Shut Up audio and mute Services audio">Shut Up</button>
+                        <a href="contact.html" class="text-red-400 hover:underline" data-key="services.contact">Contact Me</a>
+                        <button class="custom-button" onclick="playServicesAudio()" data-key="button.play">Play Audio</button>
+                        <button class="custom-button" onclick="playShutupServicesAudio()" data-key="button.shutup">Shut Up</button>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- ABOUT -->
         <section id="about" class="section">
-            <img src="4.gif" alt="Background animation for About section" class="background-gif" loading="lazy">
+            <img src="4.gif" alt="About background" class="background-gif" loading="lazy">
             <div class="max-w-4xl w-full">
-                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing">About Me</h2>
+                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing" data-key="section.about">About Me</h2>
                 <div class="about-content p-4 md:p-6 rounded-lg text-center max-w-lg mx-auto">
-                    <h3 class="text-lg md:text-xl font-semibold mb-2 about-title text-red-400">Katana-King</h3>
-                    <p class="text-base md:text-xl mb-4">
-                        Hey there! I'm Katana-King, a passionate gamer and full-stack developer. I spend my time exploring different video games, building creative projects, and creating projects that have no purpose other than having fun with code. Whether I'm developing new ideas or immersed in a gaming session, I bring creativity and energy to everything I do.
+                    <h3 class="text-lg md:text-xl font-semibold mb-2 text-red-400" data-key="about.title">Katana-King</h3>
+                    <p class="text-base md:text-xl mb-4" data-key="about.desc">
+                        Hey there! I'm Katana-King, a passionate gamer and full-stack developer. I spend my time exploring games, building creative projects, and coding for fun.
                     </p>
-                    <button class="custom-button" onclick="playAboutmeAudio()" aria-label="Play About Me audio">Play Audio</button>
-                    <button class="custom-button" onclick="playShutupAboutAudio()" aria-label="Play Shut Up audio">Shut Up</button>
+                    <button class="custom-button" onclick="playAboutmeAudio()" data-key="button.play">Play Audio</button>
+                    <button class="custom-button" onclick="playShutupAboutAudio()" data-key="button.shutup">Shut Up</button>
                 </div>
             </div>
         </section>
 
+        <!-- FOOTER -->
         <footer class="py-4 md:py-6 text-center bg-black bg-opacity-50">
-            <p class="text-sm">© 2025 Katana-King. All rights reserved.</p>
+            <p class="text-sm" data-key="footer.copyright">© 2025 Katana-King. All rights reserved.</p>
             <div class="flex justify-center gap-4 mt-2 social-icons">
-                <a href="https://github.com/Katana-king" target="_blank" aria-label="Visit GitHub Profile">
+                <a href="https://github.com/Katana-king" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2">
                         <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
                     </svg>
@@ -204,5 +236,207 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- FULL MULTILINGUAL + MUSIC SYSTEM -->
+    <script>
+        const translations = {
+            en: {
+                "site.title": "Katana-King - Gamer & Full-Stack Developer Portfolio",
+                "entry.title": "Welcome to Katana-King's Site",
+                "entry.text": "Would you like to enter?",
+                "entry.button": "Enter Site",
+                "hero.welcome": "Welcome",
+                "hero.name": "I am <span class='text-red-400 typing'>Katana-King</span>",
+                "hero.subtitle": "Gamer, Developer, and Creative Mind",
+                "nav.home": "Home", "nav.projects": "Projects", "nav.devstats": "Dev Stats", "nav.services": "Services", "nav.about": "About Me", "nav.contact": "Contact Me",
+                "section.projects": "Projects", "section.devstats": "Developer Stats", "section.services": "Services", "section.about": "About Me",
+                "project.onlyrams": "OnlyRams", "project.onlyrams.desc": "A troll site designed to humorously increase your RAM usage.",
+                "project.gamebuddy": "GameBuddyv2", "project.gamebuddy.desc": "A website that helps you find the perfect match to play games with.",
+                "project.menu": "Fast Food Menu", "project.menu.desc": "A sleek and responsive menu site for fast food items.",
+                "project.why": "Why", "project.why.desc": "A troll game to prank your friends by shutting down their PCs.",
+                "project.demo": "Live Demo", "project.download": "Download",
+                "devstats.title": "Full Stack Developer",
+                "devstats.html": "HTML: Proficient in creating semantic and accessible web structures",
+                "devstats.css": "CSS: Skilled in designing responsive and visually appealing layouts",
+                "devstats.php": "PHP: Experienced in building dynamic server-side applications",
+                "devstats.js": "JavaScript: Capable of developing responsive, event-driven, and modern web applications",
+                "devstats.github": "View Projects on GitHub",
+                "services.title": "Custom Web Development",
+                "services.desc": "Need a website that pops like a critical hit? I can craft you a shiny new site from scratch! Whether it's an online shop, restaurant menu, e-commerce empire, or anything digital — I've got you covered. Payment? Cash, crypto, CS2 skins... jk, only legit methods!",
+                "services.contact": "Contact Me",
+                "about.title": "Katana-King",
+                "about.desc": "Hey there! I'm Katana-King, a passionate gamer and full-stack developer. I spend my time exploring games, building creative projects, and coding for fun.",
+                "achievement.title": "Achievement Unlocked!", "achievement.desc": "Welcome to Katana-King's Web site",
+                "button.play": "Play Audio", "button.shutup": "Shut Up",
+                "footer.copyright": "© 2025 Katana-King. All rights reserved."
+            },
+            fr: {
+                "site.title": "Katana-King - Gamer & Développeur Full-Stack",
+                "entry.title": "Bienvenue sur le site de Katana-King",
+                "entry.text": "Voulez-vous entrer ?",
+                "entry.button": "Entrer",
+                "hero.welcome": "Bienvenue",
+                "hero.name": "Je suis <span class='text-red-400 typing'>Katana-King</span>",
+                "hero.subtitle": "Gamer, Développeur et Esprit Créatif",
+                "nav.home": "Accueil", "nav.projects": "Projets", "nav.devstats": "Stats Dev", "nav.services": "Services", "nav.about": "À propos", "nav.contact": "Contact",
+                "section.projects": "Projets", "section.devstats": "Statistiques Développeur", "section.services": "Services", "section.about": "À propos de moi",
+                "project.onlyrams": "OnlyRams", "project.onlyrams.desc": "Un site troll pour augmenter humoristiquement votre RAM.",
+                "project.gamebuddy": "GameBuddyv2", "project.gamebuddy.desc": "Un site pour trouver le partenaire idéal pour jouer.",
+                "project.menu": "Menu Fast Food", "project.menu.desc": "Un menu élégant et responsive pour fast food.",
+                "project.why": "Pourquoi", "project.why.desc": "Un jeu troll qui éteint le PC de vos amis.",
+                "project.demo": "Démo en direct", "project.download": "Télécharger",
+                "devstats.title": "Développeur Full Stack",
+                "devstats.html": "HTML : Maîtrise des structures sémantiques et accessibles",
+                "devstats.css": "CSS : Expert en design responsive et esthétique",
+                "devstats.php": "PHP : Expérimenté en applications serveur dynamiques",
+                "devstats.js": "JavaScript : Capable de créer des apps web modernes et interactives",
+                "devstats.github": "Voir les projets sur GitHub",
+                "services.title": "Développement Web Personnalisé",
+                "services.desc": "Besoin d’un site qui claque ? Je peux tout créer de A à Z ! Boutique en ligne, menu de resto, empire e-commerce... Paiement ? Cash, crypto, skins CS2... blague à part, on reste légal !",
+                "services.contact": "Me contacter",
+                "about.title": "Katana-King",
+                "about.desc": "Salut ! Je suis Katana-King, gamer passionné et développeur full-stack. Je passe mon temps à jouer, coder et créer des trucs fun.",
+                "achievement.title": "Succès Débloqué !", "achievement.desc": "Bienvenue sur le site de Katana-King",
+                "button.play": "Jouer le son", "button.shutup": "Tais-toi",
+                "footer.copyright": "© 2025 Katana-King. Tous droits réservés."
+            },
+ar: {
+    "site.title": "كاتانا كينج - مطور ويب محترف ولاعب شغوف",
+    "entry.title": "مرحبًا بك في عالم كاتانا كينج",
+    "entry.text": "هل أنت مستعد للدخول؟",
+    "entry.button": "ادخل الموقع",
+    "hero.welcome": "أهلاً وسهلاً",
+    "hero.name": "أنا <span class='text-red-400 typing'>كاتانا كينج</span>",
+    "hero.subtitle": "مطور ويب كامل الصلاحيات، لاعب، ومبدع رقمي",
+    "nav.home": "الرئيسية",
+    "nav.projects": "مشاريعي",
+    "nav.devstats": "إحصائيات التطوير",
+    "nav.services": "خدماتي",
+    "nav.about": "من أنا",
+    "nav.contact": "تواصل معي",
+    "section.projects": "مشاريعي",
+    "section.devstats": "إحصائيات التطوير",
+    "section.services": "الخدمات المقدمة",
+    "section.about": "حولي",
+    "project.onlyrams": "OnlyRams",
+    "project.onlyrams.desc": "موقع ترفيهي يرفع استهلاك الذاكرة العشوائية بطريقة طريفة",
+    "project.gamebuddy": "GameBuddy v2",
+    "project.gamebuddy.desc": "منصة لإيجاد شريك مثالي للعب معه",
+    "project.menu": "قائمة مطعم",
+    "project.menu.desc": "تصميم أنيق ومتجاوب لقوائم المطاعم والوجبات السريعة",
+    "project.why": "why",
+    "project.why.desc": "لعبة مزحة تقوم بإيهام أصدقائك بإغلاق الحاسوب عند الضغط على Enter",
+    "project.demo": "عرض مباشر",
+    "project.download": "تحميل",
+    "devstats.title": "مطور ويب متكامل (Full-Stack)",
+    "devstats.html": "HTML: خبير في بناء هياكل ويب دلالية ومتوافقة مع معايير الوصول",
+    "devstats.css": "CSS: متخصص في التصميم المتجاوب والواجهات الجذابة بصريًا",
+    "devstats.php": "PHP: خبرة واسعة في تطوير تطبيقات الخادم الديناميكية",
+    "devstats.js": "JavaScript: قادر على بناء تطبيقات ويب حديثة وتفاعلية عالية الأداء",
+    "devstats.github": "استعراض المشاريع على GitHub",
+    "services.title": "تطوير مواقع وتطبيقات ويب مخصصة",
+    "services.desc": "تحتاج إلى موقع احترافي يلفت الأنظار؟ أصمم لك موقعًا متكاملًا من الصفر: متاجر إلكترونية، قوائم مطاعم، منصات تجارة إلكترونية، أو أي فكرة رقمية. الدفع؟ نقدًا، عملات مشفرة، أو سكينات CS2 نادرة... نمزح فقط، كل شيء قانوني ومحترف!",
+    "services.contact": "تواصل معي الآن",
+    "about.title": "كاتانا كينج",
+    "about.desc": "مرحبًا، أنا كاتانا كينج — مبرمج ولاعب شغوف. أعيش بين الأكواد والألعاب، أبني مشاريع إبداعية وأستمتع بكل لحظة في عالم التطوير. إبداع، طاقة، وشغف لا ينتهي.",
+    "achievement.title": "تم إنجاز جديد!",
+    "achievement.desc": "مرحبًا بك في عالم كاتانا كينج",
+    "button.play": "تشغيل الصوت",
+    "button.shutup": "إسكات",
+    "footer.copyright": "© 2025 كاتانا كينج. جميع الحقوق محفوظة."
+    
+},
+            ru: {
+                "site.title": "Katana-King — Геймер и Full-Stack разработчик",
+                "entry.title": "Добро пожаловать на сайт Katana-King",
+                "entry.text": "Хотите войти?",
+                "entry.button": "Войти",
+                "hero.welcome": "Добро пожаловать",
+                "hero.name": "Я <span class='text-red-400 typing'>Katana-King</span>",
+                "hero.subtitle": "Геймер, Разработчик и Творческий Ум",
+                "nav.home": "Главная", "nav.projects": "Проекты", "nav.devstats": "Статистика", "nav.services": "Услуги", "nav.about": "О мне", "nav.contact": "Связаться",
+                "section.projects": "Проекты", "section.devstats": "Статистика разработчика", "section.services": "Услуги", "section.about": "О мне",
+                "project.onlyrams": "OnlyRams", "project.onlyrams.desc": "Тролль-сайт, который юмористически забивает вашу оперативку.",
+                "project.gamebuddy": "GameBuddyv2", "project.gamebuddy.desc": "Сайт для поиска идеального напарника по играм.",
+                "project.menu": "Меню фастфуда", "project.menu.desc": "Стильное и адаптивное меню для бургеров, напитков и гарниров.",
+                "project.why": "Почему", "project.why.desc": "Тролль-игра, которая при нажатии Enter выключает ПК друзей.",
+                "project.demo": "Живая демонстрация", "project.download": "Скачать",
+                "devstats.title": "Full Stack Разработчик",
+                "devstats.html": "HTML: Владею семантической и доступной вёрсткой",
+                "devstats.css": "CSS: Умею создавать адаптивные и красивые макеты",
+                "devstats.php": "PHP: Опыт создания динамических серверных приложений",
+                "devstats.js": "JavaScript: Разрабатываю современные интерактивные веб-приложения",
+                "devstats.github": "Смотреть проекты на GitHub",
+                "services.title": "Индивидуальная веб-разработка",
+                "services.desc": "Нужен сайт, который бьёт как критический удар? Могу сделать с нуля! Интернет-магазин, меню ресторана, империя e-commerce... Оплата: наличные, крипта, редкие скины CS2... шучу, только легальные способы!",
+                "services.contact": "Связаться со мной",
+                "about.title": "Katana-King",
+                "about.desc": "Привет! Я Katana-King — страстный геймер и full-stack разработчик. Провожу время в играх, создаю креативные проекты и пишу код ради фана.",
+                "achievement.title": "Достижение разблокировано!", "achievement.desc": "Добро пожаловать на сайт Katana-King",
+                "button.play": "Проиграть звук", "button.shutup": "Заткнись",
+                "footer.copyright": "© 2025 Katana-King. Все права защищены."
+            }
+        };
+
+        // Language system + music
+        document.addEventListener('DOMContentLoaded', () => {
+            const langButton = document.getElementById('langButton');
+            const langDropdown = document.getElementById('langDropdown');
+            const currentLangFlag = document.getElementById('currentLangFlag');
+            const langOptions = document.querySelectorAll('.lang-option');
+
+            let currentLang = localStorage.getItem('language') || 'en';
+
+            function applyLanguage(lang) {
+                document.documentElement.lang = lang;
+                document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+                document.title = translations[lang]["site.title"] || "Katana-King";
+
+                document.querySelectorAll('[data-key]').forEach(el => {
+                    const key = el.dataset.key;
+                    if (translations[lang] && translations[lang][key]) {
+                        if (key === 'hero.name') {
+                            el.innerHTML = translations[lang][key];
+                        } else {
+                            el.textContent = translations[lang][key];
+                        }
+                    }
+                });
+            }
+
+            applyLanguage(currentLang);
+            currentLangFlag.textContent = currentLang.toUpperCase();
+
+            langButton.addEventListener('click', e => { e.stopPropagation(); langDropdown.classList.toggle('hidden'); });
+            langOptions.forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    currentLang = btn.dataset.lang;
+                    localStorage.setItem('language', currentLang);
+                    applyLanguage(currentLang);
+                    currentLangFlag.textContent = currentLang.toUpperCase();
+                    langDropdown.classList.add('hidden');
+                });
+            });
+            document.addEventListener('click', () => langDropdown.classList.add('hidden'));
+
+            // Music
+            const bgMusic = document.getElementById('backgroundMusic');
+            const muteBtn = document.getElementById('muteButton');
+            muteBtn.classList.add('hidden');
+            const originalEnterSite = window.enterSite || (() => {});
+            window.enterSite = function() {
+                originalEnterSite();
+                bgMusic.play().catch(() => {});
+                muteBtn.classList.remove('hidden');
+            };
+            muteBtn.addEventListener('click', () => {
+                bgMusic.muted = !bgMusic.muted;
+                document.getElementById('muteText').textContent = bgMusic.muted ? 'Unmute' : 'Mute';
+                document.getElementById('muteIcon').classList.toggle('hidden', bgMusic.muted);
+                document.getElementById('unmuteIcon').classList.toggle('hidden', !bgMusic.muted);
+            });
+        });
+    </script>
 </body>
 </html>
