@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="site.title">Downloads - Katana-King</title>
+    <meta name="description" content="Download Katana-King's projects, tools, and fun apps. Includes troll games, web apps, and more.">
+    <meta name="keywords" content="Katana-King, downloads, web apps, troll games, free download, developer tools">
+    <meta name="author" content="Katana-King">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preload" href="download.gif" as="image">
+    <link rel="preload" href="1.mp3" as="audio" type="audio/mp3">
+    <link rel="preload" href="achievement-icon.png" as="image">
+    <link rel="preload" href="achievement-sound.mp3" as="audio" type="audio/mp3">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: #0f0f0f;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+        .background-gif {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .content-overlay {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+            min-height: 100vh;
+        }
+        nav {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+        nav.visible {
+            transform: translateY(0);
+        }
+        nav.scrolled {
+            transform: translateY(-100%);
+        }
+        .download-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .download-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .download-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.15);
+            border-color: #ff6b6b;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #ff6b6b, #e55a5a);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 160px;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .download-btn:hover, .download-btn:active {
+            background: linear-gradient(135deg, #e55a5a, #cc4949);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+        .download-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .achievement-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: #252525;
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right, #2f7e38, #1a6b99) 1;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            z-index: 150;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            font-family: 'Arial', sans-serif;
+        }
+        .achievement-notification.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .achievement-icon {
+            width: 48px;
+            height: 48px;
+            background: url('achievement-icon.png') no-repeat center;
+            background-size: cover;
+            margin-right: 10px;
+        }
+        .achievement-info h3 {
+            margin: 0;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+        .achievement-info p {
+            margin: 3px 0 0;
+            font-size: 0.85em;
+            color: #b1b1b1;
+        }
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            padding: 0.75rem;
+        }
+        .menu-toggle div {
+            width: 30px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        .nav-links.show {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 4rem;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem;
+            animation: slideIn 0.3s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+                flex-direction: column;
+            }
+            .nav-links {
+                display: none;
+            }
+            .download-box {
+                padding: 1rem;
+            }
+            .achievement-notification {
+                width: 250px;
+                bottom: 10px;
+                right: 10px;
+            }
+            .achievement-icon {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+        <p style="text-align:center; padding:2rem; color:#ff6b6b;">Please enable JavaScript to view this page.</p>
+    </noscript>
+
+    <img src="download.gif" alt="Animated download background" class="background-gif" loading="lazy">
+
+    <div class="content-overlay">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full p-3 md:p-4 flex justify-between items-center z-50 visible" role="navigation">
+            <div class="text-xl md:text-2xl font-bold">Katana-King</div>
+
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <button id="langButton" class="flex items-center gap-2 px-4 py-2 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 backdrop-blur-md transition">
+                        <span id="currentLangFlag">EN</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="langDropdown" class="absolute right-0 mt-2 w-44 bg-black bg-opacity-95 backdrop-blur-xl rounded-xl shadow-2xl hidden border border-red-600 border-opacity-40">
+                        <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="en">English</button>
+                        <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="fr">Français</button>
+                        <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="ar">العربية</button>
+                        <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="ru">Русский</button>
+                    </div>
+                </div>
+
+                <div class="menu-toggle" aria-label="Toggle mobile menu">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+
+            <ul class="nav-links flex gap-4 md:gap-6 items-center text-base md:text-lg">
+                <li><a href="index.html#home" class="hover:text-red-400" data-key="nav.home">Home</a></li>
+                <li><a href="index.html#projects" class="hover:text-red-400" data-key="nav.projects">Projects</a></li>
+                <li><a href="index.html#services" class="hover:text-red-400" data-key="nav.services">Services</a></li>
+                <li><a href="download.html" class="text-red-400 font-bold" data-key="nav.downloads">Downloads</a></li>
+                <li><a href="contact.html" class="hover:text-red-400" data-key="nav.contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <section class="section">
+            <div class="max-w-5xl w-full text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-pulse" data-key="downloads.title">Downloads</h1>
+                <p class="text-lg md:text-xl mb-12 text-gray-300" data-key="downloads.subtitle">Grab my apps, tools, and troll masterpieces!</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <div class="download-box visible">
+                        <h3 class="text-xl font-bold text-red-400 mb-2" data-key="download.comingsoon">???</h3>
+                        <p class="text-sm mb-4" data-key="download.comingsoon.desc">Coming soon ! ...</p>
+                        <button class="download-btn opacity-50 cursor-not-allowed" disabled data-key="download.locked">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                            Locked
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="achievement-notification" id="achievementNotification">
+            <div class="achievement-icon"></div>
+            <div class="achievement-info">
+                <h3 data-key="achievement.title">Achievement Unlocked!</h3>
+                <p data-key="achievement.download">Entered the Download Zone</p>
+            </div>
+        </div>
+
+        <footer class="py-6 text-center bg-black bg-opacity-50">
+            <p class="text-sm" data-key="footer.copyright">© 2025 Katana-King. All rights reserved.</p>
+            <div class="flex justify-center gap-4 mt-2">
+                <a href="https://github.com/Katana-king" target="_blank" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <audio id="backgroundAudio" loop>
+        <source src="1.mp3" type="audio/mp3">
+    </audio>
+    <audio id="achievementAudio">
+        <source src="achievement-sound.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        const translations = {
+            en: {
+                "site.title": "Downloads - Katana-King",
+                "nav.home": "Home",
+                "nav.projects": "Projects",
+                "nav.services": "Services",
+                "nav.downloads": "Downloads",
+                "nav.contact": "Contact",
+                "downloads.title": "Downloads",
+                "downloads.subtitle": "Grab my apps, tools, and troll masterpieces!",
+                "download.comingsoon": "???",
+                "download.comingsoon.desc": "Coming soon ! ...",
+                "download.locked": "Locked",
+                "achievement.title": "Achievement Unlocked!",
+                "achievement.download": "Entered the Download Zone",
+                "footer.copyright": "© 2025 Katana-King. All rights reserved."
+            },
+            fr: {
+                "site.title": "Téléchargements - Katana-King",
+                "nav.home": "Accueil",
+                "nav.projects": "Projets",
+                "nav.services": "Services",
+                "nav.downloads": "Téléchargements",
+                "nav.contact": "Contact",
+                "downloads.title": "Téléchargements",
+                "downloads.subtitle": "Récupérez mes apps, outils et chefs-d'œuvre troll !",
+                "download.comingsoon": "???",
+                "download.comingsoon.desc": "Bientôt disponible ! ...",
+                "download.locked": "Verrouillé",
+                "achievement.title": "Succès Débloqué !",
+                "achievement.download": "Zone de téléchargement atteinte",
+                "footer.copyright": "© 2025 Katana-King. Tous droits réservés."
+            },
+ar: {
+    "site.title": "التحميلات - كاتانا كينج",
+    "nav.home": "الرئيسية",
+    "nav.projects": "المشاريع",
+    "nav.services": "الخدمات",
+    "nav.downloads": "التحميلات",
+    "nav.contact": "تواصل معي",
+    "downloads.title": "التحميلات",
+    "downloads.subtitle": "احصل على تطبيقاتي وأدواتي وروائع المزاح الخاصة بي!",
+    "download.comingsoon": "???",
+    "download.comingsoon.desc": "قريبًا جدًا! ...",
+    "download.locked": "مقفل",
+    "achievement.title": "إنجاز مفتوح!",
+    "achievement.download": "لقد دخلت منطقة التحميلات",
+    "footer.copyright": "© 2025 كاتانا كينج. جميع الحقوق محفوظة."
+},
+            ru: {
+                "site.title": "Загрузки - Katana-King",
+                "nav.home": "Главная",
+                "nav.projects": "Проекты",
+                "nav.services": "Услуги",
+                "nav.downloads": "Загрузки",
+                "nav.contact": "Связаться",
+                "downloads.title": "Загрузки",
+                "downloads.subtitle": "Скачивайте мои приложения, инструменты и тролль-шедевры!",
+                "download.comingsoon": "???",
+                "download.comingsoon.desc": "Скоро будет ! ...",
+                "download.locked": "Заблокировано",
+                "achievement.title": "Достижение разблокировано!",
+                "achievement.download": "Вошёл в зону загрузок",
+                "footer.copyright": "© 2025 Katana-King. Все права защищены."
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langButton = document.getElementById('langButton');
+            const langDropdown = document.getElementById('langDropdown');
+            const currentLangFlag = document.getElementById('currentLangFlag');
+            const langOptions = document.querySelectorAll('.lang-option');
+
+            let currentLang = localStorage.getItem('language') || 'en';
+
+            function applyLanguage(lang) {
+                document.documentElement.lang = lang;
+                document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+                document.title = translations[lang]["site.title"] || "Downloads - Katana-King";
+
+                document.querySelectorAll('[data-key]').forEach(el => {
+                    const key = el.dataset.key;
+                    if (translations[lang] && translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+            }
+
+            applyLanguage(currentLang);
+            currentLangFlag.textContent = currentLang.toUpperCase();
+
+            langButton.addEventListener('click', e => { e.stopPropagation(); langDropdown.classList.toggle('hidden'); });
+            langOptions.forEach(btn => {
+                btn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    currentLang = btn.dataset.lang;
+                    localStorage.setItem('language', currentLang);
+                    applyLanguage(currentLang);
+                    currentLangFlag.textContent = currentLang.toUpperCase();
+                    langDropdown.classList.add('hidden');
+                });
+            });
+            document.addEventListener('click', () => langDropdown.classList.add('hidden'));
+
+            const audio = document.getElementById('backgroundAudio');
+            audio.volume = 0.3;
+            audio.play().catch(() => {});
+
+            const boxes = document.querySelectorAll('.download-box');
+            boxes.forEach((box, i) => {
+                setTimeout(() => box.classList.add('visible'), i * 150);
+            });
+
+            setTimeout(showAchievement, 2000);
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('show');
+                const bars = menuToggle.querySelectorAll('div');
+                bars[0].style.transform = navLinks.classList.contains('show') ? 'rotate(45deg) translate(5px, 5px)' : '';
+                bars[1].style.opacity = navLinks.classList.contains('show') ? '0' : '1';
+                bars[2].style.transform = navLinks.classList.contains('show') ? 'rotate(-45deg) translate(5px, -5px)' : '';
+            });
+
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+                const current = window.pageYOffset;
+                const nav = document.querySelector('nav');
+                if (current > lastScroll && current > 100) {
+                    nav.classList.remove('visible');
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                    nav.classList.add('visible');
+                }
+                lastScroll = current;
+            });
+        });
+
+        function showAchievement() {
+            const notif = document.getElementById('achievementNotification');
+            const audio = document.getElementById('achievementAudio');
+            notif.style.display = 'flex';
+            setTimeout(() => {
+                notif.classList.add('visible');
+                audio.play().catch(() => {});
+            }, 100);
+            setTimeout(() => {
+                notif.classList.remove('visible');
+                setTimeout(() => notif.style.display = 'none', 300);
+            }, 4000);
+        }
+    </script>
+</body>
+</html>

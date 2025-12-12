@@ -46,16 +46,13 @@
         </div>
     </div>
 
-   
     <video class="background-video" loop playsinline muted id="backgroundVideo" aria-hidden="true">
         <source src="videos/1.mp4" type="video/mp4">
     </video>
 
- 
     <audio id="backgroundMusic" loop aria-hidden="true">
         <source src="1.mp3" type="audio/mp3">
     </audio>
-
 
 <button id="muteButton" class="fixed bottom-5 right-5 z-50 flex items-center gap-2.5 px-4 py-2.5 bg-black/85 hover:bg-red-900/60 backdrop-blur-md text-white font-bold text-sm tracking-wider rounded-full shadow-xl border border-red-600/50 transition-all duration-300 hover:scale-105 hidden">
     <svg id="muteIcon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
@@ -77,7 +74,7 @@
 
     <div class="content-overlay">
 
-       
+        
         <nav class="fixed top-0 w-full p-3 md:p-4 flex justify-between items-center z-50 visible">
             <div class="text-xl md:text-2xl font-bold">Katana-King</div>
 
@@ -111,10 +108,10 @@
                 <li><a href="#services" class="smooth-scroll" data-key="nav.services">Services</a></li>
                 <li><a href="#about" class="smooth-scroll" data-key="nav.about">About Me</a></li>
                 <li><a href="contact.html" data-key="nav.contact">Contact Me</a></li>
+                <li><a href="download.html" data-key="nav.downloads">downloads</a></li>
             </ul>
         </nav>
 
-      
         <section id="home" class="section flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
             <div class="max-w-lg text-center md:text-left">
                 <h1 class="text-3xl md:text-6xl font-bold mb-4" data-key="hero.welcome">Welcome</h1>
@@ -139,7 +136,6 @@
             </a>
         </section>
 
-      
         <section id="projects" class="section">
             <div class="max-w-4xl w-full">
                 <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing" data-key="section.projects">Projects</h2>
@@ -168,7 +164,7 @@
             </div>
         </section>
 
-      
+       
         <section id="dev-stats" class="section">
             <div class="max-w-4xl w-full">
                 <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing" data-key="section.devstats">Developer Stats</h2>
@@ -206,7 +202,6 @@
             </div>
         </section>
 
-        
         <section id="about" class="section">
             <img src="4.gif" alt="About background" class="background-gif" loading="lazy">
             <div class="max-w-4xl w-full">
@@ -222,7 +217,6 @@
             </div>
         </section>
 
-      
         <footer class="py-4 md:py-6 text-center bg-black bg-opacity-50">
             <p class="text-sm" data-key="footer.copyright">© 2025 Katana-King. All rights reserved.</p>
             <div class="flex justify-center gap-4 mt-2 social-icons">
@@ -237,6 +231,7 @@
 
     <script src="script.js"></script>
 
+    
     <script>
         const translations = {
             en: {
@@ -378,7 +373,6 @@ ar: {
             }
         };
 
- 
         document.addEventListener('DOMContentLoaded', () => {
             const langButton = document.getElementById('langButton');
             const langDropdown = document.getElementById('langDropdown');
@@ -420,7 +414,6 @@ ar: {
             });
             document.addEventListener('click', () => langDropdown.classList.add('hidden'));
 
-            // Music
             const bgMusic = document.getElementById('backgroundMusic');
             const muteBtn = document.getElementById('muteButton');
             muteBtn.classList.add('hidden');
@@ -439,6 +432,4 @@ ar: {
         });
     </script>
 </body>
-
 </html>
-
