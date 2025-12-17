@@ -259,7 +259,7 @@
                         </div>
                         <div class="mt-4">
                             <!-- Change the href to your real download URL -->
-                            <a id="downloadBtn" class="download-btn bg-green-500 hover:bg-green-600" href="https://example.com/fake-google.zip" target="_blank" rel="noopener noreferrer" data-key="fakegoogle.downloadBtn">Download</a>
+                            <a id="downloadBtn" class="download-btn bg-green-500 hover:bg-green-600" href="https://github.com/Katana-king/fakegoogle/archive/refs/heads/main.zip" target="_blank" rel="noopener noreferrer" data-key="fakegoogle.downloadBtn">Download</a>
                         </div>
                         
                     </div>
@@ -285,7 +285,6 @@
             </div>
         </div>
 
-        <!-- Launch/simulation removed: download-only UI below -->
 
         <footer class="py-6 text-center bg-black bg-opacity-50">
             <p class="text-sm" data-key="footer.copyright">© 2025 Katana-King. All rights reserved.</p>
@@ -300,7 +299,6 @@
     </div>
 
     <audio id="backgroundAudio" loop>
-        <!-- NOTE: place a different audio file for the Downloads page here -->
         <source src="download-music.mp3" type="audio/mp3">
     </audio>
     <audio id="achievementAudio">
@@ -482,9 +480,7 @@
                 setTimeout(() => box.classList.add('visible'), i * 150);
             });
 
-            // Removed Launch/simulation UI: only download remains
 
-            // Local download counter (client-side only)
             const downloadCountEl = document.getElementById('downloadCount');
             const downloadBtnEl = document.getElementById('downloadBtn');
             const LOCAL_COUNT_KEY = 'fakegoogle_download_count';
@@ -522,7 +518,6 @@
                 });
             }
 
-            // initialize display
             updateCountDisplay();
 
             setTimeout(showAchievement, 2000);
@@ -567,5 +562,4 @@
         }
     </script>
 </body>
-
 </html>
