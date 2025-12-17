@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-key="site.title">Downloads - Katana-King</title>
-    <meta name="description" content="Download Katana-King's projects, tools, and fun apps. Includes troll games, web apps, and more.">
-    <meta name="keywords" content="Katana-King, downloads, web apps, troll games, free download, developer tools">
+    <meta name="description" content="Download Katana-King's projects tools and fun apps web apps and more.">
+    <meta name="keywords" content="Katana-King downloads web apps troll games free download developer tools">
     <meta name="author" content="Katana-King">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preload" href="download.gif" as="image">
@@ -14,6 +14,10 @@
     <link rel="preload" href="achievement-sound.mp3" as="audio" type="audio/mp3">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        .fake-google-box {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+            border: 1px solid rgba(66,133,244,0.12);
+        }
         body {
             background: #0f0f0f;
             color: #e0e0e0;
@@ -242,8 +246,23 @@
         <section class="section">
             <div class="max-w-5xl w-full text-center">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-pulse" data-key="downloads.title">Downloads</h1>
-                <p class="text-lg md:text-xl mb-12 text-gray-300" data-key="downloads.subtitle">Grab my apps, tools, and troll masterpieces!</p>
+                <p class="text-lg md:text-xl mb-12 text-gray-300" data-key="downloads.subtitle">Grab my apps tools and troll masterpieces!</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <div class="download-box fake-google-box visible">
+                        <h3 class="text-xl font-bold text-blue-400 mb-2" data-key="fakegoogle.title">Fake Google</h3>
+                        <p class="text-sm mb-4" data-key="fakegoogle.desc">A playful simulation — shows a fake shutdown sequence (SAFE)</p>
+                        <div class="flex items-center justify-center gap-3">
+                            <div class="text-center">
+                                <div class="text-sm text-gray-300" data-key="fakegoogle.downloadsLabel">Downloads:</div>
+                                <div id="downloadCount" class="font-bold text-lg">0</div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <!-- Change the href to your real download URL -->
+                            <a id="downloadBtn" class="download-btn bg-green-500 hover:bg-green-600" href="https://example.com/fake-google.zip" target="_blank" rel="noopener noreferrer" data-key="fakegoogle.downloadBtn">Download</a>
+                        </div>
+                        
+                    </div>
                     <div class="download-box visible">
                         <h3 class="text-xl font-bold text-red-400 mb-2" data-key="download.comingsoon">???</h3>
                         <p class="text-sm mb-4" data-key="download.comingsoon.desc">Coming soon ! ...</p>
@@ -266,6 +285,8 @@
             </div>
         </div>
 
+        <!-- Launch/simulation removed: download-only UI below -->
+
         <footer class="py-6 text-center bg-black bg-opacity-50">
             <p class="text-sm" data-key="footer.copyright">© 2025 Katana-King. All rights reserved.</p>
             <div class="flex justify-center gap-4 mt-2">
@@ -279,7 +300,8 @@
     </div>
 
     <audio id="backgroundAudio" loop>
-        <source src="1.mp3" type="audio/mp3">
+        <!-- NOTE: place a different audio file for the Downloads page here -->
+        <source src="download-music.mp3" type="audio/mp3">
     </audio>
     <audio id="achievementAudio">
         <source src="achievement-sound.mp3" type="audio/mp3">
@@ -295,12 +317,21 @@
                 "nav.downloads": "Downloads",
                 "nav.contact": "Contact",
                 "downloads.title": "Downloads",
-                "downloads.subtitle": "Grab my apps, tools, and troll masterpieces!",
+                "downloads.subtitle": "Grab my apps tools and troll masterpieces!",
                 "download.comingsoon": "???",
                 "download.comingsoon.desc": "Coming soon ! ...",
                 "download.locked": "Locked",
                 "achievement.title": "Achievement Unlocked!",
                 "achievement.download": "Entered the Download Zone",
+                "fakegoogle.title": "Fake Google",
+                "fakegoogle.desc": "A playful simulation — shows a fake shutdown sequence (SAFE)",
+                "fakegoogle.launch": "Launch",
+                "fakegoogle.shutdownMsg": "Shutting down your PC...",
+                "fakegoogle.shutdownSub": "This is a harmless simulation — nothing will actually happen.",
+                "fakegoogle.abort": "Abort",
+                "fakegoogle.downloadsLabel": "Downloads:",
+                "fakegoogle.downloadBtn": "Download",
+                "fakegoogle.downloaded": "Downloaded",
                 "footer.copyright": "© 2025 Katana-King. All rights reserved."
             },
             fr: {
@@ -317,24 +348,42 @@
                 "download.locked": "Verrouillé",
                 "achievement.title": "Succès Débloqué !",
                 "achievement.download": "Zone de téléchargement atteinte",
+                "fakegoogle.title": "Google factice",
+                "fakegoogle.desc": "Une simulation ludique — séquence d'arrêt factice (SÛR)",
+                "fakegoogle.launch": "Lancer",
+                "fakegoogle.shutdownMsg": "Arrêt de votre PC...",
+                "fakegoogle.shutdownSub": "Ceci est une simulation inoffensive — rien ne se passera réellement.",
+                "fakegoogle.abort": "Annuler",
+                "fakegoogle.downloadsLabel": "Téléchargements:",
+                "fakegoogle.downloadBtn": "Télécharger",
+                "fakegoogle.downloaded": "Téléchargé",
                 "footer.copyright": "© 2025 Katana-King. Tous droits réservés."
             },
-ar: {
-    "site.title": "التحميلات - كاتانا كينج",
-    "nav.home": "الرئيسية",
-    "nav.projects": "المشاريع",
-    "nav.services": "الخدمات",
-    "nav.downloads": "التحميلات",
-    "nav.contact": "تواصل معي",
-    "downloads.title": "التحميلات",
-    "downloads.subtitle": "احصل على تطبيقاتي وأدواتي وروائع المزاح الخاصة بي!",
-    "download.comingsoon": "???",
-    "download.comingsoon.desc": "قريبًا جدًا! ...",
-    "download.locked": "مقفل",
-    "achievement.title": "إنجاز مفتوح!",
-    "achievement.download": "لقد دخلت منطقة التحميلات",
-    "footer.copyright": "© 2025 كاتانا كينج. جميع الحقوق محفوظة."
-},
+            ar: {
+                "site.title": "التحميلات - كاتانا كينج",
+                "nav.home": "الرئيسية",
+                "nav.projects": "المشاريع",
+                "nav.services": "الخدمات",
+                "nav.downloads": "التحميلات",
+                "nav.contact": "تواصل معي",
+                "downloads.title": "التحميلات",
+                "downloads.subtitle": "احصل على تطبيقاتي وأدواتي وروائع المزاح الخاصة بي!",
+                "download.comingsoon": "???",
+                "download.comingsoon.desc": "قريبًا جدًا! ...",
+                "download.locked": "مقفل",
+                "achievement.title": "إنجاز مفتوح!",
+                "achievement.download": "لقد دخلت منطقة التحميلات",
+                "fakegoogle.title": "غوغل مزيف",
+                "fakegoogle.desc": "تطبيق يبدو مثل غوغل يقوم ايقاف الحاسوب الخاص بك يمكنك خداع اصدقائك به",
+                "fakegoogle.launch": "تشغيل",
+                "fakegoogle.shutdownMsg": "جاري إيقاف تشغيل جهازك...",
+                "fakegoogle.shutdownSub": "هذه محاكاة آمنة — لن يحدث شيء فعليًا.",
+                "fakegoogle.abort": "إلغاء",
+                "fakegoogle.downloadsLabel": "التنزيلات:",
+                "fakegoogle.downloadBtn": "تنزيل",
+                "fakegoogle.downloaded": "تم التنزيل",
+                "footer.copyright": "© 2025 كاتانا كينج. جميع الحقوق محفوظة."
+            },
             ru: {
                 "site.title": "Загрузки - Katana-King",
                 "nav.home": "Главная",
@@ -349,7 +398,41 @@ ar: {
                 "download.locked": "Заблокировано",
                 "achievement.title": "Достижение разблокировано!",
                 "achievement.download": "Вошёл в зону загрузок",
+                "fakegoogle.title": "Фейковый Google",
+                "fakegoogle.desc": "Игра — показывает имитацию выключения (БЕЗОПАСНО)",
+                "fakegoogle.launch": "Запустить",
+                "fakegoogle.shutdownMsg": "Выключение компьютера...",
+                "fakegoogle.shutdownSub": "Это безвредная имитация — ничего не произойдёт.",
+                "fakegoogle.abort": "Отмена",
+                "fakegoogle.downloadsLabel": "Загрузки:",
+                "fakegoogle.downloadBtn": "Скачать",
+                "fakegoogle.downloaded": "Скачано",
                 "footer.copyright": "© 2025 Katana-King. Все права защищены."
+            },
+            es: {
+                "site.title": "Descargas - Katana-King",
+                "nav.home": "Inicio",
+                "nav.projects": "Proyectos",
+                "nav.services": "Servicios",
+                "nav.downloads": "Descargas",
+                "nav.contact": "Contacto",
+                "downloads.title": "Descargas",
+                "downloads.subtitle": "Descarga mis apps, herramientas y obras de troll!",
+                "download.comingsoon": "???",
+                "download.comingsoon.desc": "¡Próximamente! ...",
+                "download.locked": "Bloqueado",
+                "achievement.title": "¡Logro Desbloqueado!",
+                "achievement.download": "Entraste en la zona de descargas",
+                "fakegoogle.title": "Google falso",
+                "fakegoogle.desc": "Simulación divertida — muestra una secuencia de apagado falsa (SEGURO)",
+                "fakegoogle.launch": "Iniciar",
+                "fakegoogle.shutdownMsg": "Apagando tu PC...",
+                "fakegoogle.shutdownSub": "Esta es una simulación inofensiva — no ocurrirá nada real.",
+                "fakegoogle.abort": "Cancelar",
+                "fakegoogle.downloadsLabel": "Descargas:",
+                "fakegoogle.downloadBtn": "Descargar",
+                "fakegoogle.downloaded": "Descargado",
+                "footer.copyright": "© 2025 Katana-King. Todos los derechos reservados."
             }
         };
 
@@ -398,6 +481,49 @@ ar: {
             boxes.forEach((box, i) => {
                 setTimeout(() => box.classList.add('visible'), i * 150);
             });
+
+            // Removed Launch/simulation UI: only download remains
+
+            // Local download counter (client-side only)
+            const downloadCountEl = document.getElementById('downloadCount');
+            const downloadBtnEl = document.getElementById('downloadBtn');
+            const LOCAL_COUNT_KEY = 'fakegoogle_download_count';
+            const USER_COUNTED_KEY = 'fakegoogle_user_counted';
+
+            function readLocalCount() {
+                return parseInt(localStorage.getItem(LOCAL_COUNT_KEY) || '0', 10);
+            }
+
+            function isUserCounted() {
+                return localStorage.getItem(USER_COUNTED_KEY) === '1';
+            }
+
+            function updateCountDisplay() {
+                downloadCountEl.textContent = String(readLocalCount());
+                if (isUserCounted()) {
+                    downloadBtnEl.textContent = translations[currentLang]['fakegoogle.downloaded'] || 'Downloaded';
+                    downloadBtnEl.disabled = true;
+                    downloadBtnEl.classList.add('opacity-60', 'cursor-not-allowed');
+                } else {
+                    downloadBtnEl.textContent = translations[currentLang]['fakegoogle.downloadBtn'] || 'Download';
+                    downloadBtnEl.disabled = false;
+                    downloadBtnEl.classList.remove('opacity-60', 'cursor-not-allowed');
+                }
+            }
+
+            if (downloadBtnEl) {
+                downloadBtnEl.addEventListener('click', () => {
+                    if (!isUserCounted()) {
+                        const newCount = readLocalCount() + 1;
+                        localStorage.setItem(LOCAL_COUNT_KEY, String(newCount));
+                        localStorage.setItem(USER_COUNTED_KEY, '1');
+                        updateCountDisplay();
+                    }
+                });
+            }
+
+            // initialize display
+            updateCountDisplay();
 
             setTimeout(showAchievement, 2000);
 
