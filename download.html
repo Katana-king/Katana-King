@@ -14,6 +14,7 @@
     <link rel="preload" href="achievement-sound.mp3" as="audio" type="audio/mp3">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Your existing styles remain unchanged */
         .fake-google-box {
             background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
             border: 1px solid rgba(66,133,244,0.12);
@@ -203,13 +204,11 @@
     <noscript>
         <p style="text-align:center; padding:2rem; color:#ff6b6b;">Please enable JavaScript to view this page.</p>
     </noscript>
-
     <img src="download.gif" alt="Animated download background" class="background-gif" loading="lazy">
-
     <div class="content-overlay">
+        <!-- Your HTML body remains exactly the same -->
         <nav class="fixed top-0 w-full p-3 md:p-4 flex justify-between items-center z-50 visible" role="navigation">
             <div class="text-xl md:text-2xl font-bold">Katana-King</div>
-
             <div class="flex items-center gap-4">
                 <div class="relative">
                     <button id="langButton" class="flex items-center gap-2 px-4 py-2 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 backdrop-blur-md transition">
@@ -223,16 +222,15 @@
                         <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="fr">Français</button>
                         <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="ar">العربية</button>
                         <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="ru">Русский</button>
+                        <button class="lang-option w-full text-left px-5 py-3 hover:bg-red-600 hover:bg-opacity-30 transition" data-lang="es">Español</button>
                     </div>
                 </div>
-
                 <div class="menu-toggle" aria-label="Toggle mobile menu">
                     <div></div>
                     <div></div>
                     <div></div>
                 </div>
             </div>
-
             <ul class="nav-links flex gap-4 md:gap-6 items-center text-base md:text-lg">
                 <li><a href="index.html#home" class="hover:text-red-400" data-key="nav.home">Home</a></li>
                 <li><a href="index.html#projects" class="hover:text-red-400" data-key="nav.projects">Projects</a></li>
@@ -241,7 +239,6 @@
                 <li><a href="contact.html" class="hover:text-red-400" data-key="nav.contact">Contact</a></li>
             </ul>
         </nav>
-
         <section class="section">
             <div class="max-w-5xl w-full text-center">
                 <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-pulse" data-key="downloads.title">Downloads</h1>
@@ -259,13 +256,23 @@
                         <div class="mt-4">
                             <a id="downloadBtn" class="download-btn bg-green-500 hover:bg-green-600" href="https://github.com/Katana-king/fakegoogle/archive/refs/heads/main.zip" target="_blank" rel="noopener noreferrer" data-key="fakegoogle.downloadBtn">Download</a>
                         </div>
-                        
                     </div>
-                   
+                    <div class="download-box fake-google-box visible">
+                        <h3 class="text-xl font-bold text-red-500 mb-2" data-key="annoyer.title">Annoyer</h3>
+                        <p class="text-sm mb-4" data-key="annoyer.desc">Discord bot that can spam your friends (use at your own risk!)</p>
+                        <div class="flex items-center justify-center gap-3">
+                            <div class="text-center">
+                                <div class="text-sm text-gray-300" data-key="annoyer.downloadsLabel">Downloads:</div>
+                                <div id="annoyerDownloadCount" class="font-bold text-lg">0</div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <a id="annoyerDownloadBtn" class="download-btn bg-red-600 hover:bg-red-700" href="https://github.com/Katana-king/annoyer/archive/refs/heads/main.zip" target="_blank" rel="noopener noreferrer" data-key="annoyer.downloadBtn">Download</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-
         <div class="achievement-notification" id="achievementNotification">
             <div class="achievement-icon"></div>
             <div class="achievement-info">
@@ -273,8 +280,6 @@
                 <p data-key="achievement.download">Entered the Download Zone</p>
             </div>
         </div>
-
-
         <footer class="py-6 text-center bg-black bg-opacity-50">
             <p class="text-sm" data-key="footer.copyright">© 2025 Katana-King. All rights reserved.</p>
             <div class="flex justify-center gap-4 mt-2">
@@ -286,16 +291,15 @@
             </div>
         </footer>
     </div>
-
     <audio id="backgroundAudio" loop>
         <source src="download-music.mp3" type="audio/mp3">
     </audio>
     <audio id="achievementAudio">
         <source src="achievement-sound.mp3" type="audio/mp3">
     </audio>
-
     <script>
         const translations = {
+            /* Your translations object remains unchanged */
             en: {
                 "site.title": "Downloads - Katana-King",
                 "nav.home": "Home",
@@ -319,6 +323,11 @@
                 "fakegoogle.downloadsLabel": "Downloads:",
                 "fakegoogle.downloadBtn": "Download",
                 "fakegoogle.downloaded": "Downloaded",
+                "annoyer.title": "Annoyer",
+                "annoyer.desc": "Discord bot that can spam your friends (use at your own risk!)",
+                "annoyer.downloadsLabel": "Downloads:",
+                "annoyer.downloadBtn": "Download",
+                "annoyer.downloaded": "Downloaded",
                 "footer.copyright": "© 2025 Katana-King. All rights reserved."
             },
             fr: {
@@ -344,6 +353,11 @@
                 "fakegoogle.downloadsLabel": "Téléchargements:",
                 "fakegoogle.downloadBtn": "Télécharger",
                 "fakegoogle.downloaded": "Téléchargé",
+                "annoyer.title": "Annoyer",
+                "annoyer.desc": "Bot Discord pour spammer vos amis (à vos risques et périls !)",
+                "annoyer.downloadsLabel": "Téléchargements :",
+                "annoyer.downloadBtn": "Télécharger",
+                "annoyer.downloaded": "Téléchargé",
                 "footer.copyright": "© 2025 Katana-King. Tous droits réservés."
             },
             ar: {
@@ -369,6 +383,11 @@
                 "fakegoogle.downloadsLabel": "التنزيلات:",
                 "fakegoogle.downloadBtn": "تنزيل",
                 "fakegoogle.downloaded": "تم التنزيل",
+                "annoyer.title": "المزعج",
+                "annoyer.desc": "بوت ديسكورد يمكنه إزعاج أصدقائك بالسبام (استخدمه على مسؤوليتك الخاصة!)",
+                "annoyer.downloadsLabel": "التنزيلات:",
+                "annoyer.downloadBtn": "تنزيل",
+                "annoyer.downloaded": "تم التنزيل",
                 "footer.copyright": "© 2025 كاتانا كينج. جميع الحقوق محفوظة."
             },
             ru: {
@@ -394,6 +413,11 @@
                 "fakegoogle.downloadsLabel": "Загрузки:",
                 "fakegoogle.downloadBtn": "Скачать",
                 "fakegoogle.downloaded": "Скачано",
+                "annoyer.title": "Досаждатель",
+                "annoyer.desc": "Бот Discord для спама друзей (на свой страх и риск!)",
+                "annoyer.downloadsLabel": "Загрузки:",
+                "annoyer.downloadBtn": "Скачать",
+                "annoyer.downloaded": "Скачано",
                 "footer.copyright": "© 2025 Katana-King. Все права защищены."
             },
             es: {
@@ -419,6 +443,11 @@
                 "fakegoogle.downloadsLabel": "Descargas:",
                 "fakegoogle.downloadBtn": "Descargar",
                 "fakegoogle.downloaded": "Descargado",
+                "annoyer.title": "Molestador",
+                "annoyer.desc": "Bot de Discord que puede spamear a tus amigos (¡úsalo bajo tu propio riesgo!)",
+                "annoyer.downloadsLabel": "Descargas:",
+                "annoyer.downloadBtn": "Descargar",
+                "annoyer.downloaded": "Descargado",
                 "footer.copyright": "© 2025 Katana-King. Todos los derechos reservados."
             }
         };
@@ -431,7 +460,43 @@
 
             let currentLang = localStorage.getItem('language') || 'en';
 
+            // Move all download-related variables here (before applyLanguage)
+            const downloadCountEl = document.getElementById('downloadCount');
+            const downloadBtnEl = document.getElementById('downloadBtn');
+            const LOCAL_COUNT_KEY = 'fakegoogle_download_count';
+            const USER_COUNTED_KEY = 'fakegoogle_user_counted';
+
+            const annoyerCountEl = document.getElementById('annoyerDownloadCount');
+            const annoyerBtnEl = document.getElementById('annoyerDownloadBtn');
+            const ANNOYER_LOCAL_COUNT_KEY = 'annoyer_download_count';
+            const ANNOYER_USER_COUNTED_KEY = 'annoyer_user_counted';
+
+            function readLocalCount(key) {
+                return parseInt(localStorage.getItem(key) || '0', 10);
+            }
+
+            function isUserCounted(key) {
+                return localStorage.getItem(key) === '1';
+            }
+
+            function updateCountDisplay(countEl, btnEl, countKey, userKey, langPrefix) {
+                if (!countEl || !btnEl) return;
+                countEl.textContent = String(readLocalCount(countKey));
+                if (isUserCounted(userKey)) {
+                    btnEl.textContent = translations[currentLang][`${langPrefix}.downloaded`] || 'Downloaded';
+                    btnEl.disabled = true;
+                    btnEl.classList.add('opacity-60', 'cursor-not-allowed');
+                } else {
+                    btnEl.textContent = translations[currentLang][`${langPrefix}.downloadBtn`] || 'Download';
+                    btnEl.disabled = false;
+                    btnEl.classList.remove('opacity-60', 'cursor-not-allowed');
+                }
+            }
+
             function applyLanguage(lang) {
+                currentLang = lang; // Important: update the global currentLang
+                localStorage.setItem('language', lang);
+
                 document.documentElement.lang = lang;
                 document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
                 document.title = translations[lang]["site.title"] || "Downloads - Katana-King";
@@ -442,75 +507,78 @@
                         el.textContent = translations[lang][key];
                     }
                 });
+
+                // Update download button texts
+                updateCountDisplay(downloadCountEl, downloadBtnEl, LOCAL_COUNT_KEY, USER_COUNTED_KEY, 'fakegoogle');
+                updateCountDisplay(annoyerCountEl, annoyerBtnEl, ANNOYER_LOCAL_COUNT_KEY, ANNOYER_USER_COUNTED_KEY, 'annoyer');
             }
 
+            // Initial application
             applyLanguage(currentLang);
             currentLangFlag.textContent = currentLang.toUpperCase();
 
-            langButton.addEventListener('click', e => { e.stopPropagation(); langDropdown.classList.toggle('hidden'); });
+            // Language selector events
+            langButton.addEventListener('click', e => {
+                e.stopPropagation();
+                langDropdown.classList.toggle('hidden');
+            });
+
             langOptions.forEach(btn => {
                 btn.addEventListener('click', e => {
                     e.stopPropagation();
-                    currentLang = btn.dataset.lang;
-                    localStorage.setItem('language', currentLang);
-                    applyLanguage(currentLang);
-                    currentLangFlag.textContent = currentLang.toUpperCase();
+                    const newLang = btn.dataset.lang;
+                    applyLanguage(newLang);
+                    currentLangFlag.textContent = newLang.toUpperCase();
                     langDropdown.classList.add('hidden');
                 });
             });
-            document.addEventListener('click', () => langDropdown.classList.add('hidden'));
 
+            document.addEventListener('click', () => {
+                langDropdown.classList.add('hidden');
+            });
+
+            // Background music
             const audio = document.getElementById('backgroundAudio');
             audio.volume = 0.3;
             audio.play().catch(() => {});
 
+            // Animate download boxes
             const boxes = document.querySelectorAll('.download-box');
             boxes.forEach((box, i) => {
                 setTimeout(() => box.classList.add('visible'), i * 150);
             });
 
-
-            const downloadCountEl = document.getElementById('downloadCount');
-            const downloadBtnEl = document.getElementById('downloadBtn');
-            const LOCAL_COUNT_KEY = 'fakegoogle_download_count';
-            const USER_COUNTED_KEY = 'fakegoogle_user_counted';
-
-            function readLocalCount() {
-                return parseInt(localStorage.getItem(LOCAL_COUNT_KEY) || '0', 10);
-            }
-
-            function isUserCounted() {
-                return localStorage.getItem(USER_COUNTED_KEY) === '1';
-            }
-
-            function updateCountDisplay() {
-                downloadCountEl.textContent = String(readLocalCount());
-                if (isUserCounted()) {
-                    downloadBtnEl.textContent = translations[currentLang]['fakegoogle.downloaded'] || 'Downloaded';
-                    downloadBtnEl.disabled = true;
-                    downloadBtnEl.classList.add('opacity-60', 'cursor-not-allowed');
-                } else {
-                    downloadBtnEl.textContent = translations[currentLang]['fakegoogle.downloadBtn'] || 'Download';
-                    downloadBtnEl.disabled = false;
-                    downloadBtnEl.classList.remove('opacity-60', 'cursor-not-allowed');
-                }
-            }
-
+            // Download click handlers (increment fake counter)
             if (downloadBtnEl) {
                 downloadBtnEl.addEventListener('click', () => {
-                    if (!isUserCounted()) {
-                        const newCount = readLocalCount() + 1;
+                    if (!isUserCounted(USER_COUNTED_KEY)) {
+                        const newCount = readLocalCount(LOCAL_COUNT_KEY) + 1;
                         localStorage.setItem(LOCAL_COUNT_KEY, String(newCount));
                         localStorage.setItem(USER_COUNTED_KEY, '1');
-                        updateCountDisplay();
+                        updateCountDisplay(downloadCountEl, downloadBtnEl, LOCAL_COUNT_KEY, USER_COUNTED_KEY, 'fakegoogle');
                     }
                 });
             }
 
-            updateCountDisplay();
+            if (annoyerBtnEl) {
+                annoyerBtnEl.addEventListener('click', () => {
+                    if (!isUserCounted(ANNOYER_USER_COUNTED_KEY)) {
+                        const newCount = readLocalCount(ANNOYER_LOCAL_COUNT_KEY) + 1;
+                        localStorage.setItem(ANNOYER_LOCAL_COUNT_KEY, String(newCount));
+                        localStorage.setItem(ANNOYER_USER_COUNTED_KEY, '1');
+                        updateCountDisplay(annoyerCountEl, annoyerBtnEl, ANNOYER_LOCAL_COUNT_KEY, ANNOYER_USER_COUNTED_KEY, 'annoyer');
+                    }
+                });
+            }
 
+            // Initial count display
+            updateCountDisplay(downloadCountEl, downloadBtnEl, LOCAL_COUNT_KEY, USER_COUNTED_KEY, 'fakegoogle');
+            updateCountDisplay(annoyerCountEl, annoyerBtnEl, ANNOYER_LOCAL_COUNT_KEY, ANNOYER_USER_COUNTED_KEY, 'annoyer');
+
+            // Achievement notification
             setTimeout(showAchievement, 2000);
 
+            // Mobile menu toggle
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
             menuToggle.addEventListener('click', () => {
@@ -521,6 +589,7 @@
                 bars[2].style.transform = navLinks.classList.contains('show') ? 'rotate(-45deg) translate(5px, -5px)' : '';
             });
 
+            // Navbar hide on scroll
             let lastScroll = 0;
             window.addEventListener('scroll', () => {
                 const current = window.pageYOffset;
