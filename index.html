@@ -23,7 +23,6 @@
 </head>
 <body>
 
-    
     <div class="entry-prompt" id="entryPrompt" role="dialog" aria-labelledby="entryPromptTitle">
         <div id="particles-js"></div>
         <img src="2.gif" alt="Welcome animation" loading="lazy">
@@ -54,17 +53,17 @@
         <source src="1.mp3" type="audio/mp3">
     </audio>
 
-<button id="muteButton" class="fixed bottom-5 right-5 z-50 flex items-center gap-2.5 px-4 py-2.5 bg-black/85 hover:bg-red-900/60 backdrop-blur-md text-white font-bold text-sm tracking-wider rounded-full shadow-xl border border-red-600/50 transition-all duration-300 hover:scale-105 hidden">
-    <svg id="muteIcon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
-        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
-    </svg>
-    <svg id="unmuteIcon" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
-        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
-        <line x1="23" y1="1" x2="1" y2="23"/>
-    </svg>
-    <span id="muteText">MUTE</span>
-</button>
+    <button id="muteButton" class="fixed bottom-5 right-5 z-50 flex items-center gap-2.5 px-4 py-2.5 bg-black/85 hover:bg-red-900/60 backdrop-blur-md text-white font-bold text-sm tracking-wider rounded-full shadow-xl border border-red-600/50 transition-all duration-300 hover:scale-105 hidden">
+        <svg id="muteIcon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        </svg>
+        <svg id="unmuteIcon" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <line x1="23" y1="1" x2="1" y2="23"/>
+        </svg>
+        <span id="muteText">MUTE</span>
+    </button>
 
     <audio id="servicesAudio" aria-hidden="true"><source src="services.mp3" type="audio/mp3"></audio>
     <audio id="shutupServicesAudio" aria-hidden="true"><source src="shutup.mp3" type="audio/mp3"></audio>
@@ -74,7 +73,6 @@
 
     <div class="content-overlay">
 
-        
         <nav class="fixed top-0 w-full p-3 md:p-4 flex justify-between items-center z-50 visible">
             <div class="text-xl md:text-2xl font-bold">Katana-King</div>
 
@@ -104,10 +102,11 @@
             <ul class="nav-links flex gap-4 md:gap-6 items-center text-base md:text-lg visible">
                 <li><a href="#home" class="smooth-scroll" data-key="nav.home">Home</a></li>
                 <li><a href="#projects" class="smooth-scroll" data-key="nav.projects">Projects</a></li>
+                <li><a href="#games" class="smooth-scroll" data-key="nav.games">Games</a></li>
                 <li><a href="#dev-stats" class="smooth-scroll" data-key="nav.devstats">Dev Stats</a></li>
                 <li><a href="#services" class="smooth-scroll" data-key="nav.services">Services</a></li>
                 <li><a href="#about" class="smooth-scroll" data-key="nav.about">About Me</a></li>
-                <li><a href="download.html" data-key="nav.downloads">downloads</a></li>
+                <li><a href="download.html" data-key="nav.downloads">Downloads</a></li>
                 <li><a href="contact.html" data-key="nav.contact">Contact Me</a></li>
             </ul>
         </nav>
@@ -128,7 +127,6 @@
                             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
                         </svg>
                     </a>
-                  
                 </div>
             </div>
             <a href="#about" class="smooth-scroll">
@@ -164,7 +162,24 @@
             </div>
         </section>
 
-       
+        <!-- GAMES SECTION -->
+        <section id="games" class="section">
+            <div class="max-w-4xl w-full">
+                <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing" data-key="section.games">Games</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div class="project-card p-4 md:p-6 rounded-lg visible bg-gradient-to-br from-purple-900/30 to-red-900/30 border border-red-600/40">
+                        <h3 class="text-lg md:text-xl font-semibold mb-2 text-red-400" data-key="game.aimlab">Katana Aim Lab ⚔️</h3>
+                        <p class="mb-4 text-sm md:text-base" data-key="game.aimlab.desc">Neon cyberpunk aim trainer with reaction time mode, explosions, screen shake, and Hotline Miami-style visuals.</p>
+                        <a href="https://lovely-haupia-207658.netlify.app" target="_blank" class="text-red-400 hover:underline font-bold text-lg" data-key="project.play">PLAY NOW</a>
+                    </div>
+                    <div class="project-card p-4 md:p-6 rounded-lg visible opacity-60">
+                        <h3 class="text-lg md:text-xl font-semibold mb-2 text-red-400">More Games Coming Soon...</h3>
+                        <p class="mb-4 text-sm md:text-base">New aim trainers and browser mini-games in development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="dev-stats" class="section">
             <div class="max-w-4xl w-full">
                 <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center typing" data-key="section.devstats">Developer Stats</h2>
@@ -183,7 +198,6 @@
             </div>
         </section>
 
-       
         <section id="services" class="section">
             <img src="5.gif" alt="Services background" class="background-gif" loading="lazy">
             <div class="max-w-4xl w-full">
@@ -231,7 +245,6 @@
 
     <script src="script.js"></script>
 
-    
     <script>
         const translations = {
             en: {
@@ -242,13 +255,32 @@
                 "hero.welcome": "Welcome",
                 "hero.name": "I am <span class='text-red-400 typing'>Katana-King</span>",
                 "hero.subtitle": "Gamer, Developer, and Creative Mind",
-                "nav.home": "Home", "nav.projects": "Projects", "nav.devstats": "Dev Stats", "nav.services": "Services", "nav.about": "About Me", "nav.contact": "Contact Me","nav.downloads": "Downloads",
-                "section.projects": "Projects", "section.devstats": "Developer Stats", "section.services": "Services", "section.about": "About Me",
-                "project.onlyrams": "OnlyRams", "project.onlyrams.desc": "A troll site designed to humorously increase your RAM usage.",
-                "project.gamebuddy": "GameBuddyv2", "project.gamebuddy.desc": "A website that helps you find the perfect match to play games with.",
-                "project.menu": "Fast Food Menu", "project.menu.desc": "A sleek and responsive menu site for fast food items.",
-                "project.why": "Why", "project.why.desc": "A troll game to prank your friends by shutting down their PCs.",
-                "project.demo": "Live Demo", "project.download": "Download",
+                "nav.home": "Home",
+                "nav.projects": "Projects",
+                "nav.games": "Games",
+                "nav.devstats": "Dev Stats",
+                "nav.services": "Services",
+                "nav.about": "About Me",
+                "nav.downloads": "Downloads",
+                "nav.contact": "Contact Me",
+                "section.projects": "Projects",
+                "section.games": "Games ",
+                "section.devstats": "Developer Stats",
+                "section.services": "Services",
+                "section.about": "About Me",
+                "game.aimlab": "Katana Aim Lab ⚔️",
+                "game.aimlab.desc": "Neon cyberpunk aim trainer with reaction time mode, explosions, screen shake, and Hotline Miami-style visuals.",
+                "project.onlyrams": "OnlyRams",
+                "project.onlyrams.desc": "A troll site designed to humorously increase your RAM usage.",
+                "project.gamebuddy": "GameBuddyv2",
+                "project.gamebuddy.desc": "A website that helps you find the perfect match to play games with.",
+                "project.menu": "Fast Food Menu",
+                "project.menu.desc": "A sleek and responsive menu site for fast food items.",
+                "project.why": "Why",
+                "project.why.desc": "A troll game to prank your friends by shutting down their PCs.",
+                "project.demo": "Live Demo",
+                "project.play": "PLAY NOW",
+                "project.download": "Download",
                 "devstats.title": "Full Stack Developer",
                 "devstats.html": "HTML: Proficient in creating semantic and accessible web structures",
                 "devstats.css": "CSS: Skilled in designing responsive and visually appealing layouts",
@@ -260,8 +292,10 @@
                 "services.contact": "Contact Me",
                 "about.title": "Katana-King",
                 "about.desc": "Hey there! I'm Katana-King, a passionate gamer and full-stack developer. I spend my time exploring games, building creative projects, and coding for fun.",
-                "achievement.title": "Achievement Unlocked!", "achievement.desc": "Welcome to Katana-King's Web site",
-                "button.play": "Play Audio", "button.shutup": "Shut Up",
+                "achievement.title": "Achievement Unlocked!",
+                "achievement.desc": "Welcome to Katana-King's Web site",
+                "button.play": "Play Audio",
+                "button.shutup": "Shut Up",
                 "footer.copyright": "© 2025 Katana-King. All rights reserved."
             },
             fr: {
@@ -272,13 +306,32 @@
                 "hero.welcome": "Bienvenue",
                 "hero.name": "Je suis <span class='text-red-400 typing'>Katana-King</span>",
                 "hero.subtitle": "Gamer, Développeur et Esprit Créatif",
-                "nav.home": "Accueil", "nav.projects": "Projets", "nav.devstats": "Stats Dev", "nav.services": "Services", "nav.about": "À propos", "nav.contact": "Contact","nav.downloads": "Téléchargements",
-                "section.projects": "Projets", "section.devstats": "Statistiques Développeur", "section.services": "Services", "section.about": "À propos de moi",
-                "project.onlyrams": "OnlyRams", "project.onlyrams.desc": "Un site troll pour augmenter humoristiquement votre RAM.",
-                "project.gamebuddy": "GameBuddyv2", "project.gamebuddy.desc": "Un site pour trouver le partenaire idéal pour jouer.",
-                "project.menu": "Menu Fast Food", "project.menu.desc": "Un menu élégant et responsive pour fast food.",
-                "project.why": "Pourquoi", "project.why.desc": "Un jeu troll qui éteint le PC de vos amis.",
-                "project.demo": "Démo en direct", "project.download": "Télécharger",
+                "nav.home": "Accueil",
+                "nav.projects": "Projets",
+                "nav.games": "Jeux",
+                "nav.devstats": "Stats Dev",
+                "nav.services": "Services",
+                "nav.about": "À propos",
+                "nav.downloads": "Téléchargements",
+                "nav.contact": "Contact",
+                "section.projects": "Projets",
+                "section.games": "Jeux & Aim Trainers",
+                "section.devstats": "Statistiques Développeur",
+                "section.services": "Services",
+                "section.about": "À propos de moi",
+                "game.aimlab": "Katana Aim Lab ⚔️",
+                "game.aimlab.desc": "Entraîneur de visée cyberpunk néon avec mode temps de réaction, explosions et style Hotline Miami.",
+                "project.onlyrams": "OnlyRams",
+                "project.onlyrams.desc": "Un site troll pour augmenter humoristiquement votre RAM.",
+                "project.gamebuddy": "GameBuddyv2",
+                "project.gamebuddy.desc": "Un site pour trouver le partenaire idéal pour jouer.",
+                "project.menu": "Menu Fast Food",
+                "project.menu.desc": "Un menu élégant et responsive pour fast food.",
+                "project.why": "Pourquoi",
+                "project.why.desc": "Un jeu troll qui éteint le PC de vos amis.",
+                "project.demo": "Démo en direct",
+                "project.play": "JOUER MAINTENANT",
+                "project.download": "Télécharger",
                 "devstats.title": "Développeur Full Stack",
                 "devstats.html": "HTML : Maîtrise des structures sémantiques et accessibles",
                 "devstats.css": "CSS : Expert en design responsive et esthétique",
@@ -290,57 +343,63 @@
                 "services.contact": "Me contacter",
                 "about.title": "Katana-King",
                 "about.desc": "Salut ! Je suis Katana-King, gamer passionné et développeur full-stack. Je passe mon temps à jouer, coder et créer des trucs fun.",
-                "achievement.title": "Succès Débloqué !", "achievement.desc": "Bienvenue sur le site de Katana-King",
-                "button.play": "Jouer le son", "button.shutup": "Tais-toi",
+                "achievement.title": "Succès Débloqué !",
+                "achievement.desc": "Bienvenue sur le site de Katana-King",
+                "button.play": "Jouer le son",
+                "button.shutup": "Tais-toi",
                 "footer.copyright": "© 2025 Katana-King. Tous droits réservés."
             },
-ar: {
-    "site.title": "كاتانا كينج - مطور ويب محترف ولاعب شغوف",
-    "entry.title": "مرحبًا بك في عالم كاتانا كينج",
-    "entry.text": "هل أنت مستعد للدخول؟",
-    "entry.button": "ادخل الموقع",
-    "hero.welcome": "أهلاً وسهلاً",
-    "hero.name": "أنا <span class='text-red-400 typing'>كاتانا كينج</span>",
-    "hero.subtitle": "مطور ويب كامل الصلاحيات، لاعب، ومبدع رقمي",
-    "nav.home": "الرئيسية",
-    "nav.projects": "مشاريعي",
-    "nav.devstats": "إحصائيات التطوير",
-    "nav.services": "خدماتي",
-    "nav.about": "من أنا",
-    "nav.downloads": "التنزيلات",
-    "nav.contact": "تواصل معي",
-    "section.projects": "مشاريعي",
-    "section.devstats": "إحصائيات التطوير",
-    "section.services": "الخدمات المقدمة",
-    "section.about": "حولي",
-    "project.onlyrams": "OnlyRams",
-    "project.onlyrams.desc": "موقع ترفيهي يرفع استهلاك الذاكرة العشوائية بطريقة طريفة",
-    "project.gamebuddy": "GameBuddy v2",
-    "project.gamebuddy.desc": "منصة لإيجاد شريك مثالي للعب معه",
-    "project.menu": "قائمة مطعم",
-    "project.menu.desc": "تصميم أنيق ومتجاوب لقوائم المطاعم والوجبات السريعة",
-    "project.why": "why",
-    "project.why.desc": "لعبة مزحة تقوم بإيهام أصدقائك بإغلاق الحاسوب عند الضغط على Enter",
-    "project.demo": "عرض مباشر",
-    "project.download": "تحميل",
-    "devstats.title": "مطور ويب متكامل (Full-Stack)",
-    "devstats.html": "HTML: خبير في بناء هياكل ويب دلالية ومتوافقة مع معايير الوصول",
-    "devstats.css": "CSS: متخصص في التصميم المتجاوب والواجهات الجذابة بصريًا",
-    "devstats.php": "PHP: خبرة واسعة في تطوير تطبيقات الخادم الديناميكية",
-    "devstats.js": "JavaScript: قادر على بناء تطبيقات ويب حديثة وتفاعلية عالية الأداء",
-    "devstats.github": "استعراض المشاريع على GitHub",
-    "services.title": "تطوير مواقع وتطبيقات ويب مخصصة",
-    "services.desc": "تحتاج إلى موقع احترافي يلفت الأنظار؟ أصمم لك موقعًا متكاملًا من الصفر: متاجر إلكترونية، قوائم مطاعم، منصات تجارة إلكترونية، أو أي فكرة رقمية. الدفع؟ نقدًا، عملات مشفرة، أو سكينات CS2 نادرة... نمزح فقط، كل شيء قانوني ومحترف!",
-    "services.contact": "تواصل معي الآن",
-    "about.title": "كاتانا كينج",
-    "about.desc": "مرحبًا، أنا كاتانا كينج — مبرمج ولاعب شغوف. أعيش بين الأكواد والألعاب، أبني مشاريع إبداعية وأستمتع بكل لحظة في عالم التطوير. إبداع، طاقة، وشغف لا ينتهي.",
-    "achievement.title": "تم إنجاز جديد!",
-    "achievement.desc": "مرحبًا بك في عالم كاتانا كينج",
-    "button.play": "تشغيل الصوت",
-    "button.shutup": "إسكات",
-    "footer.copyright": "© 2025 كاتانا كينج. جميع الحقوق محفوظة."
-    
-},
+            ar: {
+                "site.title": "كاتانا كينج - مطور ويب محترف ولاعب شغوف",
+                "entry.title": "مرحبًا بك في عالم كاتانا كينج",
+                "entry.text": "هل أنت مستعد للدخول؟",
+                "entry.button": "ادخل الموقع",
+                "hero.welcome": "أهلاً وسهلاً",
+                "hero.name": "أنا <span class='text-red-400 typing'>كاتانا كينج</span>",
+                "hero.subtitle": "مطور ويب كامل الصلاحيات، لاعب، ومبدع رقمي",
+                "nav.home": "الرئيسية",
+                "nav.projects": "مشاريعي",
+                "nav.games": "ألعاب",
+                "nav.devstats": "إحصائيات التطوير",
+                "nav.services": "خدماتي",
+                "nav.about": "من أنا",
+                "nav.downloads": "التنزيلات",
+                "nav.contact": "تواصل معي",
+                "section.projects": "مشاريعي",
+                "section.games": "ألعاب ومدربات التصويب",
+                "section.devstats": "إحصائيات التطوير",
+                "section.services": "الخدمات المقدمة",
+                "section.about": "حولي",
+                "game.aimlab": "كاتانا أيم لاب ⚔️",
+                "game.aimlab.desc": "مدرب تصويب سايبربانك نيون مع وضع وقت رد الفعل، انفجارات، اهتزاز الشاشة، وطابع Hotline Miami.",
+                "project.onlyrams": "OnlyRams",
+                "project.onlyrams.desc": "موقع ترفيهي يرفع استهلاك الذاكرة العشوائية بطريقة طريفة",
+                "project.gamebuddy": "GameBuddy v2",
+                "project.gamebuddy.desc": "منصة لإيجاد شريك مثالي للعب معه",
+                "project.menu": "قائمة مطعم",
+                "project.menu.desc": "تصميم أنيق ومتجاوب لقوائم المطاعم والوجبات السريعة",
+                "project.why": "why",
+                "project.why.desc": "لعبة مزحة تقوم بإيهام أصدقائك بإغلاق الحاسوب عند الضغط على Enter",
+                "project.demo": "عرض مباشر",
+                "project.play": "العب الآن",
+                "project.download": "تحميل",
+                "devstats.title": "مطور ويب متكامل (Full-Stack)",
+                "devstats.html": "HTML: خبير في بناء هياكل ويب دلالية ومتوافقة مع معايير الوصول",
+                "devstats.css": "CSS: متخصص في التصميم المتجاوب والواجهات الجذابة بصريًا",
+                "devstats.php": "PHP: خبرة واسعة في تطوير تطبيقات الخادم الديناميكية",
+                "devstats.js": "JavaScript: قادر على بناء تطبيقات ويب حديثة وتفاعلية عالية الأداء",
+                "devstats.github": "استعراض المشاريع على GitHub",
+                "services.title": "تطوير مواقع وتطبيقات ويب مخصصة",
+                "services.desc": "تحتاج إلى موقع احترافي يلفت الأنظار؟ أصمم لك موقعًا متكاملًا من الصفر: متاجر إلكترونية، قوائم مطاعم، منصات تجارة إلكترونية، أو أي فكرة رقمية. الدفع؟ نقدًا، عملات مشفرة، أو سكينات CS2 نادرة... نمزح فقط، كل شيء قانوني ومحترف!",
+                "services.contact": "تواصل معي الآن",
+                "about.title": "كاتانا كينج",
+                "about.desc": "مرحبًا، أنا كاتانا كينج — مبرمج ولاعب شغوف. أعيش بين الأكواد والألعاب، أبني مشاريع إبداعية وأستمتع بكل لحظة في عالم التطوير. إبداع، طاقة، وشغف لا ينتهي.",
+                "achievement.title": "تم إنجاز جديد!",
+                "achievement.desc": "مرحبًا بك في عالم كاتانا كينج",
+                "button.play": "تشغيل الصوت",
+                "button.shutup": "إسكات",
+                "footer.copyright": "© 2025 كاتانا كينج. جميع الحقوق محفوظة."
+            },
             ru: {
                 "site.title": "Katana-King — Геймер и Full-Stack разработчик",
                 "entry.title": "Добро пожаловать на сайт Katana-King",
@@ -349,13 +408,32 @@ ar: {
                 "hero.welcome": "Добро пожаловать",
                 "hero.name": "Я <span class='text-red-400 typing'>Katana-King</span>",
                 "hero.subtitle": "Геймер, Разработчик и Творческий Ум",
-                "nav.home": "Главная", "nav.projects": "Проекты", "nav.devstats": "Статистика", "nav.services": "Услуги", "nav.about": "О мне", "nav.contact": "Связаться","nav.downloads": "Загрузки",
-                "section.projects": "Проекты", "section.devstats": "Статистика разработчика", "section.services": "Услуги", "section.about": "О мне",
-                "project.onlyrams": "OnlyRams", "project.onlyrams.desc": "Тролль-сайт, который юмористически забивает вашу оперативку.",
-                "project.gamebuddy": "GameBuddyv2", "project.gamebuddy.desc": "Сайт для поиска идеального напарника по играм.",
-                "project.menu": "Меню фастфуда", "project.menu.desc": "Стильное и адаптивное меню для бургеров, напитков и гарниров.",
-                "project.why": "Почему", "project.why.desc": "Тролль-игра, которая при нажатии Enter выключает ПК друзей.",
-                "project.demo": "Живая демонстрация", "project.download": "Скачать",
+                "nav.home": "Главная",
+                "nav.projects": "Проекты",
+                "nav.games": "Игры",
+                "nav.devstats": "Статистика",
+                "nav.services": "Услуги",
+                "nav.about": "О мне",
+                "nav.downloads": "Загрузки",
+                "nav.contact": "Связаться",
+                "section.projects": "Проекты",
+                "section.games": "Игры и Aim Трейнеры",
+                "section.devstats": "Статистика разработчика",
+                "section.services": "Услуги",
+                "section.about": "О мне",
+                "game.aimlab": "Katana Aim Lab ⚔️",
+                "game.aimlab.desc": "Неоновый киберпанк-тренажёр прицеливания с режимом реакции, взрывами, тряской экрана и стилем Hotline Miami.",
+                "project.onlyrams": "OnlyRams",
+                "project.onlyrams.desc": "Тролль-сайт, который юмористически забивает вашу оперативку.",
+                "project.gamebuddy": "GameBuddyv2",
+                "project.gamebuddy.desc": "Сайт для поиска идеального напарника по играм.",
+                "project.menu": "Меню фастфуда",
+                "project.menu.desc": "Стильное и адаптивное меню для бургеров, напитков и гарниров.",
+                "project.why": "Почему",
+                "project.why.desc": "Тролль-игра, которая при нажатии Enter выключает ПК друзей.",
+                "project.demo": "Живая демонстрация",
+                "project.play": "ИГРАТЬ СЕЙЧАС",
+                "project.download": "Скачать",
                 "devstats.title": "Full Stack Разработчик",
                 "devstats.html": "HTML: Владею семантической и доступной вёрсткой",
                 "devstats.css": "CSS: Умею создавать адаптивные и красивые макеты",
@@ -367,8 +445,10 @@ ar: {
                 "services.contact": "Связаться со мной",
                 "about.title": "Katana-King",
                 "about.desc": "Привет! Я Katana-King — страстный геймер и full-stack разработчик. Провожу время в играх, создаю креативные проекты и пишу код ради фана.",
-                "achievement.title": "Достижение разблокировано!", "achievement.desc": "Добро пожаловать на сайт Katana-King",
-                "button.play": "Проиграть звук", "button.shutup": "Заткнись",
+                "achievement.title": "Достижение разблокировано!",
+                "achievement.desc": "Добро пожаловать на сайт Katana-King",
+                "button.play": "Проиграть звук",
+                "button.shutup": "Заткнись",
                 "footer.copyright": "© 2025 Katana-King. Все права защищены."
             }
         };
